@@ -136,3 +136,37 @@ button:hover {
     color: #d93025; /* Un rojo un poco más elegante que 'red' */
     font-weight: 600;
 }
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.contact-form textarea {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--text-color);
+    font-family: var(--font-main);
+    resize: vertical;
+}
+
+.contact-form button {
+    background: none;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+}
+
+.contact-form button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
