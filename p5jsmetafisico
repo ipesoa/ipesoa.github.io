@@ -1,0 +1,61 @@
+let palabras = [
+  "eco", "nada", "silencio", "pulso", "código", "vértigo",
+  "memoria", "luz", "sombra", "idea", "ruido", "ritual",
+  "trazo", "signo", "vacío", "onda", "piel", "tiempo"
+];
+
+let txt;
+
+function setup() {
+  createCanvas(800, 500, WEBGL);
+  angleMode(DEGREES);
+
+  txt = createGraphics(200, 60);
+  txt.textSize(32);
+  txt.textAlign(CENTER, CENTER);
+  txt.fill(40, 20, 80);
+  txt.noStroke();
+}
+
+function draw() {
+  background(240, 200, 230);
+  orbitControl();
+
+  let index = 0;
+
+  for (let zAngle = 0; zAngle < 180; zAngle += 30) {
+    for (let xAngle = 0; xAngle < 360; xAngle += 30) {
+
+      let az = zAngle + frameCount * 0.2;
+      let ax = xAngle + frameCount * 0.3;
+
+      // posición en esfera
+      let x = 250 * sin(az) * cos(ax);
+      let y = 250 * sin(az) * sin(ax);
+      let z = 250 * cos(az);
+
+      push();
+
+      // colocar plano en su punto
+      translate(x, y, z);
+
+      // billboarding: orientar hacia cámara
+      rotateY(-atan2(x, z));
+      let distXZ = sqrt(x * x + z * z);
+      rotateX(atan2(y, distXZ));
+
+      // palabra actual
+      let w = palabras[index % palabras.length];
+      txt.clear();
+      txt.text(w, txt.width / 2, txt.height / 2);
+
+      texture(txt);
+      noStroke();
+      plane(160, 50);
+
+      pop();
+
+      index++;
+    }
+  }
+}
