@@ -1,8 +1,19 @@
 :root {
-    --bg-color: #fefefe;
+    --bg-color: #ffffff;
     --text-color: #111111;
-    --accent-color: #888888;
-    --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --accent-color: #666666;
+    --font-main: Arial, Helvetica, sans-serif; /* Cambia aquí la fuente principal:
+       Sans-serif:
+       Arial, Helvetica, Geneva, Verdana, Tahoma, Trebuchet MS
+       Serif:
+       Times New Roman, Georgia, Palatino Linotype, Palatino, Garamond
+       Monospace:
+       Courier New, Lucida Console, Consolas, Monaco
+       Ejemplo de uso:
+       --font-main: Verdana, Geneva, sans-serif;
+       --font-main: Times New Roman, Georgia, serif;
+       --font-main: Courier New, Lucida Console, monospace;
+    */
 }
 
 body {
@@ -15,25 +26,21 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    height: 100vh;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 20px;
-    box-sizing: border-box;
 }
 
 header h1 {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 1.5rem;
+    font-weight: 700;
     margin-bottom: 2rem;
-    letter-spacing: 4px;
-    text-align: center;
+    letter-spacing: 3px;
 }
 
 nav.public-links {
     margin-bottom: 4rem;
-    font-size: 0.9rem;
-    text-align: center;
+    font-size: 0.8rem;
 }
 
 nav a {
@@ -41,7 +48,6 @@ nav a {
     color: var(--text-color);
     border-bottom: 1px solid transparent;
     transition: border-color 0.3s;
-    margin: 0 5px;
 }
 
 nav a:hover {
@@ -49,7 +55,7 @@ nav a:hover {
 }
 
 .separator {
-    margin: 0 5px;
+    margin: 0 10px;
     color: var(--accent-color);
 }
 
@@ -70,11 +76,11 @@ input {
     border: none;
     background: transparent;
     font-family: var(--font-main);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     text-align: center;
     outline: none;
     color: var(--text-color);
-    width: 220px;
+    width: 200px;
     text-transform: uppercase;
 }
 
@@ -89,95 +95,25 @@ button {
 }
 
 .instruction {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     color: var(--accent-color);
     margin-top: 15px;
 }
 
 .hidden { display: none; }
-
 #error-msg {
     margin-top: 1rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: red;
 }
 
-/* Estilo imagen jarrón */
 .main-image {
-    margin-top: 15px;
-    max-width: 300px;
-    width: 100%;
+    margin-top: 20px;
+    max-width: 100%;
     height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-}
-
-.contact-form textarea {
-    width: 260px;
-    height: 120px;
-    padding: 10px;
-    font-family: var(--font-main);
-    font-size: 0.9rem;
-    border: 1px solid var(--text-color);
-    background: transparent;
-    color: var(--text-color);
-    outline: none;
-    resize: none;
-    text-transform: none;
-}
-
-.contact-form button {
-    margin-top: 15px;
-    font-size: 1rem;
-    border: 1px solid var(--text-color);
-    background: transparent;
-    padding: 5px 15px;
-    cursor: pointer;
-    color: var(--text-color);
-    letter-spacing: 1px;
-}
-
-.contact-form button:hover {
-    background: var(--text-color);
-    color: var(--bg-color);
-}
-
-.public-container {
-    max-width: 600px;
-    text-align: center;
-    margin-top: 2rem;
-}
-
-.section-title {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-    letter-spacing: 2px;
-}
-
-.public-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.public-item {
-    text-decoration: none;
-    color: var(--text-color);
-    border: 1px solid var(--accent-color);
-    padding: 1.5rem;
-    border-radius: 4px;
-    transition: 0.2s;
-}
-
-.public-item:hover {
-    border-color: var(--text-color);
-}
-
+/* Fin de CSS principal
+   Para cambiar la tipografía solo modifica la variable --font-main al inicio
+   Todas las páginas que usan este CSS se actualizarán automáticamente
+*/
