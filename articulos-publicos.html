@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artículos Públicos - Editorial I.Pesoa</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
 </head>
+
 <body>
 
 <header>
@@ -18,43 +18,12 @@
     <h2>Nuntius Fluctibus Commissus</h2>
     <p>Mensaje confiado a las olas. Dibuja aquí y envíalo para nuestra futura exposición.</p>
 
-    <!-- Canvas de p5.js -->
-    <div id="sketch-holder"></div>
+    <!-- Link hacia la subpágina del proyecto de dibujo -->
+    <p><a href="polis-paint.html">Ir a Polis Paint</a></p>
 
-    <!-- Botón enviar dibujo -->
-    <form id="drawing-form" action="https://formspree.io/f/xxxxxxx" method="POST">
-        <input type="hidden" name="drawing" id="drawing-input">
-        <button type="submit">Enviar dibujo</button>
-    </form>
-
+    <!-- Volver a la página principal -->
     <p><a href="index.html">Volver a la página principal</a></p>
 </main>
-
-<script>
-let canvas;
-
-function setup() {
-    canvas = createCanvas(400, 400);
-    canvas.parent('sketch-holder');
-    background(255);
-
-    // Color y grosor por defecto
-    stroke(0);
-    strokeWeight(2);
-}
-
-function draw() {
-    if (mouseIsPressed) {
-        line(pmouseX, pmouseY, mouseX, mouseY);
-    }
-}
-
-// Convertir canvas a base64 al enviar
-document.getElementById('drawing-form').addEventListener('submit', function(e) {
-    const dataURL = canvas.elt.toDataURL("image/png");
-    document.getElementById('drawing-input').value = dataURL;
-});
-</script>
 
 </body>
 </html>
