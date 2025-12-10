@@ -150,3 +150,34 @@ button {
     color: var(--bg-color);
 }
 
+.public-container {
+    max-width: 600px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.section-title {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+}
+
+.public-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.public-item {
+    text-decoration: none;
+    color: var(--text-color);
+    border: 1px solid var(--accent-color);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.public-item:hover {
+    border-color: var(--text-color);
+}
+
