@@ -6,6 +6,42 @@
     <title>Nuntius Fluctibus Commissus - Editorial I.Pesoa</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+        .code-container h2 {
+            margin-bottom: 0.2rem;
+        }
+        .code-container p {
+            margin-top: 0.1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+        }
+        .drawing-area {
+            width: 400px;
+            height: 500px;
+            border: 2px dashed var(--text-color);
+            margin-bottom: 1rem;
+        }
+        button {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+        }
+        a {
+            margin-top: 1.5rem;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
 
@@ -17,13 +53,12 @@
     <h2>Nuntius Fluctibus Commissus</h2>
     <p>(Mensaje confiado a las olas)</p>
 
-    <!-- Canvas de dibujo -->
     <div id="sketch-holder" class="drawing-area"></div>
 
-    <!-- Botón enviar dibujo -->
-    <form id="drawing-form" action="#" method="POST">
+    <!-- Formulario que envía el dibujo a tu email -->
+    <form id="drawing-form" action="https://formspree.io/f/xgvgnrlw" method="POST">
         <input type="hidden" name="drawing" id="drawing-input">
-        <button type="submit">Enviar</button>
+        <button type="submit">Lanza tu mensaje al mar</button>
     </form>
 
     <p><a href="articulos-publicos.html">Volver a Artículos Públicos</a></p>
@@ -33,10 +68,9 @@
 let canvas;
 
 function setup() {
-    canvas = createCanvas(400, 400);
+    canvas = createCanvas(400, 500);
     canvas.parent('sketch-holder');
     background(255);
-
     stroke(0);
     strokeWeight(2);
 }
@@ -47,13 +81,12 @@ function draw() {
     }
 }
 
-// Convertir canvas a base64 al enviar
+// Convertir canvas a Base64 al enviar
 document.getElementById('drawing-form').addEventListener('submit', function(e) {
     const dataURL = canvas.elt.toDataURL("image/png");
     document.getElementById('drawing-input').value = dataURL;
-    // Por ahora no se envía a ningún servidor real
-    alert("Dibujo listo para enviar (simulación).");
-    e.preventDefault(); // evita que intente enviar realmente
+    // El envío real se realiza a Formspree
+    // Al enviar se redirige a su confirmación (o puedes añadir _next)
 });
 </script>
 
