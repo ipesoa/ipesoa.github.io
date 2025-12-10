@@ -13,14 +13,16 @@
 </header>
 
 <main class="code-container">
-    <h2>Contacto</h2>
-    
     <form action="https://formspree.io/f/xgvgnrlw" method="POST" class="contact-form">
-        <textarea name="message" placeholder="Escribe tu mensaje..." required></textarea>
+        <textarea name="message" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        <p style="font-size:0.7rem; color:var(--accent-color); text-align:center;">
+            (Añade dirección de respuesta si deseas que te contestemos)
+        </p>
+        <input type="text" name="_replyto" placeholder="Tu email (opcional)">
         <button type="submit">Enviar</button>
     </form>
 
-    <p><a href="index.html">Volver a la página principal</a></p>
+    <p style="margin-top: 2rem;"><a href="index.html">Volver a la página principal</a></p>
 </main>
 
 </body>
