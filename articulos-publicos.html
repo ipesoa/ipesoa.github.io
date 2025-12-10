@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artículos Públicos — I.Pesoa</title>
+    <title>Artículos Públicos - Editorial I.Pesoa</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
 </head>
 <body>
 
@@ -12,27 +13,47 @@
     <h1>EDITORIAL I.PESOA</h1>
 </header>
 
-<nav class="public-links">
-    <a href="/index.html">Inicio</a>
-    <span class="separator">/</span>
-    <a href="/editorial.html">Editorial</a>
-    <span class="separator">/</span>
-    <a href="/contacto.html">Contacto</a>
-</nav>
+<main class="code-container">
+    <h2>Nuntius Fluctibus Commissus</h2>
+    <p>Mensaje confiado a las olas. Dibuja aquí y envíalo para nuestra futura exposición.</p>
 
-<main class="public-container">
-    <h2 class="section-title">Artículos Públicos</h2>
+    <!-- Canvas de p5.js -->
+    <div id="sketch-holder"></div>
 
-    <div class="public-list">
+    <!-- Botón enviar dibujo -->
+    <form id="drawing-form" action="https://formspree.io/f/xxxxxxx" method="POST">
+        <input type="hidden" name="drawing" id="drawing-input">
+        <button type="submit">Enviar dibujo</button>
+    </form>
 
-        <!-- Proyecto 1 -->
-        <a href="/polis-paint.html" class="public-item">
-            <h3>Nuntius Fluctibus Commissus</h3>
-            <p>Un mensaje confiado a las olas. Dibuja, envía y participa en la exposición colectiva.</p>
-        </a>
-
-    </div>
+    <p><a href="index.html">Volver a la página principal</a></p>
 </main>
+
+<script>
+let canvas;
+
+function setup() {
+    canvas = createCanvas(400, 400);
+    canvas.parent('sketch-holder');
+    background(255);
+
+    // Color y grosor por defecto
+    stroke(0);
+    strokeWeight(2);
+}
+
+function draw() {
+    if (mouseIsPressed) {
+        line(pmouseX, pmouseY, mouseX, mouseY);
+    }
+}
+
+// Convertir canvas a base64 al enviar
+document.getElementById('drawing-form').addEventListener('submit', function(e) {
+    const dataURL = canvas.elt.toDataURL("image/png");
+    document.getElementById('drawing-input').value = dataURL;
+});
+</script>
 
 </body>
 </html>
