@@ -101,3 +101,14 @@ button {
     font-size: 0.8rem;
     color: red;
 }
+
+/* Estilo imagen jarrón */
+.main-image {
+    margin-top: 15px;
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
