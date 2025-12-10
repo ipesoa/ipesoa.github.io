@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Archivos - ADMIN</title>
+    <style>
+        body { font-family: sans-serif; padding: 50px; }
+        input { padding: 10px; font-size: 1.2rem; }
+        .result { margin-top: 20px; font-weight: bold; color: blue; }
+        .copy { font-size: 0.8rem; color: #666; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Generador de Nombres de Archivo</h2>
+    <p>Introduce el código que darás al usuario:</p>
+    <input type="text" id="adminInput" placeholder="Ej: 2728">
+    <div class="result" id="output"></div>
+
+    <script>
+        // ¡¡IMPORTANTE!!: Debe ser IDÉNTICO al del script.js público
+        const SITE_SALT = "noticias-ipesoa-proyecto-secreto-2025-v1";
+
+        const input = document.getElementById('adminInput');
+        const output = document.getElementById('output');
+
+        input.addEventListener('input', async () => {
+            const rawCode = input.value.trim().toLowerCase();
+            if(!rawCode) { output.innerText = ""; return; }
+
+            const encoder = new TextEncoder();
+            const data = encoder.encode(rawCode + SITE_SALT);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            output.innerHTML = `
+                Nombre del archivo a crear:<br>
+                <strong>/p/${hashHex}.html</strong>
+            `;
+        });
+    </script>
+</body>
+</html>
