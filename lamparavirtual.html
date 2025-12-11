@@ -6,48 +6,9 @@
 <title>Lámpara Virtual</title>
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <style>
-  html, body {
-    margin:0; padding:0;
-    width:100%; height:100%;
-    background:#fff;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    font-family:sans-serif;
-  }
-
-  #sketch-holder {
-    flex:1;
-    width:100%;
-    height:calc(100vh - 60px); /* espacio para el botón */
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  #botonEditorial {
-    position: fixed;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 4px 12px;
-    border: 1px solid #000;
-    background: transparent;
-    color: #000;
-    cursor: pointer;
-    font-family: sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    transition: all 0.3s ease;
-  }
-
-  #botonEditorial:hover {
-    content: 'VOLVER';
-    background: #000;
-    color: #fff;
-  }
+  html, body { margin:0; padding:0; width:100%; height:100%; background:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:sans-serif; }
+  #sketch-holder { flex:1; width:100%; height:calc(100vh - 60px); display:flex; align-items:center; justify-content:center; }
+  #botonEditorial { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); padding: 4px 12px; border: 1px solid #000; background: transparent; color: #000; cursor: pointer; font-family: sans-serif; font-weight: bold; text-transform: uppercase; letter-spacing: 4px; transition: all 0.3s ease; }
 </style>
 </head>
 <body>
@@ -55,33 +16,41 @@
 <div id="sketch-holder"></div>
 <button id="botonEditorial">EDITORIAL I.PESOA</button>
 
-<!-- Animaciones -->
-<script src="animaciones/animacion1.js"></script>
-<script src="animaciones/animacion2.js"></script>
-
 <script>
-const animaciones = []; // Se llenará automáticamente en cada animacion*.js
-
-// Cada animacionX.js debe hacer algo así:
-// animaciones.push(function(p){ ... })
+// Lista de archivos en la carpeta "animaciones" (agrega aquí tus .js)
+const archivosAnimaciones = [
+  'animaciones/animacion1.js',
+  'animaciones/animacion2.js'
+];
 
 let currentSketch;
 
-function cargarAnimacion() {
-  if(animaciones.length === 0) return;
-  const indice = Math.floor(Math.random() * animaciones.length);
+function cargarAnimacionAleatoria() {
+  // Elimina sketch anterior
   if(currentSketch) currentSketch.remove();
-  currentSketch = new p5(animaciones[indice], 'sketch-holder');
-}
 
-// Carga inicial
-cargarAnimacion();
+  // Elegir un archivo al azar
+  const indice = Math.floor(Math.random() * archivosAnimaciones.length);
+  const archivo = archivosAnimaciones[indice];
+
+  // Crear tag <script> para cargarlo
+  const script = document.createElement('script');
+  script.src = archivo;
+  script.type = 'text/javascript';
+  script.onload = () => {
+    console.log('Animación cargada: ' + archivo);
+  };
+  document.body.appendChild(script);
+}
 
 // Botón vuelve al index
 const boton = document.getElementById('botonEditorial');
 boton.addEventListener('click', () => window.location.href = '/');
 boton.addEventListener('mouseenter', () => boton.textContent = 'VOLVER');
 boton.addEventListener('mouseleave', () => boton.textContent = 'EDITORIAL I.PESOA');
+
+// Cargar animación inicial
+cargarAnimacionAleatoria();
 </script>
 
 </body>
