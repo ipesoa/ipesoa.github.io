@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silencio Virtual</title>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+<style>
+  html, body {
+    margin:0; padding:0;
+    width:100%; height:100%;
+    background:#111;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    color:#fff;
+    font-family:sans-serif;
+  }
+  #sketch-holder {
+    flex:1;
+    display:flex; align-items:center; justify-content:center;
+    width:100%; height:100%;
+  }
+  #botonEditorial {
+    position: fixed;
+    bottom: 20px;
+    padding: 6px 18px;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  #botonEditorial:hover {
+    background: #fff;
+    color: #111;
+  }
+</style>
+</head>
+<body>
+
+<div id="sketch-holder"></div>
+<button id="botonEditorial">i.pesoa</button>
+
+<script>
+// Lista de archivos de animaciones
+const animaciones = [
+  "animacion1.js",
+  "animacion2.js",
+  "animacion3.js"
+];
+
+let currentSketch;
+
+// Función para cargar animación aleatoria
+function cargarAnimacion() {
+  const indice = Math.floor(Math.random() * animaciones.length);
+
+  // Elimina animación anterior
+  if(currentSketch) currentSketch.remove();
+
+  // Crea nueva instancia p5
+  currentSketch = new p5(s => {
+    const script = document.createElement('script');
+    script.src = "animaciones/" + animaciones[indice];
+    document.body.appendChild(script);
+  }, 'sketch-holder');
+}
+
+// Carga inicial
+cargarAnimacion();
+
+// Botón con cambio de texto al pasar cursor
+const boton = document.getElementById('botonEditorial');
+boton.addEventListener('mouseenter', () => boton.textContent = "volver");
+boton.addEventListener('mouseleave', () => boton.textContent = "i.pesoa");
+boton.addEventListener('click', () => cargarAnimacion());
+</script>
+
+</body>
+</html>
