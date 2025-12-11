@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apollinare Efímero - Editorial I.Pesoa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apollinare Efímero - Editorial I.PESOA</title>
 
-    <!-- Tu estilo global -->
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
-    <style>
-        /* Ajustes específicos del generador */
-        .drawing-area {
-            width: 400px;
-            height: 500px;
-            border: 2px dashed var(--text-color);
-            margin-bottom: 1rem;
-            padding: 20px;
-            overflow: hidden;
-            position: relative;
-            font-family: var(--font-main);
-            letter-spacing: 0.05em;
-            font-size: 1.1rem;
-            line-height: 1.9;
-        }
+<style>
+    .drawing-area {
+        width: 400px;
+        height: 500px;
+        border: 2px dashed var(--text-color);
+        margin-bottom: 1rem;
+        padding: 20px;
+        overflow: hidden;
+        position: relative;
+        font-family: var(--font-main);
+        letter-spacing: 0.05em;
+        font-size: 1.1rem;
+        line-height: 1.9;
+    }
 
-        .word {
-            position: absolute;
-            white-space: nowrap;
-        }
-    </style>
+    .word {
+        position: absolute;
+        white-space: nowrap;
+    }
+</style>
 </head>
 
 <body>
@@ -42,73 +40,151 @@
     <h2>Apollinare Efímero</h2>
     <p>(Poema generado al instante)</p>
 
-    <!-- Área donde aparecerá el poema -->
     <div id="poema-area" class="drawing-area"></div>
 
-    <!-- Botón -->
     <button onclick="generarPoema()">Generar nuevo poema</button>
 
     <p><a href="articulos-publicos.html">Volver a Artículos Públicos</a></p>
 </main>
 
 <script>
-    // -----------------------------
-    // BOLSA DE PALABRAS
-    // -----------------------------
-    const palabras = [
-        "murmurio", "sombra", "caminante", "océano", "silencio",
-        "hierba", "vapor", "latido", "piedra", "memoria",
-        "cristal", "hueco", "temblor", "línea", "eco",
-        "veladura", "cuerpo", "cicatriz", "noche", "surco",
-        "pasaje", "tensión", "bruma", "cauce", "mirada",
-        "niebla", "aliento", "estela", "suelo", "frontera"
-    ];
+const palabras = [
+"Son","nueve","y","las","he","abierto","todas","Oh","puertas","de","tu","cuerpo",
+"Son","nueve","y","para","mí","se","han","vuelto","a","cerrar","todas","En","la",
+"primera","puerta","La","Clara","Razón","ha","muerto","Era","te","acuerdas","el",
+"primer","día","en","Niza","Tu","ojo","izquierdo","así","como","una","culebra","se",
+"desliza","Hasta","mi","corazón","Y","que","se","vuelva","a","abrir","de","nuevo",
+"la","puerta","de","tu","mirada","izquierda","En","la","segunda","puerta","Ha",
+"muerto","toda","mi","fuerza","Era","te","acuerdas","en","un","albergue","en",
+"Cagnes","Tu","ojo","derecho","palpitaba","como","mi","corazón","Tus","párpados",
+"latían","como","en","la","brisa","laten","las","flores","Y","que","se","vuelva",
+"a","abrir","de","nuevo","la","puerta","de","tu","mirada","derecha","En","la",
+"tercera","puerta","Escucha","latir","la","aorta","Y","todas","mis","arterias",
+"hinchadas","por","tu","sólo","amor","Y","que","se","vuelva","a","abrir","de",
+"nuevo","la","puerta","de","tu","oído","izquierdo","En","la","cuarta","puerta",
+"Me","escoltan","todas","las","primaveras","Y","aguzando","el","oído","se","escucha",
+"del","bonito","bosque","Subir","esta","canción","de","amor","y","de","los","nidos",
+"Tan","triste","para","los","soldados","que","están","en","la","guerra","Y","que",
+"se","vuelva","a","abrir","de","nuevo","la","puerta","de","tu","oído","derecho",
+"Que","no","sea","en","el","desordenado","sufrir","De","turbias","y","sombrías",
+"moradas","Subamos","juntos","la","escalera","empinada","Observatorio","de","la",
+"naturaleza","Contemplando","del","valle","su","delicadeza","Sus","floridas",
+"laderas","Su","río","cristalino","corriendo","Permitid","que","vigile","soñoliento",
+"Bajo","el","tejado","de","verdes","ramas","Donde","los","ciervos","pasan","como",
+"ráfajas","Agitando","a","las","abejas","en","sus","campanas","Pero","aunque",
+"con","placer","imagino","Estas","dulces","escenas","contigo","El","suave",
+"conversar","de","una","mente","Cuyas","palabras","son","imágenes","inocentes",
+"Es","el","placer","de","mi","alma","y","sin","duda","debe","ser","El","mayor",
+"gozo","de","la","humanidad","Soñar","que","tu","raza","pueda","sufrir","Por",
+"dos","espíritus","que","juntos","deciden","huir","Una","cosa","bella","es","un",
+"goce","eterno","Su","hermosura","va","creciendo","Y","jamás","caerá","en","la",
+"nada","Antes","conservará","para","nosotros","Un","plácido","retiro","Un","sueño",
+"lleno","de","dulces","sueños","La","salud","un","relajado","alentar","Así","cada",
+"mañana","trenzamos","una","Guirnalda","de","flores","que","nos","ata","a","la",
+"tierra","A","pesar","del","desaliento","a","la","inhumana","Falta","de",
+"naturalezas","nobles","A","los","días","nublados","A","todos","los","caminos",
+"insanos","y","lóbregos","Abiertos","a","nuestra","búsqueda","Si","pese","a",
+"todo","alguna","bella","forma","Alza","el","paño","mortuorio","De","nuestro",
+"espíritu","ensombrecido","Como","el","sol","la","luna","los","árboles","ancianos",
+"y","los","nuevos","Tendiendo","su","sombra","cálida","sobre","los","rebaños",
+"Como","también","los","narcisos","Y","el","universo","verde","en","el","que",
+"moran","Y","los","claros","arroyos","que","fluyendo","Frescos","hacia","el",
+"estío","Y","el","claro","en","medio","del","bosque","Manchado","de","rosas",
+"silvestres","Y","así","el","sublime","destino","Que","imaginamos","para","los",
+"grandes","muertos","Todos","los","deliciosos","cuentos","que","oímos","o",
+"leímos","Fuente","eterna","de","una","linfa","inmortal","Que","cae","sobre",
+"nosotros","desde","la","orilla","del","cielo","Los","momentos","pasaban","como",
+"en","el","teatro","tenía","la","sabiduría","que","el","amor","hace","nacer",
+"tenía","mi","cuota","de","sentido","común","y","a","pesar","de","todo","cuanto",
+"podría","afirmar","y","aunque","tenía","por","eso","el","elogio","de","ella",
+"una","nube","venida","desde","el","norte","despiadado","ocultó","de","repente",
+"la","luna","del","Amor","Creyendo","cada","palabra","que","decía","yo","alabé",
+"su","espíritu","y","su","cuerpo","hasta","que","el","orgullo","hizo","brillar",
+"sus","ojos","y","sonrojó","sus","mejillas","el","placer","y","volvió","ligeros",
+"sus","pasos","la","vanidad","nosotros","sin","embargo","a","pesar","de","esos",
+"elogios","en","lo","alto","veíamos","tan","sólo","oscuridad","Nos","sentamos",
+"silenciosos","como","piedras","sabíamos","aunque","ella","no","hubiera","dicho",
+"una","palabra","que","aún","el","mejor","amor","debe","morir","y","se","habría",
+"destruido","en","forma","cruel","de","no","ser","porque","el","Amor","ante",
+"el","grito","de","un","grotesco","pajarillo","arrancó","de","las","nubes","su",
+"luna","maravillosa","Qué","haré","con","esto","que","es","absurdo","oh",
+"corazón","turbado","corazón","esta","caricatura","esta","edad","decrépita","que",
+"me","ha","atado","como","un","palo","a","la","cola","de","un","perro","Nunca",
+"tuve","más","viva","apasionada","fantástica","imaginación","que","ahora","ni",
+"sentidos","capaces","de","aceptar","lo","imposible","ni","siquiera","en","la",
+"infancia","cuando","con","caña","y","mosca","o","con","el","humilde","gusano",
+"trepaba","las","laderas","del","Ben","Bulben","con","un","día","eterno","de",
+"verano","por","delante","Parece","que","ahora","debo","despedir","a","la","Musa",
+"cultivar","la","amistad","de","Platón","y","Plotino","hasta","que","la",
+"imaginación","y","los","sentidos","puedan","hallar","contento","en","el","debate",
+"convivir","con","abstracciones","o","bien","sufrir","la","burla","de","un",
+"abollado","caldero","en","los","tobillos","En","aquel","tiempo","yo","tenía",
+"veinte","años","y","estaba","loco","Había","perdido","un","país","pero","había",
+"ganado","un","sueño","Y","si","tenía","ese","sueño","lo","demás","no","importaba",
+"Ni","trabajar","ni","rezar","ni","estudiar","en","la","madrugada","junto","a",
+"los","perros","románticos","Y","el","sueño","vivía","en","el","vacío","de","mi",
+"espíritu","Una","habitación","de","madera","en","penumbras","en","uno","de","los",
+"pulmones","del","trópico","Y","a","veces","me","volvía","dentro","de","mí","y",
+"visitaba","el","sueño","estatua","eternizada","en","pensamientos","líquidos","un",
+"gusano","blanco","retorciéndose","en","el","amor","Un","amor","desbocado","Un",
+"sueño","dentro","de","otro","sueño","Y","la","pesadilla","me","decía","crecerás",
+"Dejarás","atrás","las","imágenes","del","dolor","y","del","laberinto","y",
+"olvidarás","Pero","en","aquel","tiempo","crecer","hubiera","sido","un","crimen",
+"Estoy","aquí","dije","con","los","perros","románticos","y","aquí","me","voy",
+"a","quedar","Este","poema","publicado","en","el","libro","del","mismo","nombre",
+"nos","habla","de","la","juventud","y","de","la","locura","y","el","descontrol",
+"de","las","pasiones","con","las","que","se","suele","asociar"
+];
 
-    function random(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-    }
+function random(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
 
-    // ----------------------------------------
-    // GENERADOR CALIGRAMA / APOLLINAIRE
-    // ----------------------------------------
-    function generarPoema() {
-        const area = document.getElementById("poema-area");
-        area.innerHTML = ""; // Limpia antes de generar
+function generarPoema() {
+    const area = document.getElementById("poema-area");
+    area.innerHTML = ""; 
 
-        const totalPalabras = 10;    // puedes ajustar
-        const maxPorLinea = 2;       // límite que pediste
+    const totalPalabras = 20;  // número de palabras a mostrar
+    const maxPorLinea = 2;       
+    const lineHeight = 60;        
 
-        let y = 10;  // posición inicial vertical
+    let y = 10;  
+    let palabrasLinea = 0; 
+    let usadas = []; 
 
-        for (let i = 0; i < totalPalabras; i++) {
-
-            // Probabilidad de romper línea
-            if (Math.random() < 0.3) {
-                y += 60; // salto vertical
-            }
-
-            const w = document.createElement("div");
-            w.className = "word";
-
-            w.innerText = random(palabras);
-
-            // Posición horizontal aleatoria en un rango ancho
-            const x = Math.floor(Math.random() * 280);
-
-            w.style.left = x + "px";
-            w.style.top = y + "px";
-
-            area.appendChild(w);
-
-            // Según la probabilidad, saltamos de línea
-            if (Math.random() < 0.4) {
-                y += 40;
-            }
+    for (let i = 0; i < totalPalabras; i++) {
+        if (palabrasLinea >= maxPorLinea || Math.random() < 0.3) {
+            y += lineHeight;
+            palabrasLinea = 0;
+            usadas = [];
         }
-    }
 
-    // Genera automáticamente un poema al cargar
-    generarPoema();
+        const w = document.createElement("div");
+        w.className = "word";
+        const palabra = random(palabras);
+        w.innerText = palabra;
+        area.appendChild(w);
+
+        const wordWidth = w.offsetWidth;
+        const areaWidth = area.clientWidth - wordWidth;
+
+        let x, colision, intentos = 0;
+        do {
+            x = Math.floor(Math.random() * areaWidth);
+            colision = usadas.some(pos => Math.abs(pos - x) < wordWidth + 10); 
+            intentos++;
+            if (intentos > 50) break;
+        } while (colision);
+
+        usadas.push(x);
+        palabrasLinea++;
+
+        w.style.left = x + "px";
+        w.style.top = y + "px";
+    }
+}
+
+generarPoema();
 </script>
 
 </body>
