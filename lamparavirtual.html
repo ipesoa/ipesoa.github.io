@@ -1,76 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lámpara Virtual</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lámpara Virtual</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+<style>
+  /* Ajuste específico para que el canvas no cubra el botón */
+  #sketch-holder {
+    flex: 1;
+    width: 100%;
+    height: calc(100vh - 80px); /* espacio para el botón abajo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #botonEditorial {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 18px;
+    border: 1px solid #000;
+    background: transparent;
+    color: #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    font-family: sans-serif;
+  }
+
+  #botonEditorial:hover {
+    background: #000;
+    color: #fff;
+  }
+</style>
 </head>
 <body>
 
-    <!-- Encabezado -->
-    <header>
-        <h1>EDITORIAL I.PESOA</h1>
-    </header>
+<header>
+    <h1>EDITORIAL I.PESOA</h1>
+</header>
 
-    <!-- Contenedor del sketch -->
-    <main class="code-container">
-        <div id="sketch-holder"></div>
-    </main>
+<main class="code-container">
+    <div id="sketch-holder"></div>
+</main>
 
-    <!-- Botón de volver / i.pesoa -->
-    <button id="botonEditorial" class="public-links">i.pesoa</button>
+<button id="botonEditorial">EDITORIAL I.PESOA</button>
 
-    <script>
-    // Lista de animaciones (tienes que añadir aquí los nombres de tus archivos)
-    const animaciones = [
-        "animacion1.js",
-        "animacion2.js",
-        "animacion3.js"
-    ];
+<script>
+const animaciones = [
+    // Nombres de tus archivos JS que contengan la animación
+    "animacion1.js",
+    "animacion2.js",
+    "animacion3.js"
+];
 
-    let currentSketch;
+let currentSketch;
 
-    // Función para cargar animación aleatoria
-    function cargarAnimacion() {
-        const indice = Math.floor(Math.random() * animaciones.length);
+function cargarAnimacion() {
+    const indice = Math.floor(Math.random() * animaciones.length);
 
-        // Elimina animación anterior
-        if(currentSketch) currentSketch.remove();
+    if(currentSketch) currentSketch.remove();
 
-        // Crea nueva instancia de p5
-        currentSketch = new p5((p) => {
-            p.setup = function() {
-                // Cada animación se define en su archivo, por ejemplo:
-                // crearCanvas, draw, etc. 
-                // Se espera que cada animación sea una función que acepte "p"
-                // Ejemplo de animación por defecto:
-                p.createCanvas(600, 600, p.WEBGL);
-                p.colorMode(p.HSB, 360, 100, 100);
-                p.noFill();
-            }
+    currentSketch = new p5((p) => {
+        p.setup = function() {
+            p.createCanvas(p.select('#sketch-holder').width, p.select('#sketch-holder').height, p.WEBGL);
+            p.colorMode(p.HSB, 360, 100, 100);
+            p.noFill();
+        }
+        p.draw = function() {
+            p.background(255); // fondo blanco
+            // Aquí puedes poner una animación por defecto o llamarla desde archivo
+        }
+    }, 'sketch-holder');
+}
 
-            p.draw = function() {
-                // Carga el archivo de animación dinámicamente
-                // Se espera que los archivos JS en animaciones exporten funciones de p5
-                // Para simplificar, aquí puedes incluir tu animación directamente
-            }
-        }, 'sketch-holder');
+// Carga inicial
+cargarAnimacion();
 
-        // Nota: los archivos JS deben definir sus funciones de p5 usando la instancia "p"
-        // por ejemplo: p.setup, p.draw
-    }
-
-    // Carga inicial
-    cargarAnimacion();
-
-    // Botón con cambio de texto al pasar cursor
-    const boton = document.getElementById('botonEditorial');
-    boton.addEventListener('mouseenter', () => boton.textContent = "volver");
-    boton.addEventListener('mouseleave', () => boton.textContent = "i.pesoa");
-    boton.addEventListener('click', () => cargarAnimacion());
-    </script>
+// Botón con cambio de texto al pasar cursor
+const boton = document.getElementById('botonEditorial');
+boton.addEventListener('mouseenter', () => boton.textContent = "VOLVER");
+boton.addEventListener('mouseleave', () => boton.textContent = "EDITORIAL I.PESOA");
+boton.addEventListener('click', () => cargarAnimacion());
+</script>
 
 </body>
 </html>
