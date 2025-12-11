@@ -1,72 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Silencio Virtual</title>
-<link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lámpara Virtual</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 </head>
 <body>
 
-<header>
-  <h1>EDITORIAL I.PESOA</h1>
-</header>
+    <!-- Encabezado -->
+    <header>
+        <h1>EDITORIAL I.PESOA</h1>
+    </header>
 
-<div id="sketch-holder"></div>
-<button id="botonEditorial">i.pesoa</button>
+    <!-- Contenedor del sketch -->
+    <main class="code-container">
+        <div id="sketch-holder"></div>
+    </main>
 
-<script>
-// Definir animaciones como funciones de p5
-const animaciones = [
-  function(p) { // animacion1
-    let t = 0;
-    p.setup = function() {
-      p.createCanvas(600, 600, p.WEBGL);
-      p.colorMode(p.HSB, 360, 100, 100);
-      p.noFill();
+    <!-- Botón de volver / i.pesoa -->
+    <button id="botonEditorial" class="public-links">i.pesoa</button>
+
+    <script>
+    // Lista de animaciones (tienes que añadir aquí los nombres de tus archivos)
+    const animaciones = [
+        "animacion1.js",
+        "animacion2.js",
+        "animacion3.js"
+    ];
+
+    let currentSketch;
+
+    // Función para cargar animación aleatoria
+    function cargarAnimacion() {
+        const indice = Math.floor(Math.random() * animaciones.length);
+
+        // Elimina animación anterior
+        if(currentSketch) currentSketch.remove();
+
+        // Crea nueva instancia de p5
+        currentSketch = new p5((p) => {
+            p.setup = function() {
+                // Cada animación se define en su archivo, por ejemplo:
+                // crearCanvas, draw, etc. 
+                // Se espera que cada animación sea una función que acepte "p"
+                // Ejemplo de animación por defecto:
+                p.createCanvas(600, 600, p.WEBGL);
+                p.colorMode(p.HSB, 360, 100, 100);
+                p.noFill();
+            }
+
+            p.draw = function() {
+                // Carga el archivo de animación dinámicamente
+                // Se espera que los archivos JS en animaciones exporten funciones de p5
+                // Para simplificar, aquí puedes incluir tu animación directamente
+            }
+        }, 'sketch-holder');
+
+        // Nota: los archivos JS deben definir sus funciones de p5 usando la instancia "p"
+        // por ejemplo: p.setup, p.draw
     }
-    p.draw = function() {
-      p.background(255);
-      let r = 70 + 30 * Math.sin(t);
-      let yPos = 0 + 200 * Math.sin(t*0.5);
-      let hue = (t*50) % 360;
-      p.stroke(hue, 100, 100);
-      let lw = 1 + 8 * Math.sin(t*0.3);
-      p.strokeWeight(lw);
-      p.beginShape();
-      for(let i=0;i<100;i++){
-        let angle = p.map(i,0,100,0,p.TWO_PI);
-        let x = r * Math.cos(angle);
-        let z = r * Math.sin(angle);
-        p.vertex(x,yPos,z);
-      }
-      p.endShape(p.CLOSE);
-      t += 0.01;
-    }
-  },
-  function(p) { /* animacion2 */ },
-  function(p) { /* animacion3 */ }
-];
 
-let currentSketch;
+    // Carga inicial
+    cargarAnimacion();
 
-// Función para cargar animación aleatoria
-function cargarAnimacion() {
-  const indice = Math.floor(Math.random()*animaciones.length);
-  if(currentSketch) currentSketch.remove();
-  currentSketch = new p5(animaciones[indice], 'sketch-holder');
-}
-
-// Carga inicial
-cargarAnimacion();
-
-// Botón con cambio de texto al pasar cursor
-const boton = document.getElementById('botonEditorial');
-boton.addEventListener('mouseenter', () => boton.textContent = "volver");
-boton.addEventListener('mouseleave', () => boton.textContent = "i.pesoa");
-boton.addEventListener('click', () => cargarAnimacion());
-</script>
+    // Botón con cambio de texto al pasar cursor
+    const boton = document.getElementById('botonEditorial');
+    boton.addEventListener('mouseenter', () => boton.textContent = "volver");
+    boton.addEventListener('mouseleave', () => boton.textContent = "i.pesoa");
+    boton.addEventListener('click', () => cargarAnimacion());
+    </script>
 
 </body>
 </html>
