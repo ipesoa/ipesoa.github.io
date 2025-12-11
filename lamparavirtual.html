@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lámpara Virtual</title>
-<link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <style>
   html, body {
@@ -21,7 +20,7 @@
   #sketch-holder {
     flex:1;
     width:100%;
-    height:calc(100vh - 80px); /* espacio para el botón abajo */
+    height:calc(100vh - 60px); /* espacio para el botón */
     display:flex;
     align-items:center;
     justify-content:center;
@@ -29,10 +28,10 @@
 
   #botonEditorial {
     position: fixed;
-    bottom: 20px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 6px 18px;
+    padding: 4px 12px;
     border: 1px solid #000;
     background: transparent;
     color: #000;
@@ -40,11 +39,12 @@
     font-family: sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 6px; /* igual que el header */
+    letter-spacing: 4px;
     transition: all 0.3s ease;
   }
 
   #botonEditorial:hover {
+    content: 'VOLVER';
     background: #000;
     color: #fff;
   }
@@ -55,40 +55,20 @@
 <div id="sketch-holder"></div>
 <button id="botonEditorial">EDITORIAL I.PESOA</button>
 
+<!-- Animaciones -->
+<script src="animaciones/animacion1.js"></script>
+<script src="animaciones/animacion2.js"></script>
+
 <script>
-// Array de animaciones como funciones de p5
-const animaciones = [
-  function(p) {
-    let t = 0;
-    p.setup = function() {
-      p.createCanvas(p.select('#sketch-holder').width, p.select('#sketch-holder').height, p.WEBGL);
-      p.colorMode(p.HSB, 360, 100, 100);
-      p.noFill();
-    }
-    p.draw = function() {
-      p.background(255); // fondo blanco
-      let r = 70 + 30 * Math.sin(t);
-      let y = 0 + 200 * Math.sin(t*0.5);
-      let hue = (t*50) % 360;
-      p.stroke(hue, 100, 100);
-      let lw = 1 + 8 * Math.sin(t*0.3);
-      p.strokeWeight(lw);
-      p.beginShape();
-      for(let i=0;i<100;i++){
-        let angle = p.map(i,0,100,0,p.TWO_PI);
-        let x = r * Math.cos(angle);
-        let z = r * Math.sin(angle);
-        p.vertex(x,y,z);
-      }
-      p.endShape(p.CLOSE);
-      t += 0.01;
-    }
-  }
-];
+const animaciones = []; // Se llenará automáticamente en cada animacion*.js
+
+// Cada animacionX.js debe hacer algo así:
+// animaciones.push(function(p){ ... })
 
 let currentSketch;
 
 function cargarAnimacion() {
+  if(animaciones.length === 0) return;
   const indice = Math.floor(Math.random() * animaciones.length);
   if(currentSketch) currentSketch.remove();
   currentSketch = new p5(animaciones[indice], 'sketch-holder');
@@ -100,6 +80,8 @@ cargarAnimacion();
 // Botón vuelve al index
 const boton = document.getElementById('botonEditorial');
 boton.addEventListener('click', () => window.location.href = '/');
+boton.addEventListener('mouseenter', () => boton.textContent = 'VOLVER');
+boton.addEventListener('mouseleave', () => boton.textContent = 'EDITORIAL I.PESOA');
 </script>
 
 </body>
