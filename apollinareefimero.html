@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apollinare Efímero - Editorial I.Pesoa</title>
+
+    <!-- Tu estilo global -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Ajustes específicos del generador */
+        .drawing-area {
+            width: 400px;
+            height: 500px;
+            border: 2px dashed var(--text-color);
+            margin-bottom: 1rem;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            font-family: var(--font-main);
+            letter-spacing: 0.05em;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .word {
+            position: absolute;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>EDITORIAL I.PESOA</h1>
+</header>
+
+<main class="code-container">
+
+    <h2>Apollinare Efímero</h2>
+    <p>(Poema generado al instante)</p>
+
+    <!-- Área donde aparecerá el poema -->
+    <div id="poema-area" class="drawing-area"></div>
+
+    <!-- Botón -->
+    <button onclick="generarPoema()">Generar nuevo poema</button>
+
+    <p><a href="articulos-publicos.html">Volver a Artículos Públicos</a></p>
+</main>
+
+<script>
+    // -----------------------------
+    // BOLSA DE PALABRAS
+    // -----------------------------
+    const palabras = [
+        "murmurio", "sombra", "caminante", "océano", "silencio",
+        "hierba", "vapor", "latido", "piedra", "memoria",
+        "cristal", "hueco", "temblor", "línea", "eco",
+        "veladura", "cuerpo", "cicatriz", "noche", "surco",
+        "pasaje", "tensión", "bruma", "cauce", "mirada",
+        "niebla", "aliento", "estela", "suelo", "frontera"
+    ];
+
+    function random(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    // ----------------------------------------
+    // GENERADOR CALIGRAMA / APOLLINAIRE
+    // ----------------------------------------
+    function generarPoema() {
+        const area = document.getElementById("poema-area");
+        area.innerHTML = ""; // Limpia antes de generar
+
+        const totalPalabras = 10;    // puedes ajustar
+        const maxPorLinea = 2;       // límite que pediste
+
+        let y = 10;  // posición inicial vertical
+
+        for (let i = 0; i < totalPalabras; i++) {
+
+            // Probabilidad de romper línea
+            if (Math.random() < 0.3) {
+                y += 60; // salto vertical
+            }
+
+            const w = document.createElement("div");
+            w.className = "word";
+
+            w.innerText = random(palabras);
+
+            // Posición horizontal aleatoria en un rango ancho
+            const x = Math.floor(Math.random() * 280);
+
+            w.style.left = x + "px";
+            w.style.top = y + "px";
+
+            area.appendChild(w);
+
+            // Según la probabilidad, saltamos de línea
+            if (Math.random() < 0.4) {
+                y += 40;
+            }
+        }
+    }
+
+    // Genera automáticamente un poema al cargar
+    generarPoema();
+</script>
+
+</body>
+</html>
