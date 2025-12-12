@@ -1,61 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apollinare Efímero - Editorial I.PESOA</title>
-
-<link rel="stylesheet" href="style.css">
-
-<style>
-    .drawing-area {
-        width: 100%;
-        max-width: 400px;
-        min-height: 400px;
-        border: 2px dashed var(--text-color);
-        margin-bottom: 1rem;
-        padding: 20px;
-        position: relative;
-        font-family: var(--font-main);
-        letter-spacing: 0.05em;
-        font-size: 1rem;
-        line-height: 1.7;
-        overflow: hidden; /* importante para límites */
-    }
-
-    @media (max-width: 480px) {
-        .drawing-area {
-            padding: 10px;
-            font-size: 0.9rem;
-            min-height: 350px;
-        }
-    }
-
-    .word {
-        position: absolute;
-        white-space: nowrap;
-    }
-</style>
-</head>
-
-<body>
-
-<header>
-    <h1>EDITORIAL I.PESOA</h1>
-</header>
-
-<main class="code-container">
-
-    <h2>Apollinare Efímero</h2>
-
-    <div id="poema-area" class="drawing-area"></div>
-
-    <button onclick="generarPoema()">Generar nuevo poema</button>
-
-    <p><a href="articulos-publicos.html">Volver a Artículos Públicos</a></p>
-</main>
-
 <script>
+// (Tu lista de palabras sigue igual, la he abreviado aquí para no ocupar espacio)
 const palabras = [
 "Son","nueve","y","las","he","abierto","todas","Oh","puertas","de","tu","cuerpo",
 "Son","nueve","y","para","mí","se","han","vuelto","a","cerrar","todas","En","la",
@@ -152,35 +96,79 @@ function generarPoema() {
     const area = document.getElementById("poema-area");
     area.innerHTML = "";
 
-    const total = 22;
-    const maxW = area.clientWidth - 10;
-    const maxH = area.clientHeight - 10;
+    // CONFIGURACIÓN
+    const totalPalabras = 25;   // Cuantas palabras quieres
+    const padding = 5;          // Espacio mínimo entre palabras (px)
+    const maxIntentos = 100;    // Cuantas veces intenta colocarla antes de rendirse
 
-    let y = 10;
+    // Aquí guardaremos las posiciones de las palabras ya colocadas
+    // Formato: { left, right, top, bottom }
+    const ocupado = [];
 
-    for (let i = 0; i < total; i++) {
+    const areaW = area.clientWidth;
+    const areaH = area.clientHeight;
+
+    for (let i = 0; i < totalPalabras; i++) {
+        // 1. Crear elemento y medirlo
         const w = document.createElement("div");
         w.className = "word";
         w.innerText = random(palabras);
+        
+        // Lo hacemos invisible temporalmente para poder medir su ancho/alto
+        w.style.opacity = "0"; 
         area.appendChild(w);
 
-        const ww = w.offsetWidth;
-        const hh = w.offsetHeight;
+        const anchoW = w.offsetWidth;
+        const altoW = w.offsetHeight;
 
-        let x = Math.floor(Math.random() * (maxW - ww));
-        if (x < 0) x = 0;
+        // 2. Intentar colocarlo sin chocar
+        let colocado = false;
 
-        if (Math.random() < 0.35) y += 40 + Math.random() * 30;
+        for (let attempt = 0; attempt < maxIntentos; attempt++) {
+            // Posición aleatoria dentro del contenedor
+            const x = Math.floor(Math.random() * (areaW - anchoW));
+            const y = Math.floor(Math.random() * (areaH - altoW));
 
-        if (y + hh > maxH) break;
+            // Definir la caja de la nueva palabra
+            const candidato = {
+                left: x,
+                right: x + anchoW,
+                top: y,
+                bottom: y + altoW
+            };
 
-        w.style.left = x + "px";
-        w.style.top = y + "px";
+            // 3. Comprobar colisión con TODAS las anteriores
+            let choca = false;
+            for (let caja of ocupado) {
+                // Lógica de superposición de rectángulos + padding
+                if (!(candidato.right + padding < caja.left || 
+                      candidato.left > caja.right + padding || 
+                      candidato.bottom + padding < caja.top || 
+                      candidato.top > caja.bottom + padding)) {
+                    choca = true;
+                    break;
+                }
+            }
+
+            // 4. Si no choca, guardamos y mostramos
+            if (!choca) {
+                w.style.left = x + "px";
+                w.style.top = y + "px";
+                w.style.opacity = "1"; // Ya la hacemos visible
+                
+                ocupado.push(candidato);
+                colocado = true;
+                break; // Salimos del bucle de intentos
+            }
+        }
+
+        // Si después de 100 intentos no cabe, la eliminamos del DOM
+        if (!colocado) {
+            w.remove();
+        }
     }
 }
 
-generarPoema();
+// Generar al cargar la página
+window.onload = generarPoema;
 </script>
-
-</body>
-</html>
