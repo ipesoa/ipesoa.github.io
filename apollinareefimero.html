@@ -10,18 +10,17 @@
 <style>
     .drawing-area {
         width: 100%;
-        max-width: 400px;      /* Tamaño ideal en escritorio */
-        height: auto;          /* Se adapta al contenido */
-        min-height: 400px;     /* Altura base */
+        max-width: 400px;
+        min-height: 400px;
         border: 2px dashed var(--text-color);
         margin-bottom: 1rem;
         padding: 20px;
-        overflow: visible;     /* Importante: no recorta en móvil */
         position: relative;
         font-family: var(--font-main);
         letter-spacing: 0.05em;
         font-size: 1rem;
         line-height: 1.7;
+        overflow: hidden; /* importante para límites */
     }
 
     @media (max-width: 480px) {
@@ -153,40 +152,27 @@ function generarPoema() {
     const area = document.getElementById("poema-area");
     area.innerHTML = "";
 
-    const totalPalabras = 20;
-    const maxPorLinea = 2;
-    const lineHeight = 60;
+    const total = 22;
+    const maxW = area.clientWidth - 10;
+    const maxH = area.clientHeight - 10;
 
     let y = 10;
-    let palabrasLinea = 0;
-    let usadas = [];
 
-    for (let i = 0; i < totalPalabras; i++) {
-        if (palabrasLinea >= maxPorLinea || Math.random() < 0.3) {
-            y += lineHeight;
-            palabrasLinea = 0;
-            usadas = [];
-        }
-
+    for (let i = 0; i < total; i++) {
         const w = document.createElement("div");
         w.className = "word";
-        const palabra = random(palabras);
-        w.innerText = palabra;
+        w.innerText = random(palabras);
         area.appendChild(w);
 
-        const wordWidth = w.offsetWidth;
-        const areaWidth = area.clientWidth - wordWidth;
+        const ww = w.offsetWidth;
+        const hh = w.offsetHeight;
 
-        let x, colision, intentos = 0;
-        do {
-            x = Math.floor(Math.random() * areaWidth);
-            colision = usadas.some(pos => Math.abs(pos - x) < wordWidth + 10);
-            intentos++;
-            if (intentos > 50) break;
-        } while (colision);
+        let x = Math.floor(Math.random() * (maxW - ww));
+        if (x < 0) x = 0;
 
-        usadas.push(x);
-        palabrasLinea++;
+        if (Math.random() < 0.35) y += 40 + Math.random() * 30;
+
+        if (y + hh > maxH) break;
 
         w.style.left = x + "px";
         w.style.top = y + "px";
