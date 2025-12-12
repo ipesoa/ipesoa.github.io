@@ -9,17 +9,27 @@
 
 <style>
     .drawing-area {
-        width: 400px;
-        height: 500px;
+        width: 100%;
+        max-width: 400px;      /* Tamaño ideal en escritorio */
+        height: auto;          /* Se adapta al contenido */
+        min-height: 400px;     /* Altura base */
         border: 2px dashed var(--text-color);
         margin-bottom: 1rem;
         padding: 20px;
-        overflow: hidden;
+        overflow: visible;     /* Importante: no recorta en móvil */
         position: relative;
         font-family: var(--font-main);
         letter-spacing: 0.05em;
-        font-size: 1.1rem;
-        line-height: 1.9;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    @media (max-width: 480px) {
+        .drawing-area {
+            padding: 10px;
+            font-size: 0.9rem;
+            min-height: 350px;
+        }
     }
 
     .word {
@@ -38,7 +48,6 @@
 <main class="code-container">
 
     <h2>Apollinare Efímero</h2>
-    
 
     <div id="poema-area" class="drawing-area"></div>
 
@@ -142,15 +151,15 @@ function random(arr) {
 
 function generarPoema() {
     const area = document.getElementById("poema-area");
-    area.innerHTML = ""; 
+    area.innerHTML = "";
 
-    const totalPalabras = 20;  // número de palabras a mostrar
-    const maxPorLinea = 2;       
-    const lineHeight = 60;        
+    const totalPalabras = 20;
+    const maxPorLinea = 2;
+    const lineHeight = 60;
 
-    let y = 10;  
-    let palabrasLinea = 0; 
-    let usadas = []; 
+    let y = 10;
+    let palabrasLinea = 0;
+    let usadas = [];
 
     for (let i = 0; i < totalPalabras; i++) {
         if (palabrasLinea >= maxPorLinea || Math.random() < 0.3) {
@@ -171,7 +180,7 @@ function generarPoema() {
         let x, colision, intentos = 0;
         do {
             x = Math.floor(Math.random() * areaWidth);
-            colision = usadas.some(pos => Math.abs(pos - x) < wordWidth + 10); 
+            colision = usadas.some(pos => Math.abs(pos - x) < wordWidth + 10);
             intentos++;
             if (intentos > 50) break;
         } while (colision);
