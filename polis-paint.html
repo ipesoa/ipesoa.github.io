@@ -6,6 +6,7 @@
     <title>Nuntius Fluctibus Commissus - Editorial I.Pesoa</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+
     <style>
         .code-container h2 {
             margin-bottom: 0.2rem;
@@ -16,12 +17,17 @@
             font-size: 0.9rem;
             color: var(--accent-color);
         }
+
+        /* --- NUEVO: drawing-area totalmente responsive --- */
         .drawing-area {
-            width: 400px;
-            height: 500px;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 4 / 5; /* conserva proporción original */
             border: 2px dashed var(--text-color);
             margin-bottom: 1rem;
+            position: relative;
         }
+
         button {
             background-color: var(--text-color);
             color: var(--bg-color);
@@ -55,7 +61,6 @@
 
     <div id="sketch-holder" class="drawing-area"></div>
 
-    <!-- Formulario que envía el dibujo a tu email -->
     <form id="drawing-form" action="https://formspree.io/f/xgvgnrlw" method="POST">
         <input type="hidden" name="drawing" id="drawing-input">
         <button type="submit">Lanzar tu mensaje/dibujo al mar</button>
@@ -68,11 +73,29 @@
 let canvas;
 
 function setup() {
-    canvas = createCanvas(400, 500);
+    const holder = document.getElementById("sketch-holder");
+
+    // Tamaño responsive REAL
+    const w = holder.clientWidth;
+    const h = w * 1.25; // misma proporción 400×500 (4:5)
+
+    canvas = createCanvas(w, h);
     canvas.parent('sketch-holder');
+
     background(255);
     stroke(0);
     strokeWeight(2);
+}
+
+function windowResized() {
+    // Redimensiona el canvas al cambiar orientación o tamaño
+    const holder = document.getElementById("sketch-holder");
+
+    const w = holder.clientWidth;
+    const h = w * 1.25;
+
+    resizeCanvas(w, h);
+    redraw();
 }
 
 function draw() {
@@ -82,11 +105,9 @@ function draw() {
 }
 
 // Convertir canvas a Base64 al enviar
-document.getElementById('drawing-form').addEventListener('submit', function(e) {
+document.getElementById('drawing-form').addEventListener('submit', function() {
     const dataURL = canvas.elt.toDataURL("image/png");
     document.getElementById('drawing-input').value = dataURL;
-    // El envío real se realiza a Formspree
-    // Al enviar se redirige a su confirmación (o puedes añadir _next)
 });
 </script>
 
