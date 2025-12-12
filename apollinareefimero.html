@@ -1,5 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apollinare Efímero - Editorial I.PESOA</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    .drawing-area {
+        width: 100%;
+        max-width: 400px;
+        min-height: 400px;
+        border: 2px dashed var(--text-color);
+        margin-bottom: 1rem;
+        padding: 20px;
+        position: relative;
+        font-family: var(--font-main);
+        letter-spacing: 0.05em;
+        font-size: 1rem;
+        line-height: 1.7;
+        overflow: hidden; /* importante para límites */
+    }
+
+    @media (max-width: 480px) {
+        .drawing-area {
+            padding: 10px;
+            font-size: 0.9rem;
+            min-height: 350px;
+        }
+    }
+
+    .word {
+        position: absolute;
+        white-space: nowrap;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>EDITORIAL I.PESOA</h1>
+</header>
+<main class="code-container">
+
+<h2>Apollinare Efímero</h2>
+
+<div id="poema-area" class="drawing-area"></div>
+
+<button onclick="generarPoema()">Generar nuevo poema</button>
+
+<p><a href="articulos-publicos.html">Volver a Artículos Públicos</a></p>
+</main>
 <script>
-// (Tu lista de palabras sigue igual, la he abreviado aquí para no ocupar espacio)
 const palabras = [
 "Son","nueve","y","las","he","abierto","todas","Oh","puertas","de","tu","cuerpo",
 "Son","nueve","y","para","mí","se","han","vuelto","a","cerrar","todas","En","la",
@@ -96,51 +146,49 @@ function generarPoema() {
     const area = document.getElementById("poema-area");
     area.innerHTML = "";
 
-    // CONFIGURACIÓN
-    const totalPalabras = 25;   // Cuantas palabras quieres
-    const padding = 5;          // Espacio mínimo entre palabras (px)
-    const maxIntentos = 100;    // Cuantas veces intenta colocarla antes de rendirse
+    // 1. Número aleatorio entre 8 y 10
+    const totalPalabras = Math.floor(Math.random() * (10 - 8 + 1)) + 8;
+    
+    // 2. Variables para control de colisiones
+    const padding = 10;
+    const maxIntentos = 300; 
+    const ocupado = []; // Guarda: {left, right, top, bottom}
 
-    // Aquí guardaremos las posiciones de las palabras ya colocadas
-    // Formato: { left, right, top, bottom }
-    const ocupado = [];
-
-    const areaW = area.clientWidth;
-    const areaH = area.clientHeight;
+    const maxW = area.clientWidth;
+    const maxH = area.clientHeight;
 
     for (let i = 0; i < totalPalabras; i++) {
-        // 1. Crear elemento y medirlo
+        // Crear elemento
         const w = document.createElement("div");
         w.className = "word";
         w.innerText = random(palabras);
         
-        // Lo hacemos invisible temporalmente para poder medir su ancho/alto
+        // Lo ponemos transparente para medir
         w.style.opacity = "0"; 
         area.appendChild(w);
 
-        const anchoW = w.offsetWidth;
-        const altoW = w.offsetHeight;
+        const ww = w.offsetWidth;
+        const hh = w.offsetHeight;
 
-        // 2. Intentar colocarlo sin chocar
         let colocado = false;
 
+        // Intentar colocar sin chocar
         for (let attempt = 0; attempt < maxIntentos; attempt++) {
-            // Posición aleatoria dentro del contenedor
-            const x = Math.floor(Math.random() * (areaW - anchoW));
-            const y = Math.floor(Math.random() * (areaH - altoW));
+            
+            // Calculamos posición aleatoria respetando márgenes
+            const x = Math.floor(Math.random() * (maxW - ww - 10)); // -10 es un margen de seguridad borde derecho
+            const y = Math.floor(Math.random() * (maxH - hh - 10)); // -10 margen inferior
 
-            // Definir la caja de la nueva palabra
             const candidato = {
                 left: x,
-                right: x + anchoW,
+                right: x + ww,
                 top: y,
-                bottom: y + altoW
+                bottom: y + hh
             };
 
-            // 3. Comprobar colisión con TODAS las anteriores
+            // Verificar colisión con las anteriores
             let choca = false;
             for (let caja of ocupado) {
-                // Lógica de superposición de rectángulos + padding
                 if (!(candidato.right + padding < caja.left || 
                       candidato.left > caja.right + padding || 
                       candidato.bottom + padding < caja.top || 
@@ -150,25 +198,25 @@ function generarPoema() {
                 }
             }
 
-            // 4. Si no choca, guardamos y mostramos
-            if (!choca) {
+            if (!choca && x >= 0 && y >= 0) {
                 w.style.left = x + "px";
                 w.style.top = y + "px";
-                w.style.opacity = "1"; // Ya la hacemos visible
-                
+                w.style.opacity = "1"; // Visible
                 ocupado.push(candidato);
                 colocado = true;
-                break; // Salimos del bucle de intentos
+                break;
             }
         }
 
-        // Si después de 100 intentos no cabe, la eliminamos del DOM
+        // Si no cabe, lo borramos
         if (!colocado) {
             w.remove();
         }
     }
 }
 
-// Generar al cargar la página
+// Generar al iniciar
 window.onload = generarPoema;
 </script>
+</body>
+</html>
