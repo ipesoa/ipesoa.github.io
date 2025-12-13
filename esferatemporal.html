@@ -19,13 +19,11 @@
             user-select: none; -webkit-user-select: none;
         }
 
-        /* --- CANVAS --- */
         canvas {
             display: block; position: fixed; top: 0; left: 0;
-            z-index: -1; /* Al fondo */
+            z-index: -1; 
         }
 
-        /* --- CABECERA FIJA --- */
         #info-container {
             position: fixed; top: 0; left: 0; width: 100%;
             z-index: 100; padding-top: 2rem;
@@ -47,54 +45,43 @@
             padding: 5px 15px; pointer-events: auto;
         }
 
-        /* --- INTERFAZ FLOTANTE (ALINEADA) --- */
         #ui-layer {
             position: fixed; 
-            bottom: 80px; /* Posición desde abajo */
+            bottom: 80px; 
             left: 50%;
             transform: translateX(-50%);
             z-index: 100; 
-            width: 240px; /* Un poco más ancho para que quepan bien los datos */
-            display: flex; flex-direction: column; align-items: center; /* Centrado interno */
+            width: 240px; 
+            display: flex; flex-direction: column; align-items: center; 
             pointer-events: auto; 
         }
 
-        /* Estilos estrictos para alinear fecha y botón */
         input[type="date"], button {
-            display: block; 
-            width: 100%; 
-            height: 40px; /* Altura fija para que sean iguales */
-            margin: 0 0 10px 0; /* Separación uniforme */
-            padding: 0;
-            font-size: 0.85rem;
-            border: 1px solid #000; 
-            box-sizing: border-box; /* Clave para alineación exacta */
-            font-family: inherit;
-            text-transform: uppercase;
+            display: block; width: 100%; height: 40px; margin: 0 0 10px 0; 
+            padding: 0; font-size: 0.85rem; border: 1px solid #000; 
+            box-sizing: border-box; font-family: inherit; text-transform: uppercase;
         }
 
         input[type="date"] {
             background: rgba(255,255,255,0.95);
-            text-align: center;
-            line-height: 40px; /* Centrar texto verticalmente */
+            text-align: center; line-height: 40px; 
         }
         
         button {
-            letter-spacing: 1px;
-            cursor: pointer; 
-            transition: all 0.3s ease;
-            line-height: 38px; /* Ajuste óptico botón */
+            letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease;
+            line-height: 38px; 
         }
 
         .btn-black { background-color: #000; color: #fff; }
         .btn-black:hover { background-color: #333; }
+        .btn-black:disabled { background-color: #666; cursor: wait; opacity: 0.8; }
+        
         .btn-white { background-color: rgba(255,255,255,0.9); color: #000; }
         .btn-white:hover { background-color: #f4f4f4; }
 
         .ui-step { width: 100%; transition: opacity 0.5s ease; }
         .hidden { display: none !important; }
 
-        /* Datos matemáticos pequeños */
         #math-data { 
             display: flex; flex-wrap: wrap; justify-content: center; 
             gap: 5px; margin-top: 0px; 
@@ -102,10 +89,9 @@
         .data-tag {
             font-size: 0.6rem; background: rgba(255,255,255,0.8);
             padding: 2px 6px; border: 1px solid #ccc; color: #555;
-            white-space: nowrap; /* Evita que el texto se rompa */
+            white-space: nowrap; 
         }
 
-        /* --- FOOTER --- */
         #nav-footer {
             position: fixed; bottom: 20px; width: 100%; text-align: center; z-index: 100;
             pointer-events: none;
@@ -131,20 +117,15 @@
     </div>
 
     <div id="ui-layer">
-        
-        <!-- PASO 1 -->
         <div id="step-input" class="ui-step">
             <input type="date" id="dateInput" value="2000-01-01">
             <button type="button" class="btn-black" onclick="generarEsfera()">GENERAR</button>
         </div>
 
-        <!-- PASO 2 -->
         <div id="step-result" class="ui-step hidden">
-            <!-- BOTÓN MODIFICADO AQUÍ -->
-            <button type="button" class="btn-black" onclick="exportarDINA4()">DESCARGAR PNG</button>
+            <button type="button" id="btn-descargar" class="btn-black" onclick="iniciarDescarga()">DESCARGAR PNG</button>
             <button type="button" class="btn-white" onclick="resetear()">OTRA FECHA</button>
 
-            <!-- DATOS MODIFICADOS AQUÍ (LAS 6 VARIABLES) -->
             <div id="math-data">
                 <div class="data-tag">FA:<span id="v-freqA">0</span></div>
                 <div class="data-tag">FB:<span id="v-freqB">0</span></div>
@@ -172,18 +153,14 @@
         function setup() {
             let cnv = createCanvas(windowWidth, windowHeight, WEBGL);
             cnv.style('display', 'block');
-            
             colorMode(HSB, 360, 100, 100, 1);
             smooth();
-            
-            // --- TAMAÑO EN PANTALLA (WEB) ---
             targetParams.radio = min(windowWidth, windowHeight) * 0.25;
             params.radio = targetParams.radio;
         }
 
         function draw() {
             background(255); 
-
             params.freqA = lerp(params.freqA, targetParams.freqA, 0.05);
             params.freqB = lerp(params.freqB, targetParams.freqB, 0.05);
             params.amp   = lerp(params.amp, targetParams.amp, 0.05);
@@ -205,7 +182,6 @@
         function dibujarEsfera(esAltaRes) {
             strokeWeight(esAltaRes ? 1 : 1.5);
             noFill();
-
             let rBase = params.radio;
             let rs = floor(params.res);
             if(rs < 20) rs = 20;
@@ -213,17 +189,13 @@
             for (let lat = 0; lat <= 180; lat += 180/rs) {
                 let col = (params.hue + lat/2) % 360;
                 stroke(col, 80, 40); 
-
                 beginShape(POINTS);
                 for (let lon = 0; lon <= 360; lon += 360/rs) {
                     let theta = radians(lat);
                     let phi = radians(lon);
-
                     let ondaA = sin(phi * params.freqA + params.phase);
                     let ondaB = sin(theta * params.freqB + params.phase);
-                    
                     let r = rBase + (ondaA * ondaB * params.amp * (rBase/100));
-                    
                     let x = r * sin(theta) * cos(phi);
                     let y = r * sin(theta) * sin(phi);
                     let z = r * cos(theta); 
@@ -236,14 +208,12 @@
         function generarEsfera() {
             let input = document.getElementById('dateInput').value;
             if(!input) return;
-
             let date = new Date(input);
             if(isNaN(date.getTime())) return;
 
             let dia = date.getDate();
             let mes = date.getMonth() + 1; 
             let anio = date.getFullYear();
-
             finalDateString = `${dia}.${mes}.${anio}`;
 
             targetParams.freqA = ((dia * mes) % 18) + 2; 
@@ -251,16 +221,12 @@
             targetParams.amp = (anio / (mes*dia || 1)) % 100 + 20;
             targetParams.res = map(anio, 1900, 2030, 50, 120);
             targetParams.phase = (anio / dia) % 10;
-            
             let baseVal = dia * mes * 5;
             targetParams.hue = baseVal % 360;
 
-            // --- ACTUALIZACIÓN DE LAS 6 VARIABLES EN PANTALLA ---
             document.getElementById('v-freqA').innerText = targetParams.freqA.toFixed(1);
             document.getElementById('v-freqB').innerText = targetParams.freqB.toFixed(1);
             document.getElementById('v-amp').innerText = targetParams.amp.toFixed(1);
-            
-            // Nuevas variables
             document.getElementById('v-res').innerText = targetParams.res.toFixed(0);
             document.getElementById('v-phase').innerText = targetParams.phase.toFixed(1);
             document.getElementById('v-hue').innerText = targetParams.hue.toFixed(0);
@@ -279,26 +245,70 @@
             document.getElementById('step-input').classList.remove('hidden');
         }
 
-        // --- EXPORTACIÓN FINAL ---
-        function exportarDINA4() {
-            let w = 2480;
-            let h = 3508;
+        // --- FUNCIÓN DE DETECCIÓN INTELIGENTE ---
+        function esMovil() {
+            // Detecta si es un dispositivo móvil por el User Agent o si la pantalla es estrecha
+            return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 800);
+        }
 
+        function iniciarDescarga() {
+            const btn = document.getElementById('btn-descargar');
+            const textoOriginal = btn.innerText;
+            
+            // Verificamos si es móvil
+            const modoMovil = esMovil();
+
+            // Cambiar texto para dar feedback
+            btn.innerText = modoMovil ? "GENERANDO..." : "GENERANDO HD...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                try {
+                    // Si es móvil -> Baja resolución, Si es PC -> Alta resolución
+                    ejecutarExportacionSmart(modoMovil);
+                } catch (e) {
+                    alert("Ocurrió un error al generar la imagen. Intenta refrescar.");
+                    console.error(e);
+                } finally {
+                    btn.innerText = textoOriginal;
+                    btn.disabled = false;
+                }
+            }, 100);
+        }
+
+        // --- EXPORTACIÓN UNIFICADA (SMART) ---
+        function ejecutarExportacionSmart(esModoMovil) {
+            
+            // CONFIGURACIÓN:
+            // MÓVIL: 1240x1754 px (Aprox A5/A4 web) - Seguro para RAM
+            // PC:    2480x3508 px (A4 @ 300ppi) - Máxima calidad
+            
+            let w = esModoMovil ? 1240 : 2480;
+            let h = esModoMovil ? 1754 : 3508;
+            
+            // El radio debe ser proporcional al ancho
+            // Si en PC el radio es 2090 para ancho 2480, la proporción es aprox 0.84
+            let radioExport = w * 0.84; 
+
+            // Crear Canvas Invisible
             let pg3D = createGraphics(w, h, WEBGL);
             pg3D.pixelDensity(1); 
             pg3D.colorMode(HSB, 360, 100, 100, 1);
             
-            // Cámara ajustada para ver la esfera completa
-            pg3D.camera(0, 0, 2600, 0, 0, 0, 0, 1, 0);
+            // La cámara debe alejarse proporcionalmente al tamaño
+            // Ajustamos la Z de la cámara
+            let zoomCamara = esModoMovil ? 1300 : 2600;
+            pg3D.camera(0, 0, zoomCamara, 0, 0, 0, 0, 1, 0);
             
-            pg3D.strokeWeight(3); 
+            pg3D.strokeWeight(esModoMovil ? 2 : 3);
             pg3D.noFill();
 
             let rs = floor(targetParams.res);
-            if(rs < 150) rs = 150; 
-
-            // --- RADIO SOLICITADO PARA A4 ---
-            let radioExport = 2090; 
+            // Limitadores de seguridad
+            if(rs < 100) rs = 100;
+            // En móvil limitamos más los puntos para evitar cuelgues
+            let limitePuntos = esModoMovil ? 150 : 300; 
+            if(rs > limitePuntos) rs = limitePuntos; 
 
             for (let lat = 0; lat <= 180; lat += 180/rs) {
                 let col = (targetParams.hue + lat/2) % 360;
@@ -311,7 +321,8 @@
                     let ondaA = sin(phi * targetParams.freqA + targetParams.phase);
                     let ondaB = sin(theta * targetParams.freqB + targetParams.phase);
                     
-                    let r = radioExport + (ondaA * ondaB * targetParams.amp * 5);
+                    // Multiplicador de amplitud ajustado
+                    let r = radioExport + (ondaA * ondaB * targetParams.amp * (esModoMovil ? 2.5 : 5));
 
                     let x = r * sin(theta) * cos(phi);
                     let y = r * sin(theta) * sin(phi);
@@ -321,26 +332,41 @@
                 pg3D.endShape();
             }
 
+            // Composición Final
             let pgFinal = createGraphics(w, h);
             pgFinal.pixelDensity(1);
             pgFinal.background(255); 
             pgFinal.imageMode(CENTER);
             
-            pgFinal.image(pg3D, w/2, h/2 - 200);
+            // Centrado vertical ajustado
+            let offsetY = esModoMovil ? 100 : 200;
+            pgFinal.image(pg3D, w/2, h/2 - offsetY);
 
-            // TEXTOS
+            // Textos
             pgFinal.fill(0);
             pgFinal.noStroke();
             pgFinal.textAlign(CENTER, CENTER);
             pgFinal.textFont('Helvetica'); 
             
-            pgFinal.textSize(80);
-            pgFinal.text(finalDateString, w/2, h - 500);
-            
-            pgFinal.textSize(25);
-            pgFinal.text("EDITORIAL I.PESOA", w/2, h - 150);
+            // Tamaños de fuente proporcionales
+            let sizeFecha = esModoMovil ? 40 : 80;
+            let sizeEditorial = esModoMovil ? 14 : 25;
+            let marginFecha = esModoMovil ? 250 : 500;
+            let marginEditorial = esModoMovil ? 80 : 150;
 
-            save(pgFinal, `Mandala_${finalDateString}.png`);
+            pgFinal.textSize(sizeFecha);
+            pgFinal.text(finalDateString, w/2, h - marginFecha);
+            
+            pgFinal.textSize(sizeEditorial);
+            pgFinal.text("EDITORIAL I.PESOA", w/2, h - marginEditorial);
+
+            // Guardar
+            let sufijo = esModoMovil ? "M" : "HD"; // M de Móvil, HD de PC
+            save(pgFinal, `Mandala_${finalDateString}_${sufijo}.png`);
+            
+            // Limpieza de memoria (Crucial para móvil)
+            pg3D.remove();
+            pgFinal.remove();
         }
 
         function windowResized() {
