@@ -245,29 +245,24 @@
             document.getElementById('step-input').classList.remove('hidden');
         }
 
-        // --- FUNCIÓN DE DETECCIÓN INTELIGENTE ---
+        // --- DETECCIÓN INTELIGENTE ---
         function esMovil() {
-            // Detecta si es un dispositivo móvil por el User Agent o si la pantalla es estrecha
             return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 800);
         }
 
         function iniciarDescarga() {
             const btn = document.getElementById('btn-descargar');
             const textoOriginal = btn.innerText;
-            
-            // Verificamos si es móvil
             const modoMovil = esMovil();
 
-            // Cambiar texto para dar feedback
             btn.innerText = modoMovil ? "GENERANDO..." : "GENERANDO HD...";
             btn.disabled = true;
 
             setTimeout(() => {
                 try {
-                    // Si es móvil -> Baja resolución, Si es PC -> Alta resolución
                     ejecutarExportacionSmart(modoMovil);
                 } catch (e) {
-                    alert("Ocurrió un error al generar la imagen. Intenta refrescar.");
+                    alert("Ocurrió un error. Intenta refrescar.");
                     console.error(e);
                 } finally {
                     btn.innerText = textoOriginal;
@@ -276,37 +271,39 @@
             }, 100);
         }
 
-        // --- EXPORTACIÓN UNIFICADA (SMART) ---
+        // --- EXPORTACIÓN UNIFICADA Y COMPENSADA ---
         function ejecutarExportacionSmart(esModoMovil) {
             
-            // CONFIGURACIÓN:
-            // MÓVIL: 1240x1754 px (Aprox A5/A4 web) - Seguro para RAM
-            // PC:    2480x3508 px (A4 @ 300ppi) - Máxima calidad
-            
+            // 1. DIMENSIONES
+            // Móvil = 50% del tamaño HD para ahorrar RAM
             let w = esModoMovil ? 1240 : 2480;
             let h = esModoMovil ? 1754 : 3508;
             
-            // El radio debe ser proporcional al ancho
-            // Si en PC el radio es 2090 para ancho 2480, la proporción es aprox 0.84
+            // 2. RADIO DE LA ESFERA
+            // Mantenemos la proporción exacta (ancho * 0.84)
             let radioExport = w * 0.84; 
 
-            // Crear Canvas Invisible
+            // 3. CANVAS
             let pg3D = createGraphics(w, h, WEBGL);
             pg3D.pixelDensity(1); 
             pg3D.colorMode(HSB, 360, 100, 100, 1);
             
-            // La cámara debe alejarse proporcionalmente al tamaño
-            // Ajustamos la Z de la cámara
-            let zoomCamara = esModoMovil ? 1300 : 2600;
-            pg3D.camera(0, 0, zoomCamara, 0, 0, 0, 0, 1, 0);
+            // 4. CÁMARA CON COMPENSACIÓN
+            // En HD (PC), la distancia ideal es 2600.
+            // Matemáticamente en móvil debería ser 1300 (la mitad).
+            // PERO: Para evitar que se vea "demasiado cerca", añadimos un +15% de distancia.
+            let zoomBase = esModoMovil ? 1300 : 2600;
+            if(esModoMovil) {
+                zoomBase = 1500; // Compensación visual: aleja la esfera en móvil
+            }
+
+            pg3D.camera(0, 0, zoomBase, 0, 0, 0, 0, 1, 0);
             
             pg3D.strokeWeight(esModoMovil ? 2 : 3);
             pg3D.noFill();
 
             let rs = floor(targetParams.res);
-            // Limitadores de seguridad
             if(rs < 100) rs = 100;
-            // En móvil limitamos más los puntos para evitar cuelgues
             let limitePuntos = esModoMovil ? 150 : 300; 
             if(rs > limitePuntos) rs = limitePuntos; 
 
@@ -321,7 +318,7 @@
                     let ondaA = sin(phi * targetParams.freqA + targetParams.phase);
                     let ondaB = sin(theta * targetParams.freqB + targetParams.phase);
                     
-                    // Multiplicador de amplitud ajustado
+                    // Amplitud proporcional al tamaño
                     let r = radioExport + (ondaA * ondaB * targetParams.amp * (esModoMovil ? 2.5 : 5));
 
                     let x = r * sin(theta) * cos(phi);
@@ -332,23 +329,23 @@
                 pg3D.endShape();
             }
 
-            // Composición Final
+            // 5. COMPOSICIÓN FINAL
             let pgFinal = createGraphics(w, h);
             pgFinal.pixelDensity(1);
             pgFinal.background(255); 
             pgFinal.imageMode(CENTER);
             
-            // Centrado vertical ajustado
+            // Ajuste vertical para que quede centrada igual en ambos
             let offsetY = esModoMovil ? 100 : 200;
             pgFinal.image(pg3D, w/2, h/2 - offsetY);
 
-            // Textos
+            // TEXTOS
             pgFinal.fill(0);
             pgFinal.noStroke();
             pgFinal.textAlign(CENTER, CENTER);
             pgFinal.textFont('Helvetica'); 
             
-            // Tamaños de fuente proporcionales
+            // Tamaños proporcionales
             let sizeFecha = esModoMovil ? 40 : 80;
             let sizeEditorial = esModoMovil ? 14 : 25;
             let marginFecha = esModoMovil ? 250 : 500;
@@ -360,11 +357,9 @@
             pgFinal.textSize(sizeEditorial);
             pgFinal.text("EDITORIAL I.PESOA", w/2, h - marginEditorial);
 
-            // Guardar
-            let sufijo = esModoMovil ? "M" : "HD"; // M de Móvil, HD de PC
+            let sufijo = esModoMovil ? "M" : "HD";
             save(pgFinal, `Mandala_${finalDateString}_${sufijo}.png`);
             
-            // Limpieza de memoria (Crucial para móvil)
             pg3D.remove();
             pgFinal.remove();
         }
