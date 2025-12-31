@@ -5,9 +5,13 @@ body {
 }
 
 header h1 {
-    font-size: 3em;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    margin-bottom: 5px;  /* menos espacio */
+}
+
+button#random-btn {
+    letter-spacing: 5px;
+    background-color: #f05a28;  /* color más visible */
+    color: #fff;
 }
 
 header h2 {
