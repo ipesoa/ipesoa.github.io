@@ -1,14 +1,18 @@
 const urlParams = new URLSearchParams(window.location.search);
-const nombreRevista = urlParams.get('revista');
+const idRevista = urlParams.get('id');
 
-fetch('data/fanzines.json')
+fetch('data/data.json')
   .then(res => res.json())
-  .then(fanzines => {
-      const f = fanzines.find(f => f.nombre === nombreRevista);
-      if(f){
-          document.getElementById('fanzine-img').src = `fanzines/${f.imagen}`;
-          document.getElementById('descripcion').textContent = f.descripcion;
-          document.getElementById('precio').textContent = f.precio + ' €';
-          document.getElementById('paypal-link').href = f.link_compra;
+  .then(data => {
+      const revista = data.revistas.find(r => r.id === idRevista);
+      if(revista){
+          // Imagen de la revista
+          document.getElementById('fanzine-img').src = `fanzines/${revista.imagen}`;
+          
+          // Descripción / contenido / precio en texto
+          document.getElementById('descripcion').textContent = revista.descripcion;
+          
+          // Link a PayPal
+          document.getElementById('paypal-link').href = revista.paypal;
       }
   });
