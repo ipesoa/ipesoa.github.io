@@ -9,15 +9,15 @@ const randomBtn = document.getElementById('random-btn');
 function mostrarCartelRandom() {
     const random = carteles[Math.floor(Math.random() * carteles.length)];
 
-    // Imagen
+    // Imagen del cartel
     imgCartel.src = `carteles/${random.imagen}`;
     imgCartel.style.display = 'block';
 
-    // Link revista (VIENE DEL JSON)
-    linkRevista.textContent = random.revista;
-    linkRevista.href = random.link_revista;
+    // Link a revista (usa el ID de la revista)
+    linkRevista.textContent = random.revista_id; // opcional: mostrar el nombre en lugar de ID si quieres
+    linkRevista.href = `revista.html?id=${random.revista_id}`;
 
-    // Link versión papel (por ID lógico)
+    // Link versión papel
     linkDina3.textContent = 'Versión en Papel';
     linkDina3.href = `pedido.html?id=${random.id}`;
 
@@ -28,10 +28,11 @@ function mostrarCartelRandom() {
     imgCartel.onmouseenter = null;
     imgCartel.onmouseleave = null;
     imgCartel.onclick = null;
+    hoverDiv.onclick = null;
 
-    // Hover text opcional
-    if (random.hover_text && random.hover_text.trim() !== "") {
-        hoverDiv.textContent = random.hover_text;
+    // Hover text opcional (index)
+    if (random.texto_index && random.texto_index.trim() !== "") {
+        hoverDiv.textContent = random.texto_index;
 
         // Desktop (hover)
         imgCartel.onmouseenter = () => {
@@ -58,10 +59,10 @@ function mostrarCartelRandom() {
 }
 
 // Cargar carteles
-fetch('data/carteles.json')
+fetch('data/data.json')
     .then(res => res.json())
     .then(data => {
-        carteles = data;
+        carteles = data.carteles; // ahora apunta a data.carteles
         mostrarCartelRandom();
     });
 
