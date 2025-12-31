@@ -14,7 +14,7 @@ function mostrarCartelRandom() {
     imgCartel.src = `carteles/${random.imagen}`;
     imgCartel.style.display = 'block';
 
-    // Link a revista (buscar nombre por id)
+    // Link a revista (buscar nombre por ID)
     const revista = revistas.find(r => r.id === random.revista_id);
     linkRevista.textContent = revista ? revista.id : random.revista_id;
     linkRevista.href = `revista.html?id=${random.revista_id}`;
@@ -33,21 +33,21 @@ function mostrarCartelRandom() {
     imgCartel.onclick = null;
     hoverDiv.onclick = null;
 
-    // Hover text opcional
+    // Hover opcional para el index
     if (random.texto_index && random.texto_index.trim() !== "") {
         hoverDiv.textContent = random.texto_index;
 
+        // Hover estable en escritorio
         imgCartel.onpointerenter = () => {
             imgCartel.style.display = 'none';
             hoverDiv.style.display = 'block';
         };
-
         imgCartel.onpointerleave = () => {
             hoverDiv.style.display = 'none';
             imgCartel.style.display = 'block';
         };
 
-        // Para móviles también se activa al tocar
+        // Activación por toque en móviles
         imgCartel.onclick = () => {
             imgCartel.style.display = 'none';
             hoverDiv.style.display = 'block';
