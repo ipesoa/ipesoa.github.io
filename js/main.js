@@ -16,7 +16,7 @@ function mostrarCartelRandom() {
 
     // Link a revista (buscar nombre por id)
     const revista = revistas.find(r => r.id === random.revista_id);
-    linkRevista.textContent = revista ? revista.id : random.revista_id; // mostrar ID si no encuentra nombre
+    linkRevista.textContent = revista ? revista.id : random.revista_id;
     linkRevista.href = `revista.html?id=${random.revista_id}`;
 
     // Link versión papel
@@ -26,26 +26,28 @@ function mostrarCartelRandom() {
     // Reset hover
     hoverDiv.style.display = 'none';
     hoverDiv.textContent = '';
-    imgCartel.onmouseenter = null;
-    imgCartel.onmouseleave = null;
+
+    // Eliminar eventos previos
+    imgCartel.onpointerenter = null;
+    imgCartel.onpointerleave = null;
     imgCartel.onclick = null;
     hoverDiv.onclick = null;
 
-    // Hover text opcional (index)
+    // Hover text opcional
     if (random.texto_index && random.texto_index.trim() !== "") {
         hoverDiv.textContent = random.texto_index;
 
-        // Desktop (hover)
-        imgCartel.onmouseenter = () => {
+        imgCartel.onpointerenter = () => {
             imgCartel.style.display = 'none';
             hoverDiv.style.display = 'block';
         };
-        imgCartel.onmouseleave = () => {
+
+        imgCartel.onpointerleave = () => {
             hoverDiv.style.display = 'none';
             imgCartel.style.display = 'block';
         };
 
-        // Móvil (tap)
+        // Para móviles también se activa al tocar
         imgCartel.onclick = () => {
             imgCartel.style.display = 'none';
             hoverDiv.style.display = 'block';
@@ -62,7 +64,7 @@ fetch('data/carteles.json')
     .then(res => res.json())
     .then(data => {
         carteles = data.carteles;
-        revistas = data.revistas; // guardar revistas
+        revistas = data.revistas;
         mostrarCartelRandom();
     });
 
