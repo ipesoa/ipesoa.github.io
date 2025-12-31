@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const idRevista = urlParams.get('id');
 
-fetch('data/data.json')
+fetch('data/carteles.json')
   .then(res => res.json())
   .then(data => {
       const revista = data.revistas.find(r => r.id === idRevista);
