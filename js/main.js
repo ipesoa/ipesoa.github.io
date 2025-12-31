@@ -1,54 +1,69 @@
 let carteles = [];
 
+const imgCartel = document.getElementById('cartel');
+const hoverDiv = document.getElementById('hover-text');
+const linkRevista = document.getElementById('link-revista');
+const linkDina3 = document.getElementById('link-dina3');
+const randomBtn = document.getElementById('random-btn');
+
 function mostrarCartelRandom() {
     const random = carteles[Math.floor(Math.random() * carteles.length)];
 
-    // Actualizar imagen y links
-    const imgCartel = document.getElementById('cartel');
+    // Imagen
     imgCartel.src = `carteles/${random.imagen}`;
+    imgCartel.style.display = 'block';
 
-    const linkRevista = document.getElementById('link-revista');
+    // Link revista (VIENE DEL JSON)
     linkRevista.textContent = random.revista;
     linkRevista.href = random.link_revista;
 
-    const linkDina3 = document.getElementById('link-dina3');
+    // Link versión papel (por ID lógico)
     linkDina3.textContent = 'Versión en Papel';
-    linkDina3.href = `pedido.html?cartel=${random.imagen}`;
+    linkDina3.href = `pedido.html?id=${random.id}`;
 
-    // Hover text
-    const hoverDiv = document.getElementById('hover-text');
+    // Reset hover
+    hoverDiv.style.display = 'none';
+    hoverDiv.textContent = '';
 
-    // Limpiar eventos previos para evitar duplicados
-    imgCartel.replaceWith(imgCartel.cloneNode(true));
-    const imgNuevo = document.getElementById('cartel');
+    imgCartel.onmouseenter = null;
+    imgCartel.onmouseleave = null;
+    imgCartel.onclick = null;
 
-    if(random.hover_text && random.hover_text.trim() !== "") {
+    // Hover text opcional
+    if (random.hover_text && random.hover_text.trim() !== "") {
         hoverDiv.textContent = random.hover_text;
 
-        imgNuevo.addEventListener('mouseenter', () => {
-            imgNuevo.style.display = 'none';
+        // Desktop (hover)
+        imgCartel.onmouseenter = () => {
+            imgCartel.style.display = 'none';
             hoverDiv.style.display = 'block';
-        });
+        };
 
-        imgNuevo.addEventListener('mouseleave', () => {
-            imgNuevo.style.display = 'block';
+        imgCartel.onmouseleave = () => {
             hoverDiv.style.display = 'none';
-        });
+            imgCartel.style.display = 'block';
+        };
 
-        hoverDiv.style.display = 'none';  // oculto por defecto
-    } else {
-        hoverDiv.textContent = "";
-        hoverDiv.style.display = 'none';
+        // Móvil (tap)
+        imgCartel.onclick = () => {
+            imgCartel.style.display = 'none';
+            hoverDiv.style.display = 'block';
+        };
+
+        hoverDiv.onclick = () => {
+            hoverDiv.style.display = 'none';
+            imgCartel.style.display = 'block';
+        };
     }
 }
 
-// Cargar JSON de carteles
+// Cargar carteles
 fetch('data/carteles.json')
-  .then(res => res.json())
-  .then(data => {
-      carteles = data;
-      mostrarCartelRandom();
-  });
+    .then(res => res.json())
+    .then(data => {
+        carteles = data;
+        mostrarCartelRandom();
+    });
 
 // Botón RANDOM
-document.getElementById('random-btn').addEventListener('click', mostrarCartelRandom);
+randomBtn.addEventListener('click', mostrarCartelRandom);
