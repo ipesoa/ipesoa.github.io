@@ -25,42 +25,28 @@ function mostrarCartelRandom() {
 
     // Preparar hoverDiv
     hoverDiv.textContent = random.texto_index || '';
-    hoverDiv.style.position = 'absolute';
-    hoverDiv.style.top = 0;
-    hoverDiv.style.left = 0;
-    hoverDiv.style.width = '100%';
-    hoverDiv.style.height = '100%';
-    hoverDiv.style.display = 'flex';
-    hoverDiv.style.alignItems = 'center';
-    hoverDiv.style.justifyContent = 'center';
-    hoverDiv.style.textAlign = 'center';
-    hoverDiv.style.padding = '1em';
-    hoverDiv.style.backgroundColor = 'rgba(0,0,0,0.7)';
-    hoverDiv.style.color = '#fff';
-    hoverDiv.style.transition = 'opacity 0.3s ease';
     hoverDiv.style.opacity = 0;
-    hoverDiv.style.pointerEvents = 'none'; // importante para que mouse pase a imgCartel
-
-    // Eliminar eventos previos
-    imgCartel.onmouseenter = null;
-    imgCartel.onmouseleave = null;
-    imgCartel.onclick = null;
-    hoverDiv.onclick = null;
+    hoverDiv.style.pointerEvents = 'none'; // para que el mouse no bloquee la imagen
 
     let hoverActivo = false;
 
-    // Desktop: hover
-    imgCartel.addEventListener('mouseenter', () => {
+    // Limpiar eventos previos
+    const newImgCartel = imgCartel.cloneNode(true);
+    imgCartel.parentNode.replaceChild(newImgCartel, imgCartel);
+    hoverDiv.style.opacity = 0;
+
+    // Desktop: hover estable
+    newImgCartel.addEventListener('mouseenter', () => {
         hoverDiv.style.opacity = 1;
         hoverActivo = true;
     });
-    imgCartel.addEventListener('mouseleave', () => {
+    newImgCartel.addEventListener('mouseleave', () => {
         hoverDiv.style.opacity = 0;
         hoverActivo = false;
     });
 
-    // Móvil: click
-    imgCartel.addEventListener('click', () => {
+    // Móvil: click para mostrar/ocultar
+    newImgCartel.addEventListener('click', () => {
         hoverActivo = !hoverActivo;
         hoverDiv.style.opacity = hoverActivo ? 1 : 0;
     });
