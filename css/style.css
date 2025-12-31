@@ -114,3 +114,28 @@ button#random-btn:hover {
     cursor: pointer;
     letter-spacing: 3px;
 }
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .imagen-container {
+        width: 90vw;          /* ocupa casi todo el ancho del móvil */
+        height: calc(90vw * 1.414); /* mantiene proporción DINA4 */
+    }
+
+    .links {
+        max-width: 90vw;
+    }
+
+    header h1 {
+        font-size: 2.2em;
+    }
+
+    header h2 {
+        font-size: 1.2em;
+    }
+}
+
