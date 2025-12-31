@@ -29,9 +29,12 @@ button#random-btn {
     cursor: pointer;
 }
 
-.cartel-container {
-    position: relative;  /* para tooltip */
-    margin: 20px 0;
+.cartel-container img {
+    width: 300px;     /* ancho fijo */
+    height: 424px;    /* alto proporcional DINA4 */
+    object-fit: cover; /* corta o escala sin deformar */
+    display: block;
+    margin: 0 auto;    /* centrado */
 }
 
 .cartel-container img {
