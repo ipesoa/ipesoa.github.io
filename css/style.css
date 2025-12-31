@@ -21,13 +21,15 @@ header h2 {
 }
 
 button#random-btn {
-    letter-spacing: 5px;
-    background-color: #f05a28;  /* naranja */
-    color: #fff;
-    border: none;
+    background-color: #fff;       /* fondo blanco */
+    color: #000;                  /* texto negro */
+    border: 1px solid #000;       /* borde fino negro */
     padding: 10px 20px;
+    letter-spacing: 5px;          /* espacio entre letras */
     cursor: pointer;
+    text-transform: uppercase;    /* opcional, para que quede como R A N D O M */
 }
+
 
 .cartel-container img {
     width: 300px;     /* ancho fijo */
