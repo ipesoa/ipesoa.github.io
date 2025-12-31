@@ -7,7 +7,7 @@
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
       "paypal_dina3": "https://paypal.me/cartelprisa12",
       "revista_id": "enero2026"
-    }
+    },  <--- ¡AQUÍ FALTABA LA COMA!
 
     {
       "id": "canal",
