@@ -41,8 +41,15 @@ button#random-btn {
     max-width: 80%;
 }
 
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    max-width: 300px;  /* igual que la imagen */
+    margin: 10px auto; /* centrado debajo de la imagen */
+}
+
 .links a {
-    margin: 0 10px;
     text-decoration: none;
     font-weight: bold;
     color: #000;
