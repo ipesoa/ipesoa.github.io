@@ -23,9 +23,8 @@ function mostrarCartelRandom() {
     linkDina3.textContent = 'Versión en Papel';
     linkDina3.href = `pedido.html?id=${random.id}`;
 
-    // Hover text
+    // Preparar hoverDiv
     hoverDiv.textContent = random.texto_index || '';
-    hoverDiv.style.opacity = 0;
     hoverDiv.style.position = 'absolute';
     hoverDiv.style.top = 0;
     hoverDiv.style.left = 0;
@@ -39,28 +38,36 @@ function mostrarCartelRandom() {
     hoverDiv.style.backgroundColor = 'rgba(0,0,0,0.7)';
     hoverDiv.style.color = '#fff';
     hoverDiv.style.transition = 'opacity 0.3s ease';
+    hoverDiv.style.opacity = 0;
 
-    let textoVisible = false;
+    // Eliminar eventos previos
+    imgCartel.onmouseenter = null;
+    imgCartel.onmouseleave = null;
+    imgCartel.onclick = null;
+    hoverDiv.onclick = null;
 
-    // Desktop: hover
-    imgCartel.onmouseenter = () => {
+    // Flag para estado visible
+    let hoverActivo = false;
+
+    // Desktop y móvil unificado
+    imgCartel.addEventListener('pointerenter', () => {
         hoverDiv.style.opacity = 1;
-        textoVisible = true;
-    };
-    imgCartel.onmouseleave = () => {
+        hoverActivo = true;
+    });
+    imgCartel.addEventListener('pointerleave', () => {
         hoverDiv.style.opacity = 0;
-        textoVisible = false;
-    };
+        hoverActivo = false;
+    });
 
-    // Móvil: tap
-    imgCartel.onclick = () => {
-        textoVisible = !textoVisible;
-        hoverDiv.style.opacity = textoVisible ? 1 : 0;
-    };
-    hoverDiv.onclick = () => {
-        textoVisible = false;
+    // Tap móvil
+    imgCartel.addEventListener('click', () => {
+        hoverActivo = !hoverActivo;
+        hoverDiv.style.opacity = hoverActivo ? 1 : 0;
+    });
+    hoverDiv.addEventListener('click', () => {
+        hoverActivo = false;
         hoverDiv.style.opacity = 0;
-    };
+    });
 }
 
 // Cargar JSON
