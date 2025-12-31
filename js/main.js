@@ -1,71 +1,95 @@
 let carteles = [];
 let revistas = [];
 
+// Elementos del DOM
 const imgCartel = document.getElementById('cartel');
 const hoverDiv = document.getElementById('hover-text');
 const linkRevista = document.getElementById('link-revista');
 const linkDina3 = document.getElementById('link-dina3');
 const randomBtn = document.getElementById('random-btn');
 
+// Variable para controlar el estado del hover en móvil
+let hoverActivo = false;
+
+// Función para actualizar el contenido (solo datos, no eventos)
 function mostrarCartelRandom() {
+    if (carteles.length === 0) return;
+
     const random = carteles[Math.floor(Math.random() * carteles.length)];
 
-    // Imagen del cartel
+    // 1. Imagen del cartel
+    // Asegúrate de que la ruta 'carteles/' coincida con tu carpeta real
     imgCartel.src = `carteles/${random.imagen}`;
     imgCartel.style.display = 'block';
 
-    // Link a revista
+    // 2. Link a revista
     const revista = revistas.find(r => r.id === random.revista_id);
-    linkRevista.textContent = revista ? (revista.nombre || revista.id) : random.revista_id;
-    linkRevista.href = `revista.html?id=${random.revista_id}`;
+    if (revista) {
+        linkRevista.textContent = revista.nombre || revista.id; // Usa ID si no hay nombre
+        linkRevista.href = `revista.html?id=${random.revista_id}`;
+    } else {
+        linkRevista.textContent = random.revista_id;
+        linkRevista.href = '#';
+    }
 
-    // Link versión papel
+    // 3. Link versión papel
     linkDina3.textContent = 'Versión en Papel';
     linkDina3.href = `pedido.html?id=${random.id}`;
 
-    // Hover text
+    // 4. Texto del Hover
     hoverDiv.innerHTML = random.texto_index ? random.texto_index.replace(/\n/g, "<br>") : '';
+    
+    // Resetear estados visuales
     hoverDiv.style.opacity = 0;
-    hoverDiv.style.pointerEvents = 'auto'; // para móvil
-    hoverDiv.scrollTop = 0; // reset scroll
-
-    // Eliminar eventos previos
-    imgCartel.onmouseenter = null;
-    imgCartel.onmouseleave = null;
-    imgCartel.onclick = null;
-    hoverDiv.onclick = null;
-
-    let hoverActivo = false;
-
-    // Desktop: hover estable
-    imgCartel.addEventListener('mouseenter', () => {
-        hoverDiv.style.opacity = 1;
-        hoverActivo = true;
-    });
-    imgCartel.addEventListener('mouseleave', () => {
-        hoverDiv.style.opacity = 0;
-        hoverActivo = false;
-    });
-
-    // Móvil: click para mostrar/ocultar
-    imgCartel.addEventListener('click', () => {
-        hoverActivo = !hoverActivo;
-        hoverDiv.style.opacity = hoverActivo ? 1 : 0;
-    });
-    hoverDiv.addEventListener('click', () => {
-        hoverActivo = false;
-        hoverDiv.style.opacity = 0;
-    });
+    hoverDiv.scrollTop = 0;
+    hoverActivo = false;
 }
+
+/* =========================================
+   EVENTOS (Definidos una sola vez)
+========================================= */
+
+// Desktop: Hover simple
+imgCartel.addEventListener('mouseenter', () => {
+    // Si no estamos en modo "click activado" (móvil), mostramos
+    hoverDiv.style.opacity = 1;
+});
+
+imgCartel.addEventListener('mouseleave', () => {
+    // Si no se ha activado por click, ocultamos al salir
+    if (!hoverActivo) {
+        hoverDiv.style.opacity = 0;
+    }
+});
+
+// Móvil / Click: Alternar visibilidad
+imgCartel.addEventListener('click', (e) => {
+    // Evita conflictos si hay otros eventos
+    e.stopPropagation(); 
+    hoverActivo = !hoverActivo;
+    hoverDiv.style.opacity = hoverActivo ? 1 : 0;
+});
+
+// Click en el texto para cerrar
+hoverDiv.addEventListener('click', () => {
+    hoverActivo = false;
+    hoverDiv.style.opacity = 0;
+});
+
+// Botón RANDOM
+randomBtn.addEventListener('click', mostrarCartelRandom);
 
 // Cargar JSON
 fetch('data/carteles.json')
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("No se pudo cargar el JSON");
+        }
+        return res.json();
+    })
     .then(data => {
         carteles = data.carteles;
         revistas = data.revistas;
         mostrarCartelRandom();
-    });
-
-// Botón RANDOM
-randomBtn.addEventListener('click', mostrarCartelRandom);
+    })
+    .catch(error => console.error('Error cargando datos:', error));
