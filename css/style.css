@@ -57,9 +57,10 @@ button#random-btn:hover {
     height: 424px;     
     margin: 0 auto;
     position: relative;
+    overflow: hidden;  /* evita que el hover sobresalga */
 }
 
-/* Imagen y Hover_text ocupan el mismo espacio */
+/* Imagen */
 .imagen-container img {
     width: 100%;
     height: 100%;
@@ -70,7 +71,7 @@ button#random-btn:hover {
     object-fit: cover;
 }
 
-/* Hover text ajustado */
+/* Hover text ajustado al tamaño exacto de la imagen */
 .imagen-container .hover-text {
     font-family: Arial, sans-serif;
     display: flex;
@@ -90,6 +91,7 @@ button#random-btn:hover {
     overflow: auto;
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: auto; /* permite clicks para móvil */
 }
 
 /* ========================
