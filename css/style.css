@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 3em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+header h2 {
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+button {
+    margin: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.cartel-container img {
+    max-width: 80%;
+    margin: 20px 0;
+}
+
+.links a {
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+}
