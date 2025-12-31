@@ -13,7 +13,7 @@ body {
 header h1 {
     font-size: 3em;
     letter-spacing: 4px;
-    margin-bottom: 5px;  /* espacio entre I.PESOA y EDITORIAL */
+    margin-bottom: 2px;  /* espacio entre I.PESOA y EDITORIAL */
     text-transform: uppercase;
     text-align: center;
 }
@@ -21,7 +21,7 @@ header h1 {
 header h2 {
     font-size: 1.5em;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-transform: uppercase;
     text-align: center;
 }
@@ -33,7 +33,7 @@ button#random-btn {
     background-color: #fff;       /* fondo blanco */
     color: #000;                  /* texto negro */
     border: 1px solid #000;       /* borde fino negro */
-    padding: 10px 8px;            /* menos padding horizontal */
+    padding: 10px 5px;            /* menos padding horizontal */
     letter-spacing: 5px;
     cursor: pointer;
     text-transform: uppercase;
