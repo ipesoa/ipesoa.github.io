@@ -1,0 +1,18 @@
+[
+  {
+    "imagen": "cartel1.jpg",
+    "revista": "enero2026.pdf",
+    "link_revista": "https://linkcomprarevista.com/enero2026",
+    "precio_dina3": 25,
+    "link_dina3": "https://paypal.me/compra1",
+    "texto_hover": "Primer cartel del año"
+  },
+  {
+    "imagen": "cartel2.jpg",
+    "revista": "febrero2026.pdf",
+    "link_revista": "https://linkcomprarevista.com/febrero2026",
+    "precio_dina3": 30,
+    "link_dina3": "https://paypal.me/compra2",
+    "texto_hover": "Segundo cartel del año"
+  }
+]
