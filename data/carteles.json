@@ -1,18 +1,21 @@
-[
-  {
-    "imagen": "prisa12.png",
-    "revista": "enero2026.pdf",
-    "link_revista": "https://linkcomprarevista.com/enero2026",
-    "precio_dina3": 25,
-    "link_dina3": "https://paypal.me/compra1",
-    "texto_hover": "Primer cartel del año"
-  },
-  {
-    "imagen": "cartel2.jpg",
-    "revista": "febrero2026.pdf",
-    "link_revista": "https://linkcomprarevista.com/febrero2026",
-    "precio_dina3": 30,
-    "link_dina3": "https://paypal.me/compra2",
-    "texto_hover": "Segundo cartel del año"
-  }
-]
+{
+  "carteles": [
+    {
+      "id": "prisa12",
+      "imagen": "prisa12.png",
+      "texto_index": "La prisa no es velocidad, es ansiedad con agenda.",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
+      "paypal_dina3": "https://paypal.me/cartelprisa12",
+      "revista_id": "enero2026"
+    }
+  ],
+
+  "revistas": [
+    {
+      "id": "enero2026",
+      "imagen": "enero2026.jpg",
+      "descripcion": "Un número dedicado a la aceleración, la productividad y el cansancio estructural. Precio: 8€.",
+      "paypal": "https://paypal.me/revistaenero2026"
+    }
+  ]
+}
