@@ -39,6 +39,7 @@ function mostrarCartelRandom() {
     hoverDiv.style.color = '#fff';
     hoverDiv.style.transition = 'opacity 0.3s ease';
     hoverDiv.style.opacity = 0;
+    hoverDiv.style.pointerEvents = 'none'; // importante para que mouse pase a imgCartel
 
     // Eliminar eventos previos
     imgCartel.onmouseenter = null;
@@ -46,20 +47,19 @@ function mostrarCartelRandom() {
     imgCartel.onclick = null;
     hoverDiv.onclick = null;
 
-    // Flag para estado visible
     let hoverActivo = false;
 
-    // Desktop y móvil unificado
-    imgCartel.addEventListener('pointerenter', () => {
+    // Desktop: hover
+    imgCartel.addEventListener('mouseenter', () => {
         hoverDiv.style.opacity = 1;
         hoverActivo = true;
     });
-    imgCartel.addEventListener('pointerleave', () => {
+    imgCartel.addEventListener('mouseleave', () => {
         hoverDiv.style.opacity = 0;
         hoverActivo = false;
     });
 
-    // Tap móvil
+    // Móvil: click
     imgCartel.addEventListener('click', () => {
         hoverActivo = !hoverActivo;
         hoverDiv.style.opacity = hoverActivo ? 1 : 0;
