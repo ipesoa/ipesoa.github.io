@@ -1,4 +1,5 @@
 let carteles = [];
+let revistas = [];
 
 const imgCartel = document.getElementById('cartel');
 const hoverDiv = document.getElementById('hover-text');
@@ -13,8 +14,9 @@ function mostrarCartelRandom() {
     imgCartel.src = `carteles/${random.imagen}`;
     imgCartel.style.display = 'block';
 
-    // Link a revista (usa el ID de la revista)
-    linkRevista.textContent = random.revista_id; // opcional: mostrar el nombre en lugar de ID si quieres
+    // Link a revista (buscar nombre por id)
+    const revista = revistas.find(r => r.id === random.revista_id);
+    linkRevista.textContent = revista ? revista.id : random.revista_id; // mostrar ID si no encuentra nombre
     linkRevista.href = `revista.html?id=${random.revista_id}`;
 
     // Link versión papel
@@ -24,7 +26,6 @@ function mostrarCartelRandom() {
     // Reset hover
     hoverDiv.style.display = 'none';
     hoverDiv.textContent = '';
-
     imgCartel.onmouseenter = null;
     imgCartel.onmouseleave = null;
     imgCartel.onclick = null;
@@ -39,7 +40,6 @@ function mostrarCartelRandom() {
             imgCartel.style.display = 'none';
             hoverDiv.style.display = 'block';
         };
-
         imgCartel.onmouseleave = () => {
             hoverDiv.style.display = 'none';
             imgCartel.style.display = 'block';
@@ -50,7 +50,6 @@ function mostrarCartelRandom() {
             imgCartel.style.display = 'none';
             hoverDiv.style.display = 'block';
         };
-
         hoverDiv.onclick = () => {
             hoverDiv.style.display = 'none';
             imgCartel.style.display = 'block';
@@ -58,11 +57,12 @@ function mostrarCartelRandom() {
     }
 }
 
-// Cargar carteles
-fetch('data/data.json')
+// Cargar JSON
+fetch('data/carteles.json')
     .then(res => res.json())
     .then(data => {
-        carteles = data.carteles; // ahora apunta a data.carteles
+        carteles = data.carteles;
+        revistas = data.revistas; // guardar revistas
         mostrarCartelRandom();
     });
 
