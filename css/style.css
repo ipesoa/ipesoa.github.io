@@ -71,16 +71,6 @@ button#random-btn:hover {
     object-fit: cover;
 }
 
-/* Hover_text que reemplaza la imagen */
-.hover-text {
-    display: none;          /* por defecto invisible */
-    background-color: #fff; /* fondo blanco */
-    color: #000;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: left;
-    overflow-y: auto;
-}
 
 /* ========================
    Links debajo de la imagen
