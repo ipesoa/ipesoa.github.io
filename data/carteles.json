@@ -3,7 +3,16 @@
     {
       "id": "prisa12",
       "imagen": "prisa12.png",
-      "texto_index": "La prisa no es velocidad, es ansiedad con agenda.",
+      "texto_index": "La prisa no es velocidad.",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
+      "paypal_dina3": "https://paypal.me/cartelprisa12",
+      "revista_id": "enero2026"
+    }
+
+    {
+      "id": "canal",
+      "imagen": "canalstreet.png",
+      "texto_index": "la inocencia se descorcha cada dia?.",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
       "paypal_dina3": "https://paypal.me/cartelprisa12",
       "revista_id": "enero2026"
