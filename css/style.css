@@ -30,6 +30,12 @@ button#random-btn {
     text-transform: uppercase;    /* opcional, para que quede como R A N D O M */
 }
 
+button#random-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+
 
 .cartel-container img {
     width: 300px;     /* ancho fijo */
