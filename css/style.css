@@ -13,7 +13,7 @@ Header
 header h1 {
     font-size: 3em;
     letter-spacing: 4px;
-    margin-bottom: 0px;
+    margin-bottom: -10px;
     text-transform: uppercase;
     text-align: center;
 }
@@ -21,6 +21,7 @@ header h1 {
 header h2 {
     font-size: 1.5em;
     letter-spacing: 2px;
+    margin-top: 0;
     margin-bottom: 15px;
     text-transform: uppercase;
     text-align: center;
@@ -58,6 +59,9 @@ Contenedor de Cartel / Imagen
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    border: 4px solid #000;
+    padding: 5px;
+    box-sizing: content-box;
 }
 
 /* Imagen */
@@ -66,8 +70,8 @@ Contenedor de Cartel / Imagen
     height: 100%;
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 5px;
+    left: 5px;
     object-fit: cover;
 }
 
@@ -82,11 +86,11 @@ Contenedor de Cartel / Imagen
     text-align: left;
     color: #000;
     background-color: #fff;
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 424px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 5px;
+    left: 5px;
     padding: 0;
     box-sizing: border-box;
     overflow: auto;
@@ -96,15 +100,14 @@ Contenedor de Cartel / Imagen
     line-height: 1.4;
 }
 
-/* === HOVER CON CSS (sin JavaScript, sin vibración) === */
-/* Solo afecta a desktop con mouse */
+/* HOVER CON CSS */
 .imagen-container:hover .hover-text {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
 }
 
-/* === CLASE PARA MÓVIL (click para activar) === */
+/* CLASE PARA MÓVIL */
 .imagen-container .hover-text.show-text {
     opacity: 1;
     visibility: visible;
@@ -112,12 +115,12 @@ Contenedor de Cartel / Imagen
 }
 
 /* ========================
-Links debajo de la imagen
+Links debajo de la imagen (index)
 ======================== */
 .links {
     display: flex;
     justify-content: space-between;
-    max-width: 300px;
+    max-width: 318px;
     margin: 10px auto;
 }
 
@@ -137,20 +140,45 @@ Links debajo de la imagen
 }
 
 /* ========================
-Botón Volver al inicio
+Link Realizar compra
+======================== */
+#link-compra {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    color: #000;
+}
+
+#link-compra:hover {
+    text-decoration: underline;
+}
+
+/* ========================
+Botón Volver
 ======================== */
 .volver {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.volver button {
+.volver a {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    display: inline-block;
     padding: 10px 20px;
-    background-color: #f05a28;
+    border: 1px solid #000;
+    text-decoration: none;
+    color: #000;
+    background-color: #fff;
+    transition: all 0.2s ease;
+}
+
+.volver a:hover {
+    background-color: #000;
     color: #fff;
-    border: none;
-    cursor: pointer;
-    letter-spacing: 3px;
 }
 
 /* ========================
@@ -166,8 +194,14 @@ Responsive Mobile
         height: calc(90vw * 1.414);
     }
 
+    .imagen-container img,
+    .imagen-container .hover-text {
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+    }
+
     .links {
-        max-width: 90vw;
+        max-width: calc(90vw + 18px);
     }
 
     header h1 {
@@ -177,32 +211,4 @@ Responsive Mobile
     header h2 {
         font-size: 1.2em;
     }
-}
-
-/* Botón Volver con recuadro */
-.volver {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.volver a {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    display: inline-block;
-    padding: 10px 20px;
-    border: 1px solid #000;
-    text-decoration: none;
-    color: #000;
-    background-color: #fff;
-}
-
-/* Link Realizar compra */
-#link-compra {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    text-decoration: none;
-    color: #000;
 }
