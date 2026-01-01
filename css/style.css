@@ -73,25 +73,39 @@ button#random-btn:hover {
 
 /* Hover text ajustado al tamaño exacto de la imagen */
 .imagen-container .hover-text {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
-    padding: 0.5em;
-    color: #fff;
-    background-color: rgba(0,0,0,0.7);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    overflow: auto;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: auto; /* permite clicks para móvil */
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  color: #fff;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease;
+  pointer-events: none;
+  line-height: 1.4;
+}
+
+/* Cuando está activo el hover, ocultar imagen y mostrar texto */
+.imagen-container.show-text img {
+  visibility: hidden;
+}
+
+.imagen-container.show-text .hover-text {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* ========================
