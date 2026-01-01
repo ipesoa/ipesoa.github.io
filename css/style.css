@@ -57,28 +57,30 @@ Contenedor de Cartel / Imagen
     display: inline-block;
     margin: 0 auto;
     position: relative;
-    border: 4px solid #000;
-    padding: 4px;
+    border: 4px solid #000;              /* ← GROSOR DE LÍNEA */
+    padding: 4px;                         /* ← ESPACIO BLANCO entre borde y cartel */
     background-color: #fff;
-    transition: border-color 0.1s ease;
+    transition: border-color 0.5s ease;   /* ← VELOCIDAD DESVANECIMIENTO del borde */
 }
 
-/* Borde desaparece en hover */
 .imagen-container:hover {
-    border-color: #fff;
+    border-color: #fff;                   /* ← COLOR AL QUE CAMBIA */
 }
 
-/* Imagen - tamaño natural, max-width para que no sea enorme */
 .imagen-container img {
     display: block;
-    max-width: 300px;
+    max-width: 300px;                     /* ← ANCHO MÁXIMO del cartel */
     height: auto;
+    transition: opacity 0.5s ease;        /* ← VELOCIDAD DESVANECIMIENTO de la imagen */
 }
 
-/* Hover text - Fondo blanco, letras negras */
+.imagen-container:hover img {
+    opacity: 0;
+}
+
 .imagen-container .hover-text {
     font-family: Arial, sans-serif;
-    font-size: 12px;
+    font-size: 12px;                      /* ← TAMAÑO DE LETRA del texto hover */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -97,17 +99,16 @@ Contenedor de Cartel / Imagen
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    line-height: 1.4;
+    line-height: 1.4;                     /* ← ESPACIO ENTRE LÍNEAS */
+    transition: opacity 0.5s ease;        /* ← VELOCIDAD APARICIÓN del texto */
 }
 
-/* HOVER CON CSS */
 .imagen-container:hover .hover-text {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
 }
 
-/* CLASE PARA MÓVIL */
 .imagen-container .hover-text.show-text {
     opacity: 1;
     visibility: visible;
