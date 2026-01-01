@@ -11,9 +11,6 @@ const randomBtn = document.getElementById('random-btn');
 // Variable para controlar el estado del hover en móvil
 let hoverActivo = false;
 
-// Variable para control de hover estable (evita vibración)
-let hoverTimeout = null;
-
 // Función para actualizar el contenido (solo datos, no eventos)
 function mostrarCartelRandom() {
     if (carteles.length === 0) return;
@@ -40,49 +37,36 @@ function mostrarCartelRandom() {
 
     // 4. Texto del Hover
     hoverDiv.innerHTML = random.texto_index ? random.texto_index : '';
-    
-    // Resetear estados visuales
-    const container = document.querySelector('.imagen-container');
-    container.classList.remove('show-text');
-    hoverActivo = false;
 }
 
 /* =========================================
    EVENTOS (Definidos una sola vez)
 ========================================= */
 
-// Desktop: Hover simple con delay para evitar vibración
-imgCartel.addEventListener('mouseenter', () => {
-    clearTimeout(hoverTimeout);
-    hoverTimeout = setTimeout(() => {
-        const container = document.querySelector('.imagen-container');
-        container.classList.add('show-text');
-    }, 50);
-});
-
-imgCartel.addEventListener('mouseleave', () => {
-    clearTimeout(hoverTimeout);
-    const container = document.querySelector('.imagen-container');
-    container.classList.remove('show-text');
-});
-
 // Móvil / Touch: Alternar visibilidad con tap
 imgCartel.addEventListener('click', (e) => {
     e.stopPropagation();
     hoverActivo = !hoverActivo;
-    const container = document.querySelector('.imagen-container');
     if (hoverActivo) {
-        container.classList.add('show-text');
+        hoverDiv.classList.add('show-text');
     } else {
-        container.classList.remove('show-text');
+        hoverDiv.classList.remove('show-text');
     }
 });
 
 // Click en el texto para cerrar
-hoverDiv.addEventListener('click', () => {
+hoverDiv.addEventListener('click', (e) => {
+    e.stopPropagation();
     hoverActivo = false;
-    const container = document.querySelector('.imagen-container');
-    container.classList.remove('show-text');
+    hoverDiv.classList.remove('show-text');
+});
+
+// Click fuera para cerrar en móvil
+document.addEventListener('click', () => {
+    if (hoverActivo) {
+        hoverActivo = false;
+        hoverDiv.classList.remove('show-text');
+    }
 });
 
 // Botón RANDOM
