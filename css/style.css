@@ -57,7 +57,7 @@ Contenedor de Cartel / Imagen
     display: inline-block;
     margin: 0 auto;
     position: relative;
-    border: 2px solid #000;              /* ← GROSOR DE LÍNEA */
+    border: 1px solid #000;              /* ← GROSOR DE LÍNEA */
     padding: 4px;                         /* ← ESPACIO BLANCO entre borde y cartel */
     background-color: #fff;
     transition: border-color 0.5s ease;   /* ← VELOCIDAD DESVANECIMIENTO del borde */
@@ -113,6 +113,20 @@ Contenedor de Cartel / Imagen
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+}
+/* ========================
+Control de párrafos en hover-text
+======================== */
+.hover-text p {
+    margin: 0 0 8px 0;    /* ← ESPACIO ENTRE PÁRRAFOS (cambia el 8px) */
+}
+
+.hover-text p:first-child {
+    margin-top: 0;        /* ← Primer párrafo sin margen arriba */
+}
+
+.hover-text p:last-child {
+    margin-bottom: 0;     /* ← Último párrafo sin margen abajo */
 }
 
 /* ========================
