@@ -220,3 +220,113 @@ Responsive Mobile
         font-size: 1.2em;
     }
 }
+
+/* ========================
+Página Pedido - Nueva estructura
+======================== */
+.pedido-container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.pedido-content {
+    border: 3px solid #000;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.pedido-top {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.pedido-imagen {
+    flex-shrink: 0;
+}
+
+.pedido-imagen img {
+    width: 100px;              /* ← TAMAÑO DE LA IMAGEN (1/4 aprox) */
+    height: auto;
+    display: block;
+}
+
+.pedido-info {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* Formulario */
+.pedido-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pedido-form .campo {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.pedido-form label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pedido-form input {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 8px;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+
+.pedido-form input:focus {
+    outline: none;
+    border-width: 2px;
+}
+
+/* Botones fuera del recuadro */
+.pedido-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pedido-buttons button {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 12px 25px;
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.2s ease;
+}
+
+.pedido-buttons button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .pedido-container {
+        max-width: 90vw;
+    }
+    
+    .pedido-top {
+        flex-direction: column;
+    }
+    
+    .pedido-imagen img {
+        width: 80px;
+    }
+}
