@@ -47,7 +47,7 @@ button#random-btn:hover {
 }
 
 /* ========================
-Contenedor de Cartel / Imagen
+Contenedor de Cartel / Imagen (INDEX)
 ======================== */
 .cartel-container {
     margin-top: 20px;
@@ -57,21 +57,21 @@ Contenedor de Cartel / Imagen
     display: inline-block;
     margin: 0 auto;
     position: relative;
-    border: 1px solid #000;              /* ← GROSOR DE LÍNEA */
-    padding: 4px;                         /* ← ESPACIO BLANCO entre borde y cartel */
+    border: 3px solid #000;
+    padding: 4px;
     background-color: #fff;
-    transition: border-color 0.5s ease;   /* ← VELOCIDAD DESVANECIMIENTO del borde */
+    transition: border-color 0.5s ease;
 }
 
 .imagen-container:hover {
-    border-color: #fff;                   /* ← COLOR AL QUE CAMBIA */
+    border-color: #fff;
 }
 
 .imagen-container img {
     display: block;
-    max-width: 300px;                     /* ← ANCHO MÁXIMO del cartel */
+    max-width: 300px;
     height: auto;
-    transition: opacity 0.5s ease;        /* ← VELOCIDAD DESVANECIMIENTO de la imagen */
+    transition: opacity 0.5s ease;
 }
 
 .imagen-container:hover img {
@@ -80,7 +80,7 @@ Contenedor de Cartel / Imagen
 
 .imagen-container .hover-text {
     font-family: Arial, sans-serif;
-    font-size: 12px;                      /* ← TAMAÑO DE LETRA del texto hover */
+    font-size: 12px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -99,8 +99,8 @@ Contenedor de Cartel / Imagen
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    line-height: 1.4;                     /* ← ESPACIO ENTRE LÍNEAS */
-    transition: opacity 0.5s ease;        /* ← VELOCIDAD APARICIÓN del texto */
+    line-height: 1.4;
+    transition: opacity 0.5s ease;
 }
 
 .imagen-container:hover .hover-text {
@@ -114,19 +114,18 @@ Contenedor de Cartel / Imagen
     visibility: visible;
     pointer-events: auto;
 }
-/* ========================
-Control de párrafos en hover-text
-======================== */
+
+/* Control de párrafos en hover-text */
 .hover-text p {
-    margin: 0 0 8px 0;    /* ← ESPACIO ENTRE PÁRRAFOS (cambia el 8px) */
+    margin: 0 0 8px 0;
 }
 
 .hover-text p:first-child {
-    margin-top: 0;        /* ← Primer párrafo sin margen arriba */
+    margin-top: 0;
 }
 
 .hover-text p:last-child {
-    margin-bottom: 0;     /* ← Último párrafo sin margen abajo */
+    margin-bottom: 0;
 }
 
 /* ========================
@@ -155,7 +154,7 @@ Links debajo de la imagen (index)
 }
 
 /* ========================
-Link Realizar compra
+Link Realizar compra (revista)
 ======================== */
 #link-compra {
     display: block;
@@ -197,72 +196,52 @@ Botón Volver
 }
 
 /* ========================
-Responsive Mobile
-======================== */
-@media (max-width: 600px) {
-    body {
-        padding: 10px;
-    }
-
-    .imagen-container img {
-        max-width: 85vw;
-    }
-
-    .links {
-        max-width: 85vw;
-    }
-
-    header h1 {
-        font-size: 2.2em;
-    }
-
-    header h2 {
-        font-size: 1.2em;
-    }
-}
-
-/* ========================
-Página Pedido - Nueva estructura
+PÁGINA PEDIDO - Nueva estructura
 ======================== */
 .pedido-container {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 350px;
+    margin: 20px auto 0 auto;
 }
 
 .pedido-content {
     border: 3px solid #000;
     padding: 15px;
     background-color: #fff;
+    text-align: left;
 }
 
 .pedido-top {
     display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     gap: 15px;
     margin-bottom: 20px;
 }
 
 .pedido-imagen {
     flex-shrink: 0;
+    width: 75px;                /* ← ANCHO IMAGEN PEQUEÑA */
 }
 
 .pedido-imagen img {
-    width: 100px;              /* ← TAMAÑO DE LA IMAGEN (1/4 aprox) */
-    height: auto;
+    width: 75px !important;     /* ← FORZAR TAMAÑO */
+    height: auto !important;
     display: block;
 }
 
 .pedido-info {
+    flex: 1;
     font-family: Arial, sans-serif;
     font-size: 12px;
-    line-height: 1.4;
+    line-height: 1.5;
     text-align: left;
 }
 
-/* Formulario */
+/* Formulario Pedido */
 .pedido-form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .pedido-form .campo {
@@ -274,7 +253,7 @@ Página Pedido - Nueva estructura
 .pedido-form label {
     font-family: Arial, sans-serif;
     font-size: 11px;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -282,7 +261,7 @@ Página Pedido - Nueva estructura
 .pedido-form input {
     font-family: Arial, sans-serif;
     font-size: 12px;
-    padding: 8px;
+    padding: 8px 10px;
     border: 1px solid #000;
     background-color: #fff;
 }
@@ -292,7 +271,7 @@ Página Pedido - Nueva estructura
     border-width: 2px;
 }
 
-/* Botones fuera del recuadro */
+/* Botones Pedido (fuera del recuadro, centrados) */
 .pedido-buttons {
     margin-top: 20px;
     text-align: center;
@@ -316,17 +295,36 @@ Página Pedido - Nueva estructura
     color: #fff;
 }
 
-/* Responsive */
+/* ========================
+Responsive Mobile
+======================== */
 @media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .imagen-container img {
+        max-width: 85vw;
+    }
+
+    .links {
+        max-width: 85vw;
+    }
+
+    header h1 {
+        font-size: 2.2em;
+    }
+
+    header h2 {
+        font-size: 1.2em;
+    }
+
     .pedido-container {
         max-width: 90vw;
     }
-    
-    .pedido-top {
-        flex-direction: column;
-    }
-    
+
+    .pedido-imagen,
     .pedido-imagen img {
-        width: 80px;
+        width: 60px !important;
     }
 }
