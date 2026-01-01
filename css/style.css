@@ -178,3 +178,31 @@ Responsive Mobile
         font-size: 1.2em;
     }
 }
+
+/* Botón Volver con recuadro */
+.volver {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.volver a {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #000;
+    text-decoration: none;
+    color: #000;
+    background-color: #fff;
+}
+
+/* Link Realizar compra */
+#link-compra {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    color: #000;
+}
