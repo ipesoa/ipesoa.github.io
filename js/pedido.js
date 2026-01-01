@@ -55,10 +55,6 @@ function mostrarCartel() {
     hoverDiv.innerHTML = cartel.texto_index ? cartel.texto_index : '';
 }
 
-/* =========================================
-   EVENTOS (Definidos una sola vez)
-========================================= */
-
 // Móvil / Touch: Alternar visibilidad con tap
 imgCartel.addEventListener('click', (e) => {
     e.stopPropagation();
