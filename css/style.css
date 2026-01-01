@@ -196,10 +196,10 @@ Botón Volver
 }
 
 /* ========================
-PÁGINA PEDIDO - Nueva estructura
+PÁGINA PEDIDO
 ======================== */
 .pedido-container {
-    max-width: 350px;
+    max-width: 308px;
     margin: 20px auto 0 auto;
 }
 
@@ -220,11 +220,11 @@ PÁGINA PEDIDO - Nueva estructura
 
 .pedido-imagen {
     flex-shrink: 0;
-    width: 75px;                /* ← ANCHO IMAGEN PEQUEÑA */
+    width: 75px;
 }
 
 .pedido-imagen img {
-    width: 75px !important;     /* ← FORZAR TAMAÑO */
+    width: 75px !important;
     height: auto !important;
     display: block;
 }
@@ -271,7 +271,21 @@ PÁGINA PEDIDO - Nueva estructura
     border-width: 2px;
 }
 
-/* Botones Pedido (fuera del recuadro, centrados) */
+.pedido-form textarea {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    padding: 8px 10px;
+    border: 1px solid #000;
+    background-color: #fff;
+    resize: none;
+}
+
+.pedido-form textarea:focus {
+    outline: none;
+    border-width: 2px;
+}
+
+/* Botones Pedido */
 .pedido-buttons {
     margin-top: 20px;
     text-align: center;
