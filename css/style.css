@@ -54,21 +54,25 @@ Contenedor de Cartel / Imagen
 }
 
 .imagen-container {
-    width: 308px;
-    height: 432px;
+    display: inline-block;
     margin: 0 auto;
     position: relative;
     border: 4px solid #000;
     padding: 4px;
     background-color: #fff;
-    box-sizing: border-box;
+    transition: border-color 0.1s ease;
 }
 
-/* Imagen - sin object-fit para mantener calidad */
+/* Borde desaparece en hover */
+.imagen-container:hover {
+    border-color: #fff;
+}
+
+/* Imagen - tamaño natural, max-width para que no sea enorme */
 .imagen-container img {
-    width: 300px;
-    height: 424px;
     display: block;
+    max-width: 300px;
+    height: auto;
 }
 
 /* Hover text - Fondo blanco, letras negras */
@@ -82,11 +86,11 @@ Contenedor de Cartel / Imagen
     text-align: left;
     color: #000;
     background-color: #fff;
-    width: 300px;
-    height: 424px;
     position: absolute;
     top: 4px;
     left: 4px;
+    right: 4px;
+    bottom: 4px;
     padding: 0;
     box-sizing: border-box;
     overflow: auto;
@@ -185,19 +189,12 @@ Responsive Mobile
         padding: 10px;
     }
 
-    .imagen-container {
-        width: calc(90vw + 8px);
-        height: calc(90vw * 1.414 + 8px);
-    }
-
-    .imagen-container img,
-    .imagen-container .hover-text {
-        width: 90vw;
-        height: calc(90vw * 1.414);
+    .imagen-container img {
+        max-width: 85vw;
     }
 
     .links {
-        max-width: calc(90vw + 8px);
+        max-width: 85vw;
     }
 
     header h1 {
