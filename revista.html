@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Revista - i.pesoa</title>
-<link rel="stylesheet" href="css/style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revista - i.pesoa</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
-    <h1>I.PESOA</h1>
-    <h2>EDITORIAL</h2>
-</header>
+    <header>
+        <h1>I.PESOA</h1>
+        <nav>
+            <h2>EDITORIAL</h2>
+        </nav>
+    </header>
 
-<main>
-    <div class="cartel-container">
-        <div class="imagen-container">
-            <img id="fanzine-img" src="" alt="Fanzine">
-        </div>
+    <main>
+        <section class="product-details">
+            <div class="imagen-container">
+                <img id="cartel" src="" alt="Fanzine">
+                <div id="hover-text" class="hover-text"></div>
+            </div>
+            <div class="links">
+                <a id="link-revista" href="#">-</a>
+                <a id="link-dina3" href="#">Versión en Papel</a>
+            </div>
+            <a href="#" class="button">Comprar por PayPal</a>
+        </section>
+        <section class="back-to-home">
+            <a href="index.html">Volver al inicio</a>
+        </section>
+    </main>
 
-        <p id="descripcion"></p>
-        <a id="paypal-link" href="#" target="_blank">Comprar por PayPal</a>
-    </div>
-
-    <div class="volver">
-        <a href="index.html"><button>Volver al inicio</button></a>
-    </div>
-</main>
-
-<script src="js/revista.js"></script>
+    <footer>
+    </footer>
+    <script src="js/revista.js"></script>
 </body>
 </html>
