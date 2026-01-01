@@ -48,10 +48,6 @@ function mostrarRevista() {
     linkDina3.href = '#';
 }
 
-/* =========================================
-   EVENTOS (Definidos una sola vez)
-========================================= */
-
 // Móvil / Touch: Alternar visibilidad con tap
 imgCartel.addEventListener('click', (e) => {
     e.stopPropagation();
