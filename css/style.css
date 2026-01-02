@@ -331,6 +331,41 @@ PÁGINA PEDIDO
 }
 
 /* ========================
+Footer
+======================== */
+.site-footer {
+    margin-top: 150px;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.site-footer .copyright {
+    font-size: 10px;
+    color: #000;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.site-footer .social-links {
+    display: flex;
+    justify-content: space-between;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.site-footer .social-links a {
+    font-size: 10px;
+    color: #000;
+    text-decoration: none;
+}
+
+@media (hover: hover) {
+    .site-footer .social-links a:hover {
+        text-decoration: underline;
+    }
+}
+
+/* ========================
 Responsive Mobile
 ======================== */
 @media (max-width: 600px) {
