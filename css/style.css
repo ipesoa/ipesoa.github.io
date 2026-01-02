@@ -41,9 +41,11 @@ button#random-btn {
     margin-bottom: 20px;
 }
 
-button#random-btn:hover {
-    background-color: #000;
-    color: #fff;
+@media (hover: hover) {
+    button#random-btn:hover {
+        background-color: #000;
+        color: #fff;
+    }
 }
 
 /* ========================
@@ -63,10 +65,6 @@ Contenedor de Cartel / Imagen (INDEX)
     transition: border-color 0.5s ease;
 }
 
-.imagen-container:hover {
-    border-color: #fff;
-}
-
 .imagen-container img {
     display: block;
     max-width: 300px;
@@ -74,8 +72,20 @@ Contenedor de Cartel / Imagen (INDEX)
     transition: opacity 0.5s ease;
 }
 
-.imagen-container:hover img {
-    opacity: 0;
+@media (hover: hover) {
+    .imagen-container:hover {
+        border-color: #fff;
+    }
+
+    .imagen-container:hover img {
+        opacity: 0;
+    }
+
+    .imagen-container:hover .hover-text {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
 }
 
 .imagen-container .hover-text {
@@ -103,16 +113,19 @@ Contenedor de Cartel / Imagen (INDEX)
     transition: opacity 0.5s ease;
 }
 
-.imagen-container:hover .hover-text {
+.imagen-container .hover-text.show-text {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
 }
 
-.imagen-container .hover-text.show-text {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+/* Clase para ocultar borde en móvil cuando se muestra texto */
+.imagen-container.show-text-active {
+    border-color: #fff;
+}
+
+.imagen-container.show-text-active img {
+    opacity: 0;
 }
 
 /* Control de párrafos en hover-text */
@@ -148,9 +161,11 @@ Links debajo de la imagen (index)
     transition: all 0.2s ease;
 }
 
-.links a:hover {
-    color: #fff;
-    background-color: #000;
+@media (hover: hover) {
+    .links a:hover {
+        color: #fff;
+        background-color: #000;
+    }
 }
 
 /* ========================
@@ -166,8 +181,10 @@ Link Realizar compra (revista)
     color: #000;
 }
 
-#link-compra:hover {
-    text-decoration: underline;
+@media (hover: hover) {
+    #link-compra:hover {
+        text-decoration: underline;
+    }
 }
 
 /* ========================
@@ -190,9 +207,11 @@ Botón Volver
     transition: all 0.2s ease;
 }
 
-.volver a:hover {
-    background-color: #000;
-    color: #fff;
+@media (hover: hover) {
+    .volver a:hover {
+        background-color: #000;
+        color: #fff;
+    }
 }
 
 /* ========================
@@ -304,9 +323,11 @@ PÁGINA PEDIDO
     transition: all 0.2s ease;
 }
 
-.pedido-buttons button:hover {
-    background-color: #000;
-    color: #fff;
+@media (hover: hover) {
+    .pedido-buttons button:hover {
+        background-color: #000;
+        color: #fff;
+    }
 }
 
 /* ========================
