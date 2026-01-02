@@ -5,7 +5,23 @@
       "imagen": "prisa122.png",
       "texto_index": "La prisa no es velocidad.",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
-      "amount": "25.00",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
+      "id": "fe",
+      "imagen": "fe.png",
+      "texto_index": "<p>como</p><p>1 marioneta</p><p>la almohada</p><p>imita</p><p>la forma</p><p>de</p><p>nuestra cabeza.</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
+      "id": "costipado",
+      "imagen": "costipado.png",
+      "texto_index": "<p>hacen</p><p>vals</p><p>las serpentinas</p><p>de</p><p>la</p><p>imaginación?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
+      "amount": "15.00",
       "revista_id": "enero2026"
     },
     {
@@ -13,7 +29,7 @@
       "imagen": "intuicion.png",
       "texto_index": "<p>delicadamente</p><p>un rumbo de</p><p>circulo de lana</p>",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
-      "amount": "25.00",
+      "amount": "15.00",
       "revista_id": "enero2026"
     },
     {
@@ -21,7 +37,7 @@
       "imagen": "congela.png",
       "texto_index": "las tortugas sueñan con un mar de esmeraldas?.",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
-      "amount": "25.00",
+      "amount": "15.00",
       "revista_id": "enero2026"
     },
 
@@ -31,7 +47,7 @@
       "imagen": "cartelstreet.png",
       "texto_index": "la inocencia se descorcha cada dia?.",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada. 25€.",
-      "amount": "25.00",
+      "amount": "15.00",
       "revista_id": "enero2026"
     }
   ],
@@ -40,7 +56,7 @@
       "id": "enero2026",
       "imagen": "enero2026.jpg",
       "descripcion": "Un número dedicado a la aceleración, la productividad y el cansancio estructural. Precio: 8€.",
-      "amount": "25.00"
+      "amount": "12.00"
     }
   ]
 }
