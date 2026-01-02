@@ -8,20 +8,15 @@ const linkRevista = document.getElementById('link-revista');
 const linkDina3 = document.getElementById('link-dina3');
 const randomBtn = document.getElementById('random-btn');
 
-// Variable para controlar el estado del hover en móvil
-let hoverActivo = false;
-
-// Función para actualizar el contenido (solo datos, no eventos)
+// Función para actualizar el contenido
 function mostrarCartelRandom() {
     if (carteles.length === 0) return;
 
     const random = carteles[Math.floor(Math.random() * carteles.length)];
 
-    // 1. Imagen del cartel
     imgCartel.src = `carteles/${random.imagen}`;
     imgCartel.style.display = 'block';
 
-    // 2. Link a revista
     const revista = revistas.find(r => r.id === random.revista_id);
     if (revista) {
         linkRevista.textContent = revista.nombre || revista.id;
@@ -31,42 +26,37 @@ function mostrarCartelRandom() {
         linkRevista.href = '#';
     }
 
-    // 3. Link versión papel
     linkDina3.textContent = 'Versión en Papel';
     linkDina3.href = `pedido.html?id=${random.id}`;
 
-    // 4. Texto del Hover
     hoverDiv.innerHTML = random.texto_index ? random.texto_index : '';
 }
 
 /* =========================================
-   EVENTOS (Definidos una sola vez)
+   EVENTOS TÁCTILES (Móvil)
 ========================================= */
 
-// Móvil / Touch: Alternar visibilidad con tap
-imgCartel.addEventListener('click', (e) => {
-    e.stopPropagation();
-    hoverActivo = !hoverActivo;
-    if (hoverActivo) {
-        hoverDiv.classList.add('show-text');
-    } else {
-        hoverDiv.classList.remove('show-text');
-    }
+// Mostrar texto cuando toca
+imgCartel.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const container = document.querySelector('.imagen-container');
+    hoverDiv.classList.add('show-text');
+    container.classList.add('show-text-active');
 });
 
-// Click en el texto para cerrar
-hoverDiv.addEventListener('click', (e) => {
-    e.stopPropagation();
-    hoverActivo = false;
+// Ocultar texto cuando levanta el dedo
+imgCartel.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    const container = document.querySelector('.imagen-container');
     hoverDiv.classList.remove('show-text');
+    container.classList.remove('show-text-active');
 });
 
-// Click fuera para cerrar en móvil
-document.addEventListener('click', () => {
-    if (hoverActivo) {
-        hoverActivo = false;
-        hoverDiv.classList.remove('show-text');
-    }
+// Si el toque se cancela
+imgCartel.addEventListener('touchcancel', () => {
+    const container = document.querySelector('.imagen-container');
+    hoverDiv.classList.remove('show-text');
+    container.classList.remove('show-text-active');
 });
 
 // Botón RANDOM
