@@ -17,6 +17,14 @@
       "revista_id": "enero2026"
     },
     {
+      "id": "maratonturistica",
+      "imagen": "maratonturistica.png",
+      "texto_index": "<p>el</p><p>único</p><p>zoológico</p><p>que</p><p>existe</p><p>se</p><p>llama</p><p>ciu-</p><p>-dad.</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€..",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
       "id": "experto",
       "imagen": "experto.png",
       "texto_index": "<p>la</p><p>naturaleza</p><p>es</p><p>la</p><p>mejor</p><p>editorial</p><p>del</p><p>mundo?</p>",
