@@ -17,50 +17,32 @@
       "revista_id": "enero2026"
     },
     {
-      "id": "maratonturistica",
-      "imagen": "maratonturistica.png",
+      "id": "desatender",
+      "imagen": "desatender.png",
       "texto_index": "<p>el</p><p>único</p><p>zoológico</p><p>que</p><p>existe</p><p>se</p><p>llama</p><p>ciu-</p><p>-dad.</p>",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€..",
       "amount": "15.00",
       "revista_id": "enero2026"
     },
     {
-      "id": "experto",
-      "imagen": "experto.png",
+      "id": "festivalqueja",
+      "imagen": "efestivalqueja.png",
       "texto_index": "<p>la</p><p>naturaleza</p><p>es</p><p>la</p><p>mejor</p><p>editorial</p><p>del</p><p>mundo?</p>",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
       "amount": "15.00",
       "revista_id": "enero2026"
     },
     {
-      "id": "costipado",
-      "imagen": "costipado.png",
+      "id": "hyperdroga",
+      "imagen": "hyperdroga.png",
       "texto_index": "<p>hacen</p><p>vals</p><p>las serpentinas</p><p>de</p><p>la</p><p>imaginación?</p>",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
       "amount": "15.00",
       "revista_id": "enero2026"
-    },
+    },    
     {
-      "id": "intuicion",
-      "imagen": "intuicion.png",
-      "texto_index": "<p>delicadamente</p><p>un rumbo de</p><p>circulo de lana</p>",
-      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "amount": "15.00",
-      "revista_id": "enero2026"
-    },
-    {
-      "id": "congela",
-      "imagen": "congela.png",
-      "texto_index": "las tortugas sueñan con un mar de esmeraldas verdes?.",
-      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "amount": "15.00",
-      "revista_id": "enero2026"
-    },
-
-    
-    {
-      "id": "canal",
-      "imagen": "cartelstreet.png",
+      "id": "triatlondebiles",
+      "imagen": "triatlondebiles.png",
       "texto_index": "la inocencia se descorcha cada dia?.",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
       "amount": "15.00",
