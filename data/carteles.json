@@ -57,6 +57,14 @@
       "revista_id": "enero2026"
     },
     {
+      "id": "deambular",
+      "imagen": "deambular.png",
+      "texto_index": "<p>como</p><p>un</p><p>caminante</p><p>de</p><p>ismos</p><p>mientras</p><p>llueve</p><p>en el sombrero</p><p>del</p><p>otro/a</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
       "id": "triatlondebiles",
       "imagen": "triatlondebiles.png",
       "texto_index": "la inocencia se descorcha cada dia?.",
