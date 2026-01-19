@@ -3,7 +3,7 @@
     {
       "id": "prisa12",
       "imagen": "prisa122.png",
-      "texto_index": "La prisa no es velocidad.",
+      "texto_index": "<p>la</p><p>puntualidad</p><p>de</p><p>la</p><p>higuera</p><p>será</p><p>implastificable?</p>",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
       "amount": "15.00",
       "revista_id": "enero2026"
@@ -91,7 +91,7 @@
     {
       "id": "triatlondebiles",
       "imagen": "triatlondebiles.png",
-      "texto_index": "la inocencia se descorcha cada dia?.",
+      "texto_index": "<p>practicar</p><p>el</p><p>amor</p><p>es</p><p>como</p><p>mirarse</p><p>en</p><p>un</p><p>espejo</p><p>transparente?</p>",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
       "amount": "15.00",
       "revista_id": "enero2026"
