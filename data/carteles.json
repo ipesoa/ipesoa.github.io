@@ -89,6 +89,30 @@
       "revista_id": "enero2026"
     },
     {
+      "id": "neobarrocas",
+      "imagen": "neobarrocas.png",
+      "texto_index": "<p>revivir</p><p>los</p><p>colores</p><p>que</p><p>aún</p><p>no</p><p>existen</p><p>para</p><p>probar</p><p>una</p><p>naderia</p><p>sagrada</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
+      "id": "poledance",
+      "imagen": "poledance.png",
+      "texto_index": "<p>que</p><p>intenta</p><p>tapar</p><p>la</p><p>ropa?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
+      "id": "iCURSOIGNORAR",
+      "imagen": "CURSOIGNORAR.png",
+      "texto_index": "<p>un</p><p>policía</p><p>mirándose</p><p>al espejo</p><p>es</p><p>auto-vigilancia?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
       "id": "triatlondebiles",
       "imagen": "triatlondebiles.png",
       "texto_index": "<p>practicar</p><p>el</p><p>amor</p><p>es</p><p>como</p><p>mirarse</p><p>en</p><p>un</p><p>espejo</p><p>transparente?</p>",
