@@ -136,6 +136,38 @@
       "amount": "15.00",
       "revista_id": "enero2026"
     },
+        {
+      "id": "elmentidero",
+      "imagen": "elmentidero.png",
+      "texto_index": "<p>¿la</p><p>melancolía</p><p>hecha</p><p>de menos</p><p>al</p><p>presente?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+        {
+      "id": "experienciainmersiva",
+      "imagen": "experienciainmersiva.png",
+      "texto_index": "<p>las</p><p>lineas</p><p>rectas</p><p>están</p><p>deshorientadas?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
+      "id": "perrosenpelotas",
+      "imagen": "perrosenpelotas.png",
+      "texto_index": "<p>que</p><p>nadie</p><p>cancele</p><p>a</p><p>las</p><p>macetas</p><p>por</p><p>secuestrar</p><p>la</p><p>naturaleza</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
+      "id": "carnaval",
+      "imagen": "carnaval.png",
+      "texto_index": "<p>¿que</p><p>hacen</p><p>los</p><p>nudistas</p><p>durante</p><p>el</p><p>carnaval?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
     {
       "id": "triatlondebiles",
       "imagen": "triatlondebiles.png",
