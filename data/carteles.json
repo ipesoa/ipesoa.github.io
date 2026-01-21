@@ -105,9 +105,33 @@
       "revista_id": "enero2026"
     },
     {
-      "id": "iCURSOIGNORAR",
+      "id": "CURSOIGNORAR",
       "imagen": "CURSOIGNORAR.png",
       "texto_index": "<p>un</p><p>policía</p><p>mirándose</p><p>al espejo</p><p>es</p><p>auto-vigilancia?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+        {
+      "id": "objetivosinvisibles",
+      "imagen": "objetivosinvisibles.png",
+      "texto_index": "<p>el</p><p>mar</p><p>es</p><p>experto</p><p>en</p><p>coquetear</p><p>con</p><p>la</p><p>orilla?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
+      "id": "perderseencompañia",
+      "imagen": "perderseencompañia.png",
+      "texto_index": "<p>como</p><p>una</p><p>brújula</p><p>que</p><p>no</p><p>sabe</p><p>a</p><p>donde</p><p>va</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "enero2026"
+    },
+    {
+      "id": "descansartrabajando",
+      "imagen": "descansartrabajando.png",
+      "texto_index": "<p>las</p><p>palomas</p><p>nos observan</p><p>sorprendidas</p><p>desde</p><p>el</p><p>aire</p>",
       "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
       "amount": "15.00",
       "revista_id": "enero2026"
