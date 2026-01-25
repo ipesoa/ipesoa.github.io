@@ -25,7 +25,8 @@ fetch('data/carteles.json')
             producto = data.revistas.find(r => r.id === productoId);
             if (producto) {
                 imgCartel.src = `fanzines/${producto.imagen}`;
-                textoInfo.innerHTML = producto.descripcion || '';
+                // Usar texto_impresion (igual que los carteles)
+                textoInfo.innerHTML = producto.texto_impresion || '';
                 orderId = generarOrderId();
             }
         } else {
