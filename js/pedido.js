@@ -25,7 +25,6 @@ fetch('data/carteles.json')
             producto = data.revistas.find(r => r.id === productoId);
             if (producto) {
                 imgCartel.src = `fanzines/${producto.imagen}`;
-                // Usar texto_impresion (igual que los carteles)
                 textoInfo.innerHTML = producto.texto_impresion || '';
                 orderId = generarOrderId();
             }
@@ -53,7 +52,7 @@ btnCompra.addEventListener('click', () => {
         return;
     }
 
-    // Enviar a Google Forms (oculto, en segundo plano)
+    // Preparar datos para Google Forms
     const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc4HgVhBrjQMoW2p5-3JuF3RH3wicutIkQ_5euPVw8ZSO_J6A/formResponse';
     const formData = new FormData();
     formData.append('entry.484459052', nombre);           // Nombre completo
@@ -62,14 +61,30 @@ btnCompra.addEventListener('click', () => {
     formData.append('entry.1298772582', producto.id);     // Producto ID
     formData.append('entry.1738015936', orderId);         // Order ID
 
-    // Enviar sin esperar respuesta (Google Forms no permite CORS)
-    fetch(googleFormUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-    });
+    // Usar sendBeacon para envío garantizado (funciona en móvil)
+    // Convertir FormData a URLSearchParams para sendBeacon
+    const params = new URLSearchParams();
+    params.append('entry.484459052', nombre);
+    params.append('entry.559425642', direccion);
+    params.append('entry.1615188299', email);
+    params.append('entry.1298772582', producto.id);
+    params.append('entry.1738015936', orderId);
 
-    // Redirigir a PayPal con el precio del producto
-    const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=312rimini@gmail.com&item_name=${producto.id}&amount=${producto.amount}&currency_code=EUR&custom=${orderId}`;
-    window.location.href = paypalUrl;
+    // sendBeacon garantiza el envío incluso al cambiar de página
+    const beaconSent = navigator.sendBeacon(googleFormUrl, params);
+
+    // Fallback: si sendBeacon no está disponible o falla, usar fetch
+    if (!beaconSent) {
+        fetch(googleFormUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+        });
+    }
+
+    // Pequeño delay para asegurar envío, luego redirigir a PayPal
+    setTimeout(() => {
+        const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=312rimini@gmail.com&item_name=${producto.id}&amount=${producto.amount}&currency_code=EUR&custom=${orderId}`;
+        window.location.href = paypalUrl;
+    }, 300);
 });
