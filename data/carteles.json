@@ -321,27 +321,27 @@
       "descripcion": "<p>٩( ๑╹ ꇴ╹)۶</p><p>enero2026</p><p>*</p><p>recopilación</p><p>de</p><p>28 páginas</p><p>carteles sin criterio</p><p>*</p><p>dina5</p><p>12 euros</p>",
       "texto_impresion": "Fanzine DINA5, 28 páginas. Recopilación de carteles. Edición limitada. 12€.",
       "amount": "12.00"
-    }
-        {
+    },
+    {
       "id": "vals",
       "imagen": "vals.png",
       "descripcion": "<p>vals</p><p>28 páginas</p><p>llenas</p><p>de</p><p>cabezas</p><p>perfumadas</p><p>como</p><p>todos tus</p><p>espejos</p><p>10 euros</p>",
       "texto_impresion": "Fanzine DINA5, 28 páginas. archivo gráfico. Edición limitada. 10€.",
       "amount": "8.00"
-    }
-        {
+    },
+    {
       "id": "a su ritmo",
       "imagen": "asuritmo.png",
       "descripcion": "<p>a su ritmo</p><p>algunxs</p><p>caminantes</p><p>a</p><p>bpms</p><p>propios</p><p>28 paginas</p><p>12 euros</p>",
       "texto_impresion": "Fanzine DINA5, 28 páginas. Inspiration mirror&run. Edición limitada. 12€.",
       "amount": "12.00"
-    }
-        {
+    },
+    {
       "id": "puentes",
       "imagen": "puentes.png",
       "descripcion": "<p>puentes</p><p>28 paginas</p><p>historias</p><p>in</p><p>ter</p><p>mi</p><p>na</p><p>bles</p><p>(etc)</p><p>12 euros horizontales</p>",
       "texto_impresion": "Fanzine Horizontal, 28 páginas. Recopilación de carteles. Edición limitada. 12€.",
       "amount": "12.00"
     }
-  ]
+]
 }
