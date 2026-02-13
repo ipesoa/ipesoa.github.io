@@ -232,6 +232,79 @@
       "amount": "15.00",
       "revista_id": "enero2026"
     },
+        {
+      "id": "adorno",
+      "imagen": "adorno.png",
+      "texto_index": "<p>como</p><p>un</p><p>curso</p><p>de</p><p>milagros</p><p>para</p><p>la</p><p>belleza</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "a su ritmo"
+    },
+        {
+      "id": "lacan.png",
+      "imagen": "lacan.png",
+      "texto_index": "<p>un</p><p>autoestopista</p><p>de</p><p>bandera</p><p>de la</p><p>naturaleza</p><p>hace</p><p>jazz</p><p>suizo</p><p>sobre</p><p>un</p><p>iceberg</p><p>con</p><p>ruedas</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "a su ritmo"
+    },
+        {
+      "id": "socrates",
+      "imagen": "socrates.png",
+      "texto_index": "<p>nadie</p><p>puede</p><p>escribir</p><p>igual</p><p>que</p><p>sócrates</p><p>(creo)</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "a su ritmo"
+    },
+        {
+      "id": "sontag",
+      "imagen": "sontag.png",
+      "texto_index": "<p>la</p><p>carambola</p><p>del</p><p>azar</p><p>mantiquellea</p><p>orificios</p><p>smooth</p><p>en</p><p>sabor</p><p>al</p><p>trino</p><p>angelical</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "a su ritmo"
+    },
+        {
+      "id": "puentescartel",
+      "imagen": "puentescartel.png",
+      "texto_index": "<p>muchas</p><p>más</p><p>historias</p><p>pitoneando</p><p>sílabas</p><p>de</p><p>beginings &amp; etcs</p><p>tipo</p><p>Homero</p><p>ó</p><p>Roberto Bolaño</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "puentes"
+    },
+        {
+      "id": "weil",
+      "imagen": "weil.png",
+      "texto_index": "<p>como</p><p>una</p><p>sartén</p><p>sin</p><p>mango</p><p>ni</p><p>dueño/a</p><p>ni</p><p>vencedor/a</p><p>ni vencido/a</p><p>ni</p><p>lugar</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "15.00",
+      "revista_id": "a su ritmo"
+    },
+        {
+      "id": "vals1",
+      "imagen": "vals1.png",
+      "texto_index": "<p>quién</p><p>confecciona</p><p>coronas</p><p>de</p><p>paja</p><p>en</p><p>el</p><p>leroy merlin?</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "10.00",
+      "revista_id": "vals"
+    },
+        {
+      "id": "vals2",
+      "imagen": "vals2.png",
+      "texto_index": "<p>carcajean</p><p>ángeles</p><p>con</p><p>aliento</p><p>a</p><p>enjuague</p><p>bucal</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "10.00",
+      "revista_id": "vals"
+    },
+        {
+      "id": "vals3",
+      "imagen": "vals3.png",
+      "texto_index": "<p>como</p><p>un</p><p>kimono</p><p>haciendo</p><p>la</p><p>colada</p><p>sin</p><p>humanos</p>",
+      "texto_impresion": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
+      "amount": "10.00",
+      "revista_id": "vals"
+    },
+    
     {
       "id": "triatlondebiles",
       "imagen": "triatlondebiles.png",
@@ -247,6 +320,27 @@
       "imagen": "enero2026.png",
       "descripcion": "<p>٩( ๑╹ ꇴ╹)۶</p><p>enero2026</p><p>*</p><p>recopilación</p><p>de</p><p>28 páginas</p><p>carteles sin criterio</p><p>*</p><p>dina5</p><p>12 euros</p>",
       "texto_impresion": "Fanzine DINA5, 28 páginas. Recopilación de carteles. Edición limitada. 12€.",
+      "amount": "12.00"
+    }
+        {
+      "id": "vals",
+      "imagen": "vals.png",
+      "descripcion": "<p>vals</p><p>28 páginas</p><p>llenas</p><p>de</p><p>cabezas</p><p>perfumadas</p><p>como</p><p>todos tus</p><p>espejos</p><p>10 euros</p>",
+      "texto_impresion": "Fanzine DINA5, 28 páginas. archivo gráfico. Edición limitada. 10€.",
+      "amount": "8.00"
+    }
+        {
+      "id": "a su ritmo",
+      "imagen": "asuritmo.png",
+      "descripcion": "<p>a su ritmo</p><p>algunxs</p><p>caminantes</p><p>a</p><p>bpms</p><p>propios</p><p>28 paginas</p><p>12 euros</p>",
+      "texto_impresion": "Fanzine DINA5, 28 páginas. Inspiration mirror&run. Edición limitada. 12€.",
+      "amount": "12.00"
+    }
+        {
+      "id": "puentes",
+      "imagen": "puentes.png",
+      "descripcion": "<p>puentes</p><p>28 paginas</p><p>historias</p><p>in</p><p>ter</p><p>mi</p><p>na</p><p>bles</p><p>(etc)</p><p>12 euros horizontales</p>",
+      "texto_impresion": "Fanzine Horizontal, 28 páginas. Recopilación de carteles. Edición limitada. 12€.",
       "amount": "12.00"
     }
   ]
