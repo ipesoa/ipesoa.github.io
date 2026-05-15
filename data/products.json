@@ -11,19 +11,6 @@
   ],
   "products": [
     {
-      "id": "indiscutible",
-      "name": "Indiscutible",
-      "images": [
-        "carteles/indiscutible.png"
-      ],
-      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
-      "price": 15,
-      "categories": [
-        "carteles"
-      ],
-      "sold": false
-    },
-    {
       "id": "neobarrocas",
       "name": "Neobarrocas",
       "images": [
