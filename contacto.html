@@ -11,14 +11,11 @@
 <header>
     <h1><a href="index.html">I.PESOA</a></h1>
     <h2>EDITORIAL</h2>
+    <p class="subtitle">ediciones impublicables</p>
 </header>
 
 <nav class="main-nav">
     <a href="index.html">SHOP</a>
-    <div class="nav-dropdown">
-        <button class="nav-dropdown-toggle" id="cat-toggle">Apartados</button>
-        <div class="nav-dropdown-menu" id="cat-menu"></div>
-    </div>
     <a href="contacto.html">CONTACTO</a>
 </nav>
 
@@ -47,32 +44,5 @@
     </div>
 </footer>
 
-<script>
-// Dropdown nav
-const catToggle = document.getElementById('cat-toggle');
-const catMenu = document.getElementById('cat-menu');
-
-fetch('data/products.json')
-    .then(res => res.json())
-    .then(data => {
-        const allLink = document.createElement('a');
-        allLink.href = 'index.html';
-        allLink.textContent = 'Todo';
-        catMenu.appendChild(allLink);
-
-        data.categories.forEach(cat => {
-            const a = document.createElement('a');
-            a.href = `index.html#cat=${cat.id}`;
-            a.textContent = cat.name;
-            catMenu.appendChild(a);
-        });
-    });
-
-catToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    catMenu.classList.toggle('open');
-});
-document.addEventListener('click', () => catMenu.classList.remove('open'));
-</script>
 </body>
 </html>

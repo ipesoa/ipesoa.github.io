@@ -1,13 +1,11 @@
 let producto = null;
 let orderId = null;
-let categories = [];
 
 const gallery = document.getElementById('gallery');
 const productInfo = document.getElementById('product-info');
 const productDescription = document.getElementById('product-description');
 const orderSection = document.getElementById('order-section');
 const btnCompra = document.getElementById('btn-compra');
-const catMenu = document.getElementById('cat-menu');
 
 // Obtener ID del producto de la URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -18,7 +16,7 @@ function generarOrderId() {
     return Math.floor(1000000 + Math.random() * 9000000).toString();
 }
 
-// Construir carrusel
+// Construir carrusel o imagen única
 function buildGallery(images) {
     if (images.length === 1) {
         const img = document.createElement('img');
@@ -44,7 +42,6 @@ function buildGallery(images) {
 
     container.appendChild(track);
 
-    // Botones prev/next
     const prevBtn = document.createElement('button');
     prevBtn.className = 'carousel-btn prev';
     prevBtn.textContent = '‹';
@@ -68,7 +65,6 @@ function buildGallery(images) {
     });
     gallery.appendChild(dots);
 
-    // Carousel logic
     let current = 0;
     const total = images.length;
 
@@ -83,7 +79,7 @@ function buildGallery(images) {
     prevBtn.addEventListener('click', () => goTo((current - 1 + total) % total));
     nextBtn.addEventListener('click', () => goTo((current + 1) % total));
 
-    // Swipe support
+    // Swipe
     let startX = 0;
     container.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
     container.addEventListener('touchend', (e) => {
@@ -95,27 +91,11 @@ function buildGallery(images) {
     });
 }
 
-// Construir menú de categorías en nav
-function buildCategoryMenu() {
-    const allLink = document.createElement('a');
-    allLink.href = 'index.html';
-    allLink.textContent = 'Todo';
-    catMenu.appendChild(allLink);
-
-    categories.forEach(cat => {
-        const a = document.createElement('a');
-        a.href = `index.html#cat=${cat.id}`;
-        a.textContent = cat.name;
-        catMenu.appendChild(a);
-    });
-}
-
 // Cargar datos
 fetch('data/products.json')
     .then(res => res.json())
     .then(data => {
-        categories = data.categories;
-        buildCategoryMenu();
+        const categories = data.categories;
 
         producto = data.products.find(p => p.id === productoId);
         if (!producto) {
@@ -156,14 +136,6 @@ fetch('data/products.json')
         orderId = generarOrderId();
     })
     .catch(err => console.error('Error:', err));
-
-// Dropdown nav toggle
-const catToggle = document.getElementById('cat-toggle');
-catToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    catMenu.classList.toggle('open');
-});
-document.addEventListener('click', () => catMenu.classList.remove('open'));
 
 // Compra — envío a Google Forms + PayPal (misma lógica original)
 btnCompra.addEventListener('click', () => {

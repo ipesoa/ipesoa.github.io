@@ -2,9 +2,10 @@ let products = [];
 let categories = [];
 
 const grid = document.getElementById('product-grid');
-const categorySelect = document.getElementById('category-select');
 const catToggle = document.getElementById('cat-toggle');
 const catMenu = document.getElementById('cat-menu');
+
+let currentFilter = 'all';
 
 // Cargar datos
 fetch('data/products.json')
@@ -12,38 +13,68 @@ fetch('data/products.json')
     .then(data => {
         products = data.products;
         categories = data.categories;
-        buildCategoryDropdowns();
-        renderProducts('all');
+        buildCategoryDropdown();
+
+        // Check URL hash for category filter
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#cat=')) {
+            const catId = hash.replace('#cat=', '');
+            filterBy(catId);
+        } else {
+            renderProducts('all');
+        }
     })
     .catch(err => console.error('Error cargando productos:', err));
 
-function buildCategoryDropdowns() {
-    // Select filter
-    categories.forEach(cat => {
-        const opt = document.createElement('option');
-        opt.value = cat.id;
-        opt.textContent = cat.name;
-        categorySelect.appendChild(opt);
-    });
-
-    // Nav dropdown menu
+function buildCategoryDropdown() {
+    // "Todo" option
     const allLink = document.createElement('a');
-    allLink.href = 'index.html';
+    allLink.href = '#';
     allLink.textContent = 'Todo';
+    allLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        filterBy('all');
+    });
     catMenu.appendChild(allLink);
 
+    // "Lo más reciente" option
+    const recentLink = document.createElement('a');
+    recentLink.href = '#';
+    recentLink.textContent = 'Lo más reciente';
+    recentLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        filterBy('recent');
+    });
+    catMenu.appendChild(recentLink);
+
+    // Category options
     categories.forEach(cat => {
         const a = document.createElement('a');
         a.href = '#';
         a.textContent = cat.name;
         a.addEventListener('click', (e) => {
             e.preventDefault();
-            categorySelect.value = cat.id;
-            renderProducts(cat.id);
-            catMenu.classList.remove('open');
+            filterBy(cat.id);
         });
         catMenu.appendChild(a);
     });
+}
+
+function filterBy(filter) {
+    currentFilter = filter;
+    catMenu.classList.remove('open');
+
+    // Update toggle text
+    if (filter === 'all') {
+        catToggle.textContent = 'Todo';
+    } else if (filter === 'recent') {
+        catToggle.textContent = 'Lo más reciente';
+    } else {
+        const cat = categories.find(c => c.id === filter);
+        catToggle.textContent = cat ? cat.name : 'Todo';
+    }
+
+    renderProducts(filter);
 }
 
 // Toggle dropdown
@@ -60,18 +91,17 @@ catMenu.addEventListener('click', (e) => {
     e.stopPropagation();
 });
 
-// Filtro por categoría
-categorySelect.addEventListener('change', () => {
-    renderProducts(categorySelect.value);
-});
-
 // Renderizar productos
-function renderProducts(categoryId) {
+function renderProducts(filter) {
     grid.innerHTML = '';
 
     let filtered = products;
-    if (categoryId !== 'all') {
-        filtered = products.filter(p => p.categories.includes(categoryId));
+
+    if (filter === 'recent') {
+        // Show last 12 products (most recently added)
+        filtered = products.slice(-12).reverse();
+    } else if (filter !== 'all') {
+        filtered = products.filter(p => p.categories.includes(filter));
     }
 
     filtered.forEach(product => {
