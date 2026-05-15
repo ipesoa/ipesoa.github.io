@@ -11,19 +11,6 @@
   ],
   "products": [
     {
-      "id": "a su ritmo",
-      "name": "A Su Ritmo",
-      "images": [
-        "fanzines/asuritmo.png"
-      ],
-      "description": "Fanzine DINA5, 28 pÃ¡ginas. Inspiration mirror&run. EdiciÃ³n limitada. 12â¬.",
-      "price": 12,
-      "categories": [
-        "fanzines"
-      ],
-      "sold": false
-    },
-    {
       "id": "puentes",
       "name": "Puentes",
       "images": [
