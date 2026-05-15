@@ -9,19 +9,5 @@
       "name": "Fanzines"
     }
   ],
-  "products": [
-    {
-      "id": "puentes",
-      "name": "Puentes",
-      "images": [
-        "fanzines/puentes.png"
-      ],
-      "description": "Fanzine Horizontal, 28 pÃ¡ginas. RecopilaciÃ³n de carteles. EdiciÃ³n limitada. 12â¬.",
-      "price": 12,
-      "categories": [
-        "fanzines"
-      ],
-      "sold": false
-    }
-  ]
+  "products": []
 }
