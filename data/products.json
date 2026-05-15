@@ -11,19 +11,6 @@
   ],
   "products": [
     {
-      "id": "vals",
-      "name": "Vals",
-      "images": [
-        "fanzines/vals.png"
-      ],
-      "description": "Fanzine DINA5, 28 pÃ¡ginas. archivo grÃ¡fico. EdiciÃ³n limitada. 10â¬.",
-      "price": 8,
-      "categories": [
-        "fanzines"
-      ],
-      "sold": false
-    },
-    {
       "id": "a su ritmo",
       "name": "A Su Ritmo",
       "images": [
