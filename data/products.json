@@ -11,19 +11,6 @@
   ],
   "products": [
     {
-      "id": "enero2026",
-      "name": "Enero2026",
-      "images": [
-        "fanzines/enero2026.png"
-      ],
-      "description": "Fanzine DINA5, 28 pÃ¡ginas. RecopilaciÃ³n de carteles. EdiciÃ³n limitada. 12â¬.",
-      "price": 12,
-      "categories": [
-        "fanzines"
-      ],
-      "sold": false
-    },
-    {
       "id": "vals",
       "name": "Vals",
       "images": [
