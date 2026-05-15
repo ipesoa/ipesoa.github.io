@@ -11,26 +11,13 @@
   ],
   "products": [
     {
-      "id": "prisa12",
-      "name": "Prisa12",
-      "images": [
-        "carteles/prisa122.png"
-      ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
-      "categories": [
-        "carteles"
-      ],
-      "sold": false
-    },
-    {
       "id": "fe",
       "name": "Fe",
       "images": [
         "carteles/fe.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€..",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬..",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -42,8 +29,8 @@
       "images": [
         "carteles/desatender.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€..",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬..",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -55,8 +42,8 @@
       "images": [
         "carteles/festivalqueja.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -68,8 +55,8 @@
       "images": [
         "carteles/hyperdroga.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -81,8 +68,8 @@
       "images": [
         "carteles/sugerenciasuni.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -94,8 +81,8 @@
       "images": [
         "carteles/practicaempatia.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -107,8 +94,8 @@
       "images": [
         "carteles/deambular.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -120,8 +107,8 @@
       "images": [
         "carteles/conciertoscroll.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -133,8 +120,8 @@
       "images": [
         "carteles/penultimahoja.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -146,8 +133,8 @@
       "images": [
         "carteles/indiscutible.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -159,8 +146,8 @@
       "images": [
         "carteles/neobarrocas.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -172,8 +159,8 @@
       "images": [
         "carteles/poledance.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -185,8 +172,8 @@
       "images": [
         "carteles/CURSOIGNORAR.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -198,21 +185,21 @@
       "images": [
         "carteles/objetivosinvisibles.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
       "sold": false
     },
     {
-      "id": "perderseencompañia",
-      "name": "Perderseencompañia",
+      "id": "perderseencompaÃ±ia",
+      "name": "PerderseencompaÃ±ia",
       "images": [
-        "carteles/perderseencompañia.png"
+        "carteles/perderseencompaÃ±ia.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -224,8 +211,8 @@
       "images": [
         "carteles/descansartrabajando.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -237,8 +224,8 @@
       "images": [
         "carteles/elmentidero.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -250,8 +237,8 @@
       "images": [
         "carteles/experienciainmersiva.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -263,8 +250,8 @@
       "images": [
         "carteles/perrosenpelotas.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -276,8 +263,8 @@
       "images": [
         "carteles/carnaval.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -289,8 +276,8 @@
       "images": [
         "carteles/intuicionpuntillas.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -302,8 +289,8 @@
       "images": [
         "carteles/alquilervelas.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -315,8 +302,8 @@
       "images": [
         "carteles/hacercola.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -328,8 +315,8 @@
       "images": [
         "carteles/recordararena.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -341,8 +328,8 @@
       "images": [
         "carteles/horizontedepreguntas.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -354,8 +341,8 @@
       "images": [
         "carteles/casinada.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -367,8 +354,8 @@
       "images": [
         "carteles/gloriascroll.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -380,8 +367,8 @@
       "images": [
         "carteles/concursorelatos.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -393,8 +380,8 @@
       "images": [
         "carteles/adorno.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -406,8 +393,8 @@
       "images": [
         "carteles/lacan.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -419,8 +406,8 @@
       "images": [
         "carteles/socrates.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -432,8 +419,8 @@
       "images": [
         "carteles/sontag.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -445,8 +432,8 @@
       "images": [
         "carteles/puentescartel.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -458,8 +445,8 @@
       "images": [
         "carteles/weil.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -471,8 +458,8 @@
       "images": [
         "carteles/vals1.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 10.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 10,
       "categories": [
         "carteles"
       ],
@@ -484,8 +471,8 @@
       "images": [
         "carteles/vals2.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 10.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 10,
       "categories": [
         "carteles"
       ],
@@ -497,8 +484,8 @@
       "images": [
         "carteles/vals3.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 10.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 10,
       "categories": [
         "carteles"
       ],
@@ -510,8 +497,8 @@
       "images": [
         "carteles/triatlondebiles.png"
       ],
-      "description": "Impresión monocromática en papel offset 80 g. Tamaño DINA3 (29,7 × 42 cm). Edición limitada firmada a mano. 15€.",
-      "price": 15.0,
+      "description": "ImpresiÃ³n monocromÃ¡tica en papel offset 80 g. TamaÃ±o DINA3 (29,7 Ã 42 cm). EdiciÃ³n limitada firmada a mano. 15â¬.",
+      "price": 15,
       "categories": [
         "carteles"
       ],
@@ -523,8 +510,8 @@
       "images": [
         "fanzines/enero2026.png"
       ],
-      "description": "Fanzine DINA5, 28 páginas. Recopilación de carteles. Edición limitada. 12€.",
-      "price": 12.0,
+      "description": "Fanzine DINA5, 28 pÃ¡ginas. RecopilaciÃ³n de carteles. EdiciÃ³n limitada. 12â¬.",
+      "price": 12,
       "categories": [
         "fanzines"
       ],
@@ -536,8 +523,8 @@
       "images": [
         "fanzines/vals.png"
       ],
-      "description": "Fanzine DINA5, 28 páginas. archivo gráfico. Edición limitada. 10€.",
-      "price": 8.0,
+      "description": "Fanzine DINA5, 28 pÃ¡ginas. archivo grÃ¡fico. EdiciÃ³n limitada. 10â¬.",
+      "price": 8,
       "categories": [
         "fanzines"
       ],
@@ -549,8 +536,8 @@
       "images": [
         "fanzines/asuritmo.png"
       ],
-      "description": "Fanzine DINA5, 28 páginas. Inspiration mirror&run. Edición limitada. 12€.",
-      "price": 12.0,
+      "description": "Fanzine DINA5, 28 pÃ¡ginas. Inspiration mirror&run. EdiciÃ³n limitada. 12â¬.",
+      "price": 12,
       "categories": [
         "fanzines"
       ],
@@ -562,8 +549,8 @@
       "images": [
         "fanzines/puentes.png"
       ],
-      "description": "Fanzine Horizontal, 28 páginas. Recopilación de carteles. Edición limitada. 12€.",
-      "price": 12.0,
+      "description": "Fanzine Horizontal, 28 pÃ¡ginas. RecopilaciÃ³n de carteles. EdiciÃ³n limitada. 12â¬.",
+      "price": 12,
       "categories": [
         "fanzines"
       ],
