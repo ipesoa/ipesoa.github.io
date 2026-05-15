@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto - I.PESOA Editorial</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1><a href="index.html">I.PESOA</a></h1>
+    <h2>EDITORIAL</h2>
+</header>
+
+<nav class="main-nav">
+    <a href="index.html">SHOP</a>
+    <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" id="cat-toggle">Apartados</button>
+        <div class="nav-dropdown-menu" id="cat-menu"></div>
+    </div>
+    <a href="contacto.html">CONTACTO</a>
+</nav>
+
+<main>
+    <div class="product-detail" id="product-detail">
+        <!-- Top: imagen izquierda, info derecha -->
+        <div class="product-detail-top">
+            <div class="product-detail-gallery" id="gallery">
+                <!-- Carrusel o imagen única -->
+            </div>
+            <div class="product-detail-info" id="product-info">
+                <!-- Nombre, precio, categorías -->
+            </div>
+        </div>
+
+        <!-- Descripción debajo -->
+        <div class="product-detail-description" id="product-description"></div>
+
+        <!-- Formulario de compra -->
+        <div class="order-section" id="order-section">
+            <h4>Realizar pedido</h4>
+            <div class="order-form">
+                <div class="campo">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="campo">
+                    <label for="direccion">Dirección de envío</label>
+                    <textarea id="direccion" name="direccion" rows="3" required></textarea>
+                </div>
+                <div class="campo">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="button" id="btn-compra">Realizar compra</button>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">← Volver</a>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <p class="copyright">© 2026 ipesoa editorial. All rights reserved.</p>
+    <div class="social-links">
+        <a href="https://instagram.com/ipesoaeditorial" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@ipesoaeditorial" target="_blank">Tiktok</a>
+    </div>
+</footer>
+
+<script src="js/product.js"></script>
+</body>
+</html>

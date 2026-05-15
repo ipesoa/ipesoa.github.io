@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - I.PESOA Editorial</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+        h1 { font-size: 1.5em; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px; }
+        h2 { font-size: 0.9em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; color: #666; }
+        h3 { font-size: 1em; letter-spacing: 1px; text-transform: uppercase; margin: 20px 0 10px; }
+
+        /* Auth */
+        .auth-section {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .auth-section input {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            padding: 8px 10px;
+            border: 1px solid #000;
+            width: 300px;
+            margin-right: 10px;
+        }
+        .auth-section button, .btn {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            padding: 8px 16px;
+            border: 1px solid #000;
+            background: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+        }
+        .btn:hover, .auth-section button:hover {
+            background: #000;
+            color: #fff;
+        }
+        .btn-danger { border-color: #c00; color: #c00; }
+        .btn-danger:hover { background: #c00; color: #fff; }
+        .btn-small { padding: 4px 10px; font-size: 10px; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            border: 1px solid #000;
+            background: #fff;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .tab.active { background: #000; color: #fff; }
+        .tab + .tab { border-left: none; }
+
+        /* Panels */
+        .panel { display: none; background: #fff; border: 1px solid #000; padding: 20px; }
+        .panel.active { display: block; }
+
+        /* Product list */
+        .product-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .product-row img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border: 1px solid #000;
+        }
+        .product-row-info { flex: 1; }
+        .product-row-info .name {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .product-row-info .meta {
+            font-size: 10px;
+            color: #666;
+            margin-top: 3px;
+        }
+        .product-row-actions { display: flex; gap: 5px; flex-wrap: wrap; }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            padding: 8px 10px;
+            border: 1px solid #000;
+            width: 100%;
+            background: #fff;
+        }
+        .form-group textarea { resize: vertical; min-height: 60px; }
+
+        /* Category chips */
+        .chip {
+            display: inline-block;
+            padding: 3px 8px;
+            border: 1px solid #000;
+            font-size: 10px;
+            margin: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .chip .remove {
+            cursor: pointer;
+            margin-left: 5px;
+            color: #c00;
+            font-weight: bold;
+        }
+
+        /* Status */
+        .status-msg {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 12px;
+            border: 1px solid #000;
+        }
+        .status-msg.success { border-color: #090; color: #090; }
+        .status-msg.error { border-color: #c00; color: #c00; }
+
+        /* Image upload */
+        .image-preview {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .image-preview-item {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .image-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 1px solid #000;
+        }
+        .image-preview-item .remove-img {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            background: #c00;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hidden { display: none; }
+        .loading { opacity: 0.5; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+<h1>I.PESOA Admin</h1>
+<h2>Gestión de productos</h2>
+
+<!-- Auth -->
+<div class="auth-section" id="auth-section">
+    <label style="font-size:11px;text-transform:uppercase;letter-spacing:1px;">Token de GitHub:</label><br><br>
+    <input type="password" id="github-token" placeholder="ghp_...">
+    <button onclick="authenticate()">Conectar</button>
+    <div id="auth-status"></div>
+</div>
+
+<!-- Main admin (hidden until auth) -->
+<div id="admin-main" class="hidden">
+
+    <div class="tabs">
+        <div class="tab active" data-tab="products" onclick="switchTab('products')">Productos</div>
+        <div class="tab" data-tab="add" onclick="switchTab('add')">Añadir producto</div>
+        <div class="tab" data-tab="categories" onclick="switchTab('categories')">Categorías</div>
+    </div>
+
+    <!-- PRODUCTS LIST -->
+    <div class="panel active" id="panel-products">
+        <div id="product-list"></div>
+    </div>
+
+    <!-- ADD / EDIT PRODUCT -->
+    <div class="panel" id="panel-add">
+        <h3 id="form-title">Añadir producto</h3>
+        <input type="hidden" id="edit-id">
+
+        <div class="form-group">
+            <label>ID (identificador único, sin espacios)</label>
+            <input type="text" id="prod-id" placeholder="mi-producto">
+        </div>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" id="prod-name" placeholder="Nombre del producto">
+        </div>
+        <div class="form-group">
+            <label>Precio (€)</label>
+            <input type="number" id="prod-price" step="0.01" value="15.00">
+        </div>
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea id="prod-description" placeholder="Descripción del producto..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Categorías</label>
+            <div id="prod-categories-chips"></div>
+            <select id="prod-category-add" onchange="addCategoryToProduct()">
+                <option value="">Añadir categoría...</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Imágenes (subir archivos)</label>
+            <input type="file" id="prod-images" accept="image/*" multiple onchange="previewImages()">
+            <div class="image-preview" id="image-preview"></div>
+        </div>
+        <div class="form-group">
+            <label>Imágenes existentes (paths)</label>
+            <div id="existing-images"></div>
+        </div>
+
+        <br>
+        <button class="btn" onclick="saveProduct()">Guardar producto</button>
+        <button class="btn" onclick="resetForm()">Limpiar</button>
+        <div id="save-status"></div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="panel" id="panel-categories">
+        <h3>Categorías existentes</h3>
+        <div id="category-list"></div>
+        <br>
+        <div class="form-group">
+            <label>Nueva categoría</label>
+            <input type="text" id="new-cat-id" placeholder="ID (ej: posters)" style="width:45%;display:inline-block;margin-right:5px;">
+            <input type="text" id="new-cat-name" placeholder="Nombre (ej: Pósters)" style="width:45%;display:inline-block;">
+        </div>
+        <button class="btn" onclick="addCategory()">Añadir categoría</button>
+        <div id="cat-status"></div>
+    </div>
+
+</div>
+
+<script>
+const REPO_OWNER = 'ipesoa';
+const REPO_NAME = 'ipesoa.github.io';
+const DATA_PATH = 'data/products.json';
+
+let token = '';
+let storeData = { categories: [], products: [] };
+let fileSha = '';
+let selectedCategories = [];
+let imageFiles = []; // new files to upload
+let existingImagePaths = []; // paths already in the repo
+
+// =====================
+// AUTH
+// =====================
+async function authenticate() {
+    token = document.getElementById('github-token').value.trim();
+    if (!token) return;
+
+    try {
+        const res = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`);
+        if (res.ok) {
+            document.getElementById('auth-section').innerHTML = '<p style="font-size:12px;color:#090;">✓ Conectado al repositorio</p>';
+            document.getElementById('admin-main').classList.remove('hidden');
+            await loadData();
+        } else {
+            showStatus('auth-status', 'Token inválido o sin permisos', 'error');
+        }
+    } catch (e) {
+        showStatus('auth-status', 'Error de conexión', 'error');
+    }
+}
+
+function ghFetch(url, options = {}) {
+    return fetch(url, {
+        ...options,
+        headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            ...(options.headers || {})
+        }
+    });
+}
+
+// =====================
+// DATA LOADING
+// =====================
+async function loadData() {
+    try {
+        const res = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}`);
+        if (res.ok) {
+            const file = await res.json();
+            fileSha = file.sha;
+            const content = atob(file.content.replace(/\n/g, ''));
+            storeData = JSON.parse(content);
+        } else {
+            // File doesn't exist yet, start fresh
+            storeData = { categories: [], products: [] };
+            fileSha = '';
+        }
+    } catch (e) {
+        storeData = { categories: [], products: [] };
+        fileSha = '';
+    }
+
+    renderProductList();
+    renderCategoryList();
+    renderCategorySelect();
+}
+
+async function saveData(message) {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(storeData, null, 2))));
+    const body = {
+        message: message || 'Update products.json',
+        content: content
+    };
+    if (fileSha) body.sha = fileSha;
+
+    const res = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        fileSha = data.content.sha;
+        return true;
+    }
+    return false;
+}
+
+// =====================
+// IMAGE UPLOAD TO GITHUB
+// =====================
+async function uploadImage(file, folder) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+            const base64 = reader.result.split(',')[1];
+            const path = `${folder}/${file.name}`;
+
+            // Check if file exists
+            let sha = '';
+            try {
+                const check = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`);
+                if (check.ok) {
+                    const existing = await check.json();
+                    sha = existing.sha;
+                }
+            } catch(e) {}
+
+            const body = {
+                message: `Upload ${path}`,
+                content: base64
+            };
+            if (sha) body.sha = sha;
+
+            const res = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+
+            if (res.ok) resolve(path);
+            else reject(new Error(`Failed to upload ${path}`));
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+// =====================
+// TABS
+// =====================
+function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tab}`));
+    if (tab === 'add' && !document.getElementById('edit-id').value) resetForm();
+}
+
+// =====================
+// PRODUCT LIST
+// =====================
+function renderProductList() {
+    const list = document.getElementById('product-list');
+    if (storeData.products.length === 0) {
+        list.innerHTML = '<p style="font-size:12px;color:#666;">No hay productos.</p>';
+        return;
+    }
+
+    list.innerHTML = storeData.products.map(p => `
+        <div class="product-row">
+            <img src="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${p.images[0]}" alt="${p.name}" onerror="this.style.background='#eee'">
+            <div class="product-row-info">
+                <div class="name">${p.name}</div>
+                <div class="meta">${p.price.toFixed(2)}€ · ${p.categories.join(', ')} ${p.sold ? '· <strong style="color:#c00">VENDIDO</strong>' : ''}</div>
+            </div>
+            <div class="product-row-actions">
+                <button class="btn btn-small" onclick="editProduct('${p.id}')">Editar</button>
+                <button class="btn btn-small" onclick="toggleSold('${p.id}')">${p.sold ? 'Disponible' : 'Vendido'}</button>
+                <button class="btn btn-small btn-danger" onclick="deleteProduct('${p.id}')">Eliminar</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// =====================
+// PRODUCT CRUD
+// =====================
+function editProduct(id) {
+    const p = storeData.products.find(x => x.id === id);
+    if (!p) return;
+
+    document.getElementById('edit-id').value = p.id;
+    document.getElementById('prod-id').value = p.id;
+    document.getElementById('prod-id').disabled = true;
+    document.getElementById('prod-name').value = p.name;
+    document.getElementById('prod-price').value = p.price;
+    document.getElementById('prod-description').value = p.description;
+    document.getElementById('form-title').textContent = 'Editar producto';
+
+    selectedCategories = [...p.categories];
+    renderSelectedCategories();
+
+    existingImagePaths = [...p.images];
+    renderExistingImages();
+
+    imageFiles = [];
+    document.getElementById('image-preview').innerHTML = '';
+    document.getElementById('prod-images').value = '';
+
+    switchTab('add');
+}
+
+async function toggleSold(id) {
+    const p = storeData.products.find(x => x.id === id);
+    if (!p) return;
+    p.sold = !p.sold;
+
+    const ok = await saveData(`Toggle sold: ${id}`);
+    if (ok) renderProductList();
+    else alert('Error al guardar');
+}
+
+async function deleteProduct(id) {
+    if (!confirm(`¿Eliminar "${id}"?`)) return;
+    storeData.products = storeData.products.filter(x => x.id !== id);
+    const ok = await saveData(`Delete product: ${id}`);
+    if (ok) renderProductList();
+    else alert('Error al guardar');
+}
+
+async function saveProduct() {
+    const editId = document.getElementById('edit-id').value;
+    const id = document.getElementById('prod-id').value.trim();
+    const name = document.getElementById('prod-name').value.trim();
+    const price = parseFloat(document.getElementById('prod-price').value);
+    const description = document.getElementById('prod-description').value.trim();
+
+    if (!id || !name || isNaN(price)) {
+        showStatus('save-status', 'Completa ID, nombre y precio', 'error');
+        return;
+    }
+
+    // Check duplicate ID (only for new products)
+    if (!editId && storeData.products.some(p => p.id === id)) {
+        showStatus('save-status', 'Ya existe un producto con ese ID', 'error');
+        return;
+    }
+
+    showStatus('save-status', 'Guardando...', '');
+
+    // Upload new images
+    let uploadedPaths = [];
+    const folder = 'products'; // New products go to products/ folder
+
+    for (const file of imageFiles) {
+        try {
+            const path = await uploadImage(file, folder);
+            uploadedPaths.push(path);
+        } catch (e) {
+            showStatus('save-status', `Error subiendo ${file.name}`, 'error');
+            return;
+        }
+    }
+
+    const allImages = [...existingImagePaths, ...uploadedPaths];
+
+    if (allImages.length === 0) {
+        showStatus('save-status', 'Añade al menos una imagen', 'error');
+        return;
+    }
+
+    const product = {
+        id: id,
+        name: name,
+        images: allImages,
+        description: description,
+        price: price,
+        categories: [...selectedCategories],
+        sold: false
+    };
+
+    if (editId) {
+        // Editing existing
+        const idx = storeData.products.findIndex(p => p.id === editId);
+        if (idx >= 0) {
+            product.sold = storeData.products[idx].sold;
+            storeData.products[idx] = product;
+        }
+    } else {
+        storeData.products.push(product);
+    }
+
+    const ok = await saveData(editId ? `Update product: ${id}` : `Add product: ${id}`);
+    if (ok) {
+        showStatus('save-status', '✓ Producto guardado', 'success');
+        resetForm();
+        renderProductList();
+        switchTab('products');
+    } else {
+        showStatus('save-status', 'Error al guardar en GitHub', 'error');
+    }
+}
+
+function resetForm() {
+    document.getElementById('edit-id').value = '';
+    document.getElementById('prod-id').value = '';
+    document.getElementById('prod-id').disabled = false;
+    document.getElementById('prod-name').value = '';
+    document.getElementById('prod-price').value = '15.00';
+    document.getElementById('prod-description').value = '';
+    document.getElementById('form-title').textContent = 'Añadir producto';
+    selectedCategories = [];
+    renderSelectedCategories();
+    existingImagePaths = [];
+    renderExistingImages();
+    imageFiles = [];
+    document.getElementById('image-preview').innerHTML = '';
+    document.getElementById('prod-images').value = '';
+    document.getElementById('save-status').innerHTML = '';
+}
+
+// =====================
+// CATEGORIES
+// =====================
+function renderCategoryList() {
+    const list = document.getElementById('category-list');
+    if (storeData.categories.length === 0) {
+        list.innerHTML = '<p style="font-size:12px;color:#666;">No hay categorías.</p>';
+        return;
+    }
+
+    list.innerHTML = storeData.categories.map(c => {
+        const count = storeData.products.filter(p => p.categories.includes(c.id)).length;
+        return `
+            <div class="product-row">
+                <div class="product-row-info">
+                    <div class="name">${c.name}</div>
+                    <div class="meta">ID: ${c.id} · ${count} producto(s)</div>
+                </div>
+                <div class="product-row-actions">
+                    <button class="btn btn-small btn-danger" onclick="deleteCategory('${c.id}')">Eliminar</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+async function addCategory() {
+    const id = document.getElementById('new-cat-id').value.trim().toLowerCase().replace(/\s+/g, '-');
+    const name = document.getElementById('new-cat-name').value.trim();
+
+    if (!id || !name) {
+        showStatus('cat-status', 'Completa ID y nombre', 'error');
+        return;
+    }
+
+    if (storeData.categories.some(c => c.id === id)) {
+        showStatus('cat-status', 'Ya existe esa categoría', 'error');
+        return;
+    }
+
+    storeData.categories.push({ id, name });
+    const ok = await saveData(`Add category: ${id}`);
+    if (ok) {
+        showStatus('cat-status', '✓ Categoría añadida', 'success');
+        document.getElementById('new-cat-id').value = '';
+        document.getElementById('new-cat-name').value = '';
+        renderCategoryList();
+        renderCategorySelect();
+    } else {
+        showStatus('cat-status', 'Error al guardar', 'error');
+    }
+}
+
+async function deleteCategory(id) {
+    if (!confirm(`¿Eliminar categoría "${id}"? Los productos seguirán existiendo.`)) return;
+
+    storeData.categories = storeData.categories.filter(c => c.id !== id);
+    // Remove from products
+    storeData.products.forEach(p => {
+        p.categories = p.categories.filter(c => c !== id);
+    });
+
+    const ok = await saveData(`Delete category: ${id}`);
+    if (ok) {
+        renderCategoryList();
+        renderCategorySelect();
+        renderProductList();
+    }
+}
+
+function renderCategorySelect() {
+    const select = document.getElementById('prod-category-add');
+    select.innerHTML = '<option value="">Añadir categoría...</option>';
+    storeData.categories.forEach(c => {
+        select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+    });
+}
+
+// Category chips for product form
+function addCategoryToProduct() {
+    const select = document.getElementById('prod-category-add');
+    const val = select.value;
+    if (!val || selectedCategories.includes(val)) {
+        select.value = '';
+        return;
+    }
+    selectedCategories.push(val);
+    select.value = '';
+    renderSelectedCategories();
+}
+
+function removeCategoryFromProduct(id) {
+    selectedCategories = selectedCategories.filter(c => c !== id);
+    renderSelectedCategories();
+}
+
+function renderSelectedCategories() {
+    const container = document.getElementById('prod-categories-chips');
+    container.innerHTML = selectedCategories.map(id => {
+        const cat = storeData.categories.find(c => c.id === id);
+        return `<span class="chip">${cat ? cat.name : id} <span class="remove" onclick="removeCategoryFromProduct('${id}')">×</span></span>`;
+    }).join('');
+}
+
+// =====================
+// IMAGE HANDLING
+// =====================
+function previewImages() {
+    const input = document.getElementById('prod-images');
+    const preview = document.getElementById('image-preview');
+    const newFiles = Array.from(input.files);
+    imageFiles = [...imageFiles, ...newFiles];
+
+    newFiles.forEach((file, i) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const idx = imageFiles.indexOf(file);
+            const item = document.createElement('div');
+            item.className = 'image-preview-item';
+            item.innerHTML = `
+                <img src="${e.target.result}">
+                <button class="remove-img" onclick="removeNewImage(${idx}, this.parentElement)">×</button>
+            `;
+            preview.appendChild(item);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function removeNewImage(index, element) {
+    imageFiles.splice(index, 1);
+    element.remove();
+}
+
+function renderExistingImages() {
+    const container = document.getElementById('existing-images');
+    container.innerHTML = existingImagePaths.map((path, i) => `
+        <div class="image-preview-item" style="display:inline-block;vertical-align:top;margin:5px;">
+            <img src="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/${path}" style="width:80px;height:80px;object-fit:cover;border:1px solid #000;" onerror="this.style.background='#eee'">
+            <br>
+            <button class="btn btn-small btn-danger" onclick="removeExistingImage(${i})">Quitar</button>
+        </div>
+    `).join('');
+}
+
+function removeExistingImage(index) {
+    existingImagePaths.splice(index, 1);
+    renderExistingImages();
+}
+
+// =====================
+// UTILS
+// =====================
+function showStatus(elementId, msg, type) {
+    const el = document.getElementById(elementId);
+    el.innerHTML = `<div class="status-msg ${type || ''}">${msg}</div>`;
+    if (type === 'success') setTimeout(() => el.innerHTML = '', 3000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - I.PESOA Editorial</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1><a href="index.html">I.PESOA</a></h1>
+    <h2>EDITORIAL</h2>
+</header>
+
+<nav class="main-nav">
+    <a href="index.html">SHOP</a>
+    <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle" id="cat-toggle">Apartados</button>
+        <div class="nav-dropdown-menu" id="cat-menu"></div>
+    </div>
+    <a href="contacto.html">CONTACTO</a>
+</nav>
+
+<main>
+    <div class="contact-section">
+        <h3>Contacto</h3>
+        <p>ediciones impublicables</p>
+        <br>
+        <p>
+            <a href="https://instagram.com/ipesoaeditorial" target="_blank">Instagram: @ipesoaeditorial</a>
+        </p>
+        <p>
+            <a href="https://tiktok.com/@ipesoaeditorial" target="_blank">TikTok: @ipesoaeditorial</a>
+        </p>
+        <p>
+            <a href="mailto:312rimini@gmail.com">312rimini@gmail.com</a>
+        </p>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <p class="copyright">© 2026 ipesoa editorial. All rights reserved.</p>
+    <div class="social-links">
+        <a href="https://instagram.com/ipesoaeditorial" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@ipesoaeditorial" target="_blank">Tiktok</a>
+    </div>
+</footer>
+
+<script>
+// Dropdown nav
+const catToggle = document.getElementById('cat-toggle');
+const catMenu = document.getElementById('cat-menu');
+
+fetch('data/products.json')
+    .then(res => res.json())
+    .then(data => {
+        const allLink = document.createElement('a');
+        allLink.href = 'index.html';
+        allLink.textContent = 'Todo';
+        catMenu.appendChild(allLink);
+
+        data.categories.forEach(cat => {
+            const a = document.createElement('a');
+            a.href = `index.html#cat=${cat.id}`;
+            a.textContent = cat.name;
+            catMenu.appendChild(a);
+        });
+    });
+
+catToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    catMenu.classList.toggle('open');
+});
+document.addEventListener('click', () => catMenu.classList.remove('open'));
+</script>
+</body>
+</html>
