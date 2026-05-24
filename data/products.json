@@ -9,5 +9,19 @@
       "name": "ToteBags"
     }
   ],
-  "products": []
+  "products": [
+    {
+      "id": "beta0.1",
+      "name": "betaimagen",
+      "images": [
+        "products/1779649547218_Sin_t_tulo-12.png"
+      ],
+      "description": "descripcion\ndel\ntexto\nbeta",
+      "price": 15,
+      "categories": [
+        "libros"
+      ],
+      "sold": false
+    }
+  ]
 }
