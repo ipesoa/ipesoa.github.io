@@ -3,6 +3,10 @@
     {
       "id": "libros",
       "name": "Libros"
+    },
+    {
+      "id": "totebags",
+      "name": "ToteBags"
     }
   ],
   "products": []
