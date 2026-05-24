@@ -1,4 +1,9 @@
 {
-  "categories": [],
+  "categories": [
+    {
+      "id": "libros",
+      "name": "Libros"
+    }
+  ],
   "products": []
 }
