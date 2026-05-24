@@ -1,10 +1,6 @@
 {
   "categories": [
     {
-      "id": "carteles",
-      "name": "Carteles"
-    },
-    {
       "id": "fanzines",
       "name": "Fanzines"
     }
