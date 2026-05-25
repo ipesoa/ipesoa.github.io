@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - I.PESOA Editorial</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            color: #000;
+        }
+        h1 { font-size: 1.5em; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2px; }
+        h2 { font-size: 0.9em; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; color: #666; font-weight: normal; }
+        h3 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin: 20px 0 10px; }
+
+        /* Auth */
+        .auth-section {
+            border: 1px solid #000;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .auth-section label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .auth-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .auth-row input {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            padding: 8px 10px;
+            border: 1px solid #000;
+            flex: 1;
+            min-width: 200px;
+        }
+        .auth-remember {
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+        }
+        .auth-remember input[type="checkbox"] {
+            accent-color: #000;
+        }
+
+        /* Buttons */
+        .btn {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            padding: 8px 16px;
+            border: 1px solid #000;
+            background: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.15s;
+            color: #000;
+        }
+        .btn:hover { background: #000; color: #fff; }
+        .btn:active { transform: scale(0.97); }
+        .btn-danger { border-color: #c00; color: #c00; }
+        .btn-danger:hover { background: #c00; color: #fff; border-color: #c00; }
+        .btn-small { padding: 4px 10px; font-size: 10px; }
+        .btn-icon { padding: 4px 8px; font-size: 14px; line-height: 1; }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tab {
+            padding: 10px 20px;
+            border: 1px solid #000;
+            background: #fff;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.15s;
+            color: #000;
+        }
+        .tab:hover { background: #eee; }
+        .tab.active { background: #000; color: #fff; }
+        .tab + .tab { border-left: none; }
+
+        /* Panels */
+        .panel { display: none; border: 1px solid #000; padding: 20px; }
+        .panel.active { display: block; }
+
+        /* Product list */
+        .product-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            transition: background 0.1s;
+        }
+        .product-row.dragging {
+            opacity: 0.4;
+        }
+        .product-row.drag-over {
+            border-top: 2px solid #000;
+        }
+        .product-row img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border: 1px solid #000;
+        }
+        .product-row-info { flex: 1; min-width: 0; }
+        .product-row-info .name {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .product-row-info .meta {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+        }
+        .product-row-actions { display: flex; gap: 4px; flex-wrap: wrap; flex-shrink: 0; }
+        .drag-handle {
+            cursor: grab;
+            font-size: 16px;
+            color: #999;
+            padding: 0 4px;
+            user-select: none;
+            flex-shrink: 0;
+        }
+        .drag-handle:active { cursor: grabbing; }
+
+        /* Reorder info */
+        .reorder-bar {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #000;
+            background: #f9f9f9;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .reorder-bar.visible { display: flex; }
+
+        /* Form */
+        .form-group { margin-bottom: 12px; }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            padding: 8px 10px;
+            border: 1px solid #000;
+            width: 100%;
+            background: #fff;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-width: 2px;
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+
+        /* Category chips */
+        .chip {
+            display: inline-block;
+            padding: 3px 8px;
+            border: 1px solid #000;
+            font-size: 10px;
+            margin: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .chip .remove {
+            cursor: pointer;
+            margin-left: 5px;
+            color: #c00;
+            font-weight: bold;
+        }
+
+        /* Status */
+        .status-msg {
+            padding: 8px 12px;
+            margin: 8px 0;
+            font-size: 11px;
+            border: 1px solid #000;
+            letter-spacing: 0.5px;
+        }
+        .status-msg.success { border-color: #090; color: #090; }
+        .status-msg.error { border-color: #c00; color: #c00; }
+
+        /* Image upload drop zone */
+        .drop-zone {
+            border: 2px dashed #ccc;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 5px;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #000;
+            background: #fafafa;
+        }
+        .drop-zone-text {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+        }
+        .drop-zone-text strong { color: #000; }
+        .drop-zone input { display: none; }
+
+        /* Image previews */
+        .image-grid {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .image-thumb {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .image-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 1px solid #000;
+        }
+        .image-thumb .remove-img {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 18px;
+            height: 18px;
+            background: #c00;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .image-thumb .remove-img:hover { background: #900; }
+
+        /* Loading overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .loading-overlay.visible { display: flex; }
+        .loading-text {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 1.2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .progress-bar {
+            width: 200px;
+            height: 2px;
+            background: #eee;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #000;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .hidden { display: none; }
+
+        /* Disconnect */
+        .connected-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            border: 1px solid #090;
+            margin-bottom: 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .connected-bar .dot {
+            width: 6px;
+            height: 6px;
+            background: #090;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        /* Filter bar */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-bar select {
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            padding: 5px 8px;
+            border: 1px solid #000;
+            background: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .product-count {
+            font-size: 10px;
+            color: #666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .product-row { flex-wrap: wrap; gap: 8px; }
+            .product-row-actions { width: 100%; justify-content: flex-end; }
+            .auth-row input { min-width: 150px; }
+            .tab { padding: 8px 12px; font-size: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>I.PESOA</h1>
+<h2>Panel de administración</h2>
+
+<!-- Loading overlay -->
+<div class="loading-overlay" id="loading-overlay">
+    <div class="loading-text" id="loading-text">Guardando...</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+</div>
+
+<!-- Auth -->
+<div id="auth-section" class="auth-section">
+    <label>Token de GitHub</label>
+    <div class="auth-row">
+        <input type="password" id="github-token" placeholder="ghp_...">
+        <button class="btn" onclick="authenticate()">Conectar</button>
+    </div>
+    <label class="auth-remember">
+        <input type="checkbox" id="remember-token" checked> Recordar token en este navegador
+    </label>
+    <div id="auth-status"></div>
+</div>
+
+<!-- Connected bar (shown after auth) -->
+<div id="connected-bar" class="connected-bar hidden">
+    <span><span class="dot"></span> Conectado al repositorio</span>
+    <button class="btn btn-small" onclick="disconnect()">Desconectar</button>
+</div>
+
+<!-- Main admin (hidden until auth) -->
+<div id="admin-main" class="hidden">
+
+    <div class="tabs">
+        <div class="tab active" data-tab="products" onclick="switchTab('products')">Productos</div>
+        <div class="tab" data-tab="add" onclick="switchTab('add')">Añadir</div>
+        <div class="tab" data-tab="categories" onclick="switchTab('categories')">Categorías</div>
+    </div>
+
+    <!-- PRODUCTS LIST -->
+    <div class="panel active" id="panel-products">
+        <div class="filter-bar">
+            <select id="filter-category" onchange="renderProductList()">
+                <option value="all">Todas las categorías</option>
+            </select>
+            <span class="product-count" id="product-count"></span>
+        </div>
+        <div class="reorder-bar" id="reorder-bar">
+            <span>Orden modificado</span>
+            <div style="display:flex;gap:5px;">
+                <button class="btn btn-small" onclick="saveOrder()">Guardar orden</button>
+                <button class="btn btn-small" onclick="cancelReorder()">Cancelar</button>
+            </div>
+        </div>
+        <div id="product-list"></div>
+    </div>
+
+    <!-- ADD / EDIT PRODUCT -->
+    <div class="panel" id="panel-add">
+        <h3 id="form-title">Añadir producto</h3>
+        <input type="hidden" id="edit-id">
+
+        <div class="form-group">
+            <label>ID (sin espacios, único)</label>
+            <input type="text" id="prod-id" placeholder="mi-producto">
+        </div>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" id="prod-name" placeholder="Nombre del producto">
+        </div>
+        <div class="form-group">
+            <label>Precio (€)</label>
+            <input type="number" id="prod-price" step="0.01" value="15.00">
+        </div>
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea id="prod-description" placeholder="Descripción del producto..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Pegatina NEW!</label>
+            <select id="prod-sticker" style="font-family:Arial;font-size:12px;padding:8px 10px;border:1px solid #000;width:100%;">
+                <option value="">Sin pegatina</option>
+                <option value="green" style="background:#39ff14;">🟢 Verde fluor</option>
+                <option value="yellow" style="background:#ffff00;">🟡 Amarillo fluor</option>
+                <option value="red" style="background:#ff3131;color:#fff;">🔴 Rojo fluor</option>
+                <option value="blue" style="background:#00cfff;">🔵 Azul fluor</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Categorías</label>
+            <div id="prod-categories-chips"></div>
+            <select id="prod-category-add" onchange="addCategoryToProduct()">
+                <option value="">Añadir categoría...</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Imágenes</label>
+            <div class="drop-zone" id="drop-zone">
+                <div class="drop-zone-text">
+                    <strong>Arrastra imágenes aquí</strong><br>o haz clic para seleccionar
+                </div>
+                <input type="file" id="prod-images" accept="image/*" multiple>
+            </div>
+            <div class="image-grid" id="image-preview"></div>
+        </div>
+        <div class="form-group">
+            <div class="image-grid" id="existing-images"></div>
+        </div>
+
+        <br>
+        <button class="btn" onclick="saveProduct()">Guardar producto</button>
+        <button class="btn" onclick="resetForm()" style="margin-left:5px;">Limpiar</button>
+        <div id="save-status"></div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="panel" id="panel-categories">
+        <h3>Categorías existentes</h3>
+        <div id="category-list"></div>
+        <br>
+        <h3>Nueva categoría</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input type="text" id="new-cat-id" placeholder="ID (ej: posters)" style="font-family:Arial;font-size:12px;padding:8px 10px;border:1px solid #000;flex:1;min-width:120px;">
+            <input type="text" id="new-cat-name" placeholder="Nombre (ej: Pósters)" style="font-family:Arial;font-size:12px;padding:8px 10px;border:1px solid #000;flex:1;min-width:120px;">
+            <button class="btn" onclick="addCategory()">Añadir</button>
+        </div>
+        <div id="cat-status"></div>
+    </div>
+
+</div>
+
+<script>
+const REPO_OWNER = 'ipesoa';
+const REPO_NAME = 'ipesoa.github.io';
+const DATA_PATH = 'data/products.json';
+const TOKEN_KEY = 'ipesoa_admin_token';
+
+let token = '';
+let storeData = { categories: [], products: [] };
+let originalOrder = []; // for cancel reorder
+let fileSha = '';
+let selectedCategories = [];
+let imageFiles = [];
+let existingImagePaths = [];
+let orderChanged = false;
+
+// =====================
+// INIT — check saved token
+// =====================
+(function init() {
+    const saved = localStorage.getItem(TOKEN_KEY);
+    if (saved) {
+        document.getElementById('github-token').value = saved;
+        document.getElementById('remember-token').checked = true;
+        authenticate();
+    }
+})();
+
+// =====================
+// AUTH
+// =====================
+async function authenticate() {
+    token = document.getElementById('github-token').value.trim();
+    if (!token) return;
+
+    try {
+        const res = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`);
+        if (res.ok) {
+            // Save token if checkbox checked
+            if (document.getElementById('remember-token').checked) {
+                localStorage.setItem(TOKEN_KEY, token);
+            }
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('connected-bar').classList.remove('hidden');
+            document.getElementById('admin-main').classList.remove('hidden');
+            await loadData();
+        } else {
+            showStatus('auth-status', 'Token inválido o sin permisos', 'error');
+        }
+    } catch (e) {
+        showStatus('auth-status', 'Error de conexión', 'error');
+    }
+}
+
+function disconnect() {
+    localStorage.removeItem(TOKEN_KEY);
+    token = '';
+    document.getElementById('auth-section').classList.remove('hidden');
+    document.getElementById('connected-bar').classList.add('hidden');
+    document.getElementById('admin-main').classList.add('hidden');
+    document.getElementById('github-token').value = '';
+}
+
+function ghFetch(url, options = {}) {
+    return fetch(url, {
+        ...options,
+        headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            ...(options.headers || {})
+        }
+    });
+}
+
+// =====================
+// LOADING OVERLAY
+// =====================
+function showLoading(text, progress) {
+    const overlay = document.getElementById('loading-overlay');
+    document.getElementById('loading-text').textContent = text || 'Guardando...';
+    document.getElementById('progress-fill').style.width = (progress || 0) + '%';
+    overlay.classList.add('visible');
+}
+function updateLoading(text, progress) {
+    if (text) document.getElementById('loading-text').textContent = text;
+    if (progress !== undefined) document.getElementById('progress-fill').style.width = progress + '%';
+}
+function hideLoading() {
+    document.getElementById('loading-overlay').classList.remove('visible');
+}
+
+// =====================
+// DATA
+// =====================
+async function loadData() {
+    try {
+        const res = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}`);
+        if (res.ok) {
+            const file = await res.json();
+            fileSha = file.sha;
+            const content = atob(file.content.replace(/\n/g, ''));
+            storeData = JSON.parse(content);
+        } else {
+            storeData = { categories: [], products: [] };
+            fileSha = '';
+        }
+    } catch (e) {
+        storeData = { categories: [], products: [] };
+        fileSha = '';
+    }
+
+    originalOrder = storeData.products.map(p => p.id);
+    renderProductList();
+    renderCategoryList();
+    renderCategorySelect();
+    renderFilterCategories();
+}
+
+async function saveData(message) {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(storeData, null, 2))));
+    const body = { message: message || 'Update products.json', content };
+    if (fileSha) body.sha = fileSha;
+
+    const res = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_PATH}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        fileSha = data.content.sha;
+        return true;
+    }
+    return false;
+}
+
+// =====================
+// IMAGE UPLOAD
+// =====================
+async function uploadImage(file, folder) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+            const base64 = reader.result.split(',')[1];
+            // sanitize filename
+            const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+            const timestamp = Date.now();
+            const path = `${folder}/${timestamp}_${safeName}`;
+
+            let sha = '';
+            try {
+                const check = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`);
+                if (check.ok) {
+                    const existing = await check.json();
+                    sha = existing.sha;
+                }
+            } catch(e) {}
+
+            const body = { message: `Upload ${path}`, content: base64 };
+            if (sha) body.sha = sha;
+
+            const res = await ghFetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+
+            if (res.ok) resolve(path);
+            else reject(new Error(`Error subiendo ${path}`));
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+// =====================
+// TABS
+// =====================
+function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === `panel-${tab}`));
+    if (tab === 'add' && !document.getElementById('edit-id').value) resetForm();
+}
+
+// =====================
+// PRODUCT LIST + DRAG REORDER
+// =====================
+function renderProductList() {
+    const list = document.getElementById('product-list');
+    const filter = document.getElementById('filter-category').value;
+
+    let filtered = storeData.products;
+    if (filter !== 'all') {
+        filtered = storeData.products.filter(p => p.categories.includes(filter));
+    }
+
+    document.getElementById('product-count').textContent = `${filtered.length} producto${filtered.length !== 1 ? 's' : ''}`;
+
+    if (filtered.length === 0) {
+        list.innerHTML = '<p style="font-size:12px;color:#666;padding:20px 0;">No hay productos.</p>';
+        return;
+    }
+
+    list.innerHTML = filtered.map((p, i) => {
+        const imgSrc = p.images && p.images.length > 0
+            ? p.images[0]
+            : '';
+        const catNames = p.categories.map(cid => {
+            const cat = storeData.categories.find(c => c.id === cid);
+            return cat ? cat.name : cid;
+        }).join(', ');
+
+        return `
+            <div class="product-row" draggable="true" data-id="${p.id}" data-index="${i}">
+                <span class="drag-handle" title="Arrastrar para reordenar">⠿</span>
+                <img src="${imgSrc}" alt="${p.name}" onerror="this.style.background='#eee';this.alt='?'">
+                <div class="product-row-info">
+                    <div class="name">${p.name}</div>
+                    <div class="meta">${p.price.toFixed(2)}€ · ${catNames || 'sin categoría'} ${p.sold ? '· <b style="color:#c00">VENDIDO</b>' : ''}${p.sticker ? ` · <b style="color:${p.sticker === 'green' ? '#090' : p.sticker === 'red' ? '#c00' : p.sticker === 'blue' ? '#09c' : '#a90'}">NEW!</b>` : ''}</div>
+                </div>
+                <div class="product-row-actions">
+                    ${filter === 'all' ? `
+                    <button class="btn btn-small btn-icon" onclick="moveProduct('${p.id}', -1)" title="Subir">↑</button>
+                    <button class="btn btn-small btn-icon" onclick="moveProduct('${p.id}', 1)" title="Bajar">↓</button>
+                    ` : ''}
+                    <button class="btn btn-small" onclick="editProduct('${p.id}')">Editar</button>
+                    <button class="btn btn-small" onclick="toggleSold('${p.id}')">${p.sold ? 'Disponible' : 'Vendido'}</button>
+                    <button class="btn btn-small btn-danger" onclick="deleteProduct('${p.id}')">✕</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    // Drag & drop (only when showing all)
+    if (filter === 'all') setupDragAndDrop();
+}
+
+function setupDragAndDrop() {
+    const rows = document.querySelectorAll('.product-row[draggable]');
+    let draggedId = null;
+
+    rows.forEach(row => {
+        row.addEventListener('dragstart', (e) => {
+            draggedId = row.dataset.id;
+            row.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+
+        row.addEventListener('dragend', () => {
+            row.classList.remove('dragging');
+            document.querySelectorAll('.product-row').forEach(r => r.classList.remove('drag-over'));
+        });
+
+        row.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            row.classList.add('drag-over');
+        });
+
+        row.addEventListener('dragleave', () => {
+            row.classList.remove('drag-over');
+        });
+
+        row.addEventListener('drop', (e) => {
+            e.preventDefault();
+            row.classList.remove('drag-over');
+            const targetId = row.dataset.id;
+            if (draggedId && draggedId !== targetId) {
+                reorderProducts(draggedId, targetId);
+            }
+        });
+    });
+}
+
+function reorderProducts(fromId, toId) {
+    const fromIdx = storeData.products.findIndex(p => p.id === fromId);
+    const toIdx = storeData.products.findIndex(p => p.id === toId);
+    if (fromIdx < 0 || toIdx < 0) return;
+
+    const [item] = storeData.products.splice(fromIdx, 1);
+    storeData.products.splice(toIdx, 0, item);
+    orderChanged = true;
+    document.getElementById('reorder-bar').classList.add('visible');
+    renderProductList();
+}
+
+function moveProduct(id, direction) {
+    const idx = storeData.products.findIndex(p => p.id === id);
+    const newIdx = idx + direction;
+    if (newIdx < 0 || newIdx >= storeData.products.length) return;
+
+    const [item] = storeData.products.splice(idx, 1);
+    storeData.products.splice(newIdx, 0, item);
+    orderChanged = true;
+    document.getElementById('reorder-bar').classList.add('visible');
+    renderProductList();
+}
+
+async function saveOrder() {
+    showLoading('Guardando orden...');
+    const ok = await saveData('Reorder products');
+    hideLoading();
+    if (ok) {
+        orderChanged = false;
+        originalOrder = storeData.products.map(p => p.id);
+        document.getElementById('reorder-bar').classList.remove('visible');
+    } else {
+        alert('Error al guardar el orden');
+    }
+}
+
+function cancelReorder() {
+    // Restore original order
+    const reordered = [];
+    originalOrder.forEach(id => {
+        const p = storeData.products.find(x => x.id === id);
+        if (p) reordered.push(p);
+    });
+    // Add any new products not in original
+    storeData.products.forEach(p => {
+        if (!originalOrder.includes(p.id)) reordered.push(p);
+    });
+    storeData.products = reordered;
+    orderChanged = false;
+    document.getElementById('reorder-bar').classList.remove('visible');
+    renderProductList();
+}
+
+// =====================
+// PRODUCT CRUD
+// =====================
+function editProduct(id) {
+    const p = storeData.products.find(x => x.id === id);
+    if (!p) return;
+
+    document.getElementById('edit-id').value = p.id;
+    document.getElementById('prod-id').value = p.id;
+    document.getElementById('prod-id').disabled = true;
+    document.getElementById('prod-name').value = p.name;
+    document.getElementById('prod-price').value = p.price;
+    document.getElementById('prod-description').value = p.description || '';
+    document.getElementById('prod-sticker').value = p.sticker || '';
+    document.getElementById('form-title').textContent = `Editar: ${p.name}`;
+
+    selectedCategories = [...(p.categories || [])];
+    renderSelectedCategories();
+
+    existingImagePaths = [...(p.images || [])];
+    renderExistingImages();
+
+    imageFiles = [];
+    document.getElementById('image-preview').innerHTML = '';
+
+    switchTab('add');
+}
+
+async function toggleSold(id) {
+    const p = storeData.products.find(x => x.id === id);
+    if (!p) return;
+    p.sold = !p.sold;
+
+    showLoading(p.sold ? 'Marcando como vendido...' : 'Marcando como disponible...');
+    const ok = await saveData(`Toggle sold: ${id}`);
+    hideLoading();
+    if (ok) renderProductList();
+    else alert('Error al guardar');
+}
+
+async function deleteProduct(id) {
+    if (!confirm(`¿Eliminar "${id}"? Esta acción no se puede deshacer.`)) return;
+    storeData.products = storeData.products.filter(x => x.id !== id);
+    showLoading('Eliminando...');
+    const ok = await saveData(`Delete product: ${id}`);
+    hideLoading();
+    if (ok) renderProductList();
+    else alert('Error al guardar');
+}
+
+async function saveProduct() {
+    const editId = document.getElementById('edit-id').value;
+    const id = document.getElementById('prod-id').value.trim().toLowerCase().replace(/\s+/g, '-');
+    const name = document.getElementById('prod-name').value.trim();
+    const price = parseFloat(document.getElementById('prod-price').value);
+    const description = document.getElementById('prod-description').value.trim();
+    const sticker = document.getElementById('prod-sticker').value;
+
+    if (!id || !name || isNaN(price)) {
+        showStatus('save-status', 'Completa ID, nombre y precio', 'error');
+        return;
+    }
+
+    if (!editId && storeData.products.some(p => p.id === id)) {
+        showStatus('save-status', 'Ya existe un producto con ese ID', 'error');
+        return;
+    }
+
+    const activeImageFiles = imageFiles.filter(f => f !== null);
+    const totalImages = existingImagePaths.length + activeImageFiles.length;
+    if (totalImages === 0) {
+        showStatus('save-status', 'Añade al menos una imagen', 'error');
+        return;
+    }
+
+    // Upload images
+    let uploadedPaths = [];
+    const activeFiles = imageFiles.filter(f => f !== null);
+    if (activeFiles.length > 0) {
+        showLoading(`Subiendo imagen 1 de ${activeFiles.length}...`, 0);
+        for (let i = 0; i < activeFiles.length; i++) {
+            updateLoading(`Subiendo imagen ${i+1} de ${activeFiles.length}...`, ((i) / activeFiles.length) * 80);
+            try {
+                const path = await uploadImage(activeFiles[i], 'products');
+                uploadedPaths.push(path);
+            } catch (e) {
+                hideLoading();
+                showStatus('save-status', `Error subiendo ${activeFiles[i].name}`, 'error');
+                return;
+            }
+        }
+    }
+
+    showLoading('Guardando producto...', 90);
+
+    const allImages = [...existingImagePaths, ...uploadedPaths];
+    const product = {
+        id, name,
+        images: allImages,
+        description,
+        price,
+        categories: [...selectedCategories],
+        sticker: sticker || '',
+        sold: false
+    };
+
+    if (editId) {
+        const idx = storeData.products.findIndex(p => p.id === editId);
+        if (idx >= 0) {
+            product.sold = storeData.products[idx].sold;
+            storeData.products[idx] = product;
+        }
+    } else {
+        storeData.products.push(product);
+    }
+
+    const ok = await saveData(editId ? `Update: ${id}` : `Add: ${id}`);
+    hideLoading();
+
+    if (ok) {
+        showStatus('save-status', '✓ Producto guardado', 'success');
+        resetForm();
+        renderProductList();
+        switchTab('products');
+    } else {
+        showStatus('save-status', 'Error al guardar en GitHub', 'error');
+    }
+}
+
+function resetForm() {
+    document.getElementById('edit-id').value = '';
+    document.getElementById('prod-id').value = '';
+    document.getElementById('prod-id').disabled = false;
+    document.getElementById('prod-name').value = '';
+    document.getElementById('prod-price').value = '15.00';
+    document.getElementById('prod-description').value = '';
+    document.getElementById('prod-sticker').value = '';
+    document.getElementById('form-title').textContent = 'Añadir producto';
+    selectedCategories = [];
+    renderSelectedCategories();
+    existingImagePaths = [];
+    renderExistingImages();
+    imageFiles = [];
+    document.getElementById('image-preview').innerHTML = '';
+    document.getElementById('save-status').innerHTML = '';
+}
+
+// =====================
+// CATEGORIES
+// =====================
+function renderCategoryList() {
+    const list = document.getElementById('category-list');
+    if (storeData.categories.length === 0) {
+        list.innerHTML = '<p style="font-size:12px;color:#666;">No hay categorías.</p>';
+        return;
+    }
+
+    list.innerHTML = storeData.categories.map(c => {
+        const count = storeData.products.filter(p => p.categories && p.categories.includes(c.id)).length;
+        return `
+            <div class="product-row">
+                <div class="product-row-info">
+                    <div class="name">${c.name}</div>
+                    <div class="meta">ID: ${c.id} · ${count} producto(s)</div>
+                </div>
+                <div class="product-row-actions">
+                    <button class="btn btn-small btn-danger" onclick="deleteCategory('${c.id}')">Eliminar</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+async function addCategory() {
+    const id = document.getElementById('new-cat-id').value.trim().toLowerCase().replace(/\s+/g, '-');
+    const name = document.getElementById('new-cat-name').value.trim();
+
+    if (!id || !name) {
+        showStatus('cat-status', 'Completa ID y nombre', 'error');
+        return;
+    }
+    if (storeData.categories.some(c => c.id === id)) {
+        showStatus('cat-status', 'Ya existe esa categoría', 'error');
+        return;
+    }
+
+    storeData.categories.push({ id, name });
+    showLoading('Añadiendo categoría...');
+    const ok = await saveData(`Add category: ${id}`);
+    hideLoading();
+
+    if (ok) {
+        showStatus('cat-status', '✓ Categoría añadida', 'success');
+        document.getElementById('new-cat-id').value = '';
+        document.getElementById('new-cat-name').value = '';
+        renderCategoryList();
+        renderCategorySelect();
+        renderFilterCategories();
+    } else {
+        showStatus('cat-status', 'Error al guardar', 'error');
+    }
+}
+
+async function deleteCategory(id) {
+    if (!confirm(`¿Eliminar categoría "${id}"?`)) return;
+
+    storeData.categories = storeData.categories.filter(c => c.id !== id);
+    storeData.products.forEach(p => {
+        if (p.categories) p.categories = p.categories.filter(c => c !== id);
+    });
+
+    showLoading('Eliminando categoría...');
+    const ok = await saveData(`Delete category: ${id}`);
+    hideLoading();
+
+    if (ok) {
+        renderCategoryList();
+        renderCategorySelect();
+        renderFilterCategories();
+        renderProductList();
+    }
+}
+
+function renderCategorySelect() {
+    const select = document.getElementById('prod-category-add');
+    select.innerHTML = '<option value="">Añadir categoría...</option>';
+    storeData.categories.forEach(c => {
+        select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+    });
+}
+
+function renderFilterCategories() {
+    const select = document.getElementById('filter-category');
+    const current = select.value;
+    select.innerHTML = '<option value="all">Todas las categorías</option>';
+    storeData.categories.forEach(c => {
+        select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+    });
+    select.value = current || 'all';
+}
+
+// Category chips for product form
+function addCategoryToProduct() {
+    const select = document.getElementById('prod-category-add');
+    const val = select.value;
+    if (!val || selectedCategories.includes(val)) { select.value = ''; return; }
+    selectedCategories.push(val);
+    select.value = '';
+    renderSelectedCategories();
+}
+
+function removeCategoryFromProduct(id) {
+    selectedCategories = selectedCategories.filter(c => c !== id);
+    renderSelectedCategories();
+}
+
+function renderSelectedCategories() {
+    const container = document.getElementById('prod-categories-chips');
+    container.innerHTML = selectedCategories.map(id => {
+        const cat = storeData.categories.find(c => c.id === id);
+        return `<span class="chip">${cat ? cat.name : id} <span class="remove" onclick="removeCategoryFromProduct('${id}')">×</span></span>`;
+    }).join('');
+}
+
+// =====================
+// DRAG & DROP IMAGE UPLOAD
+// =====================
+const dropZone = document.getElementById('drop-zone');
+const fileInput = document.getElementById('prod-images');
+
+dropZone.addEventListener('click', () => fileInput.click());
+
+dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+});
+
+dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('dragover');
+});
+
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    if (files.length) addImageFiles(files);
+});
+
+fileInput.addEventListener('change', () => {
+    const files = Array.from(fileInput.files);
+    if (files.length) addImageFiles(files);
+    fileInput.value = '';
+});
+
+function addImageFiles(files) {
+    files.forEach(file => {
+        imageFiles.push(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const idx = imageFiles.indexOf(file);
+            const preview = document.getElementById('image-preview');
+            const item = document.createElement('div');
+            item.className = 'image-thumb';
+            item.dataset.idx = idx;
+            item.innerHTML = `
+                <img src="${e.target.result}">
+                <button class="remove-img" onclick="removeNewImage(${idx}, this.parentElement)">×</button>
+            `;
+            preview.appendChild(item);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function removeNewImage(index, element) {
+    imageFiles[index] = null; // mark as removed
+    element.remove();
+}
+
+// Clean nulls before upload
+function getActiveImageFiles() {
+    return imageFiles.filter(f => f !== null);
+}
+
+function renderExistingImages() {
+    const container = document.getElementById('existing-images');
+    if (existingImagePaths.length === 0) { container.innerHTML = ''; return; }
+
+    container.innerHTML = '<label style="display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Imágenes actuales</label>' +
+        existingImagePaths.map((path, i) => `
+        <div class="image-thumb" style="display:inline-block;vertical-align:top;margin:0 8px 8px 0;">
+            <img src="${path}" onerror="this.style.background='#eee'">
+            <button class="remove-img" onclick="removeExistingImage(${i})">×</button>
+        </div>
+    `).join('');
+}
+
+function removeExistingImage(index) {
+    existingImagePaths.splice(index, 1);
+    renderExistingImages();
+}
+
+// =====================
+// UTILS
+// =====================
+function showStatus(elementId, msg, type) {
+    const el = document.getElementById(elementId);
+    el.innerHTML = `<div class="status-msg ${type || ''}">${msg}</div>`;
+    if (type === 'success') setTimeout(() => el.innerHTML = '', 4000);
+}
+</script>
+</body>
+</html>
