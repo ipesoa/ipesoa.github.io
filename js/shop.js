@@ -1,11 +1,9 @@
 let products = [];
 let categories = [];
-
 const grid = document.getElementById('product-grid');
 const catToggle = document.getElementById('cat-toggle');
 const catMenu = document.getElementById('cat-menu');
-
-let currentFilter = 'all';
+let currentFilter = 'recent';
 
 // Cargar datos
 fetch('data/products.json')
@@ -21,22 +19,12 @@ fetch('data/products.json')
             const catId = hash.replace('#cat=', '');
             filterBy(catId);
         } else {
-            renderProducts('all');
+            filterBy('recent');
         }
     })
     .catch(err => console.error('Error cargando productos:', err));
 
 function buildCategoryDropdown() {
-    // "Todo" option
-    const allLink = document.createElement('a');
-    allLink.href = '#';
-    allLink.textContent = 'Todo';
-    allLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        filterBy('all');
-    });
-    catMenu.appendChild(allLink);
-
     // "Lo más reciente" option
     const recentLink = document.createElement('a');
     recentLink.href = '#';
@@ -65,13 +53,11 @@ function filterBy(filter) {
     catMenu.classList.remove('open');
 
     // Update toggle text
-    if (filter === 'all') {
-        catToggle.textContent = 'Todo';
-    } else if (filter === 'recent') {
+    if (filter === 'recent') {
         catToggle.textContent = 'Lo más reciente';
     } else {
         const cat = categories.find(c => c.id === filter);
-        catToggle.textContent = cat ? cat.name : 'Todo';
+        catToggle.textContent = cat ? cat.name : 'Categorías';
     }
 
     renderProducts(filter);
@@ -94,7 +80,6 @@ catMenu.addEventListener('click', (e) => {
 // Renderizar productos
 function renderProducts(filter) {
     grid.innerHTML = '';
-
     let filtered = products;
 
     if (filter === 'recent') {
