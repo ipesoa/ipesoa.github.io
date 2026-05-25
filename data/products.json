@@ -22,7 +22,9 @@
       ],
       "description": "60x66 cm (aprox)",
       "price": 15,
-      "categories": [],
+      "categories": [
+        "carteles"
+      ],
       "sold": false
     },
     {
