@@ -1,13 +1,18 @@
-I.PESOA SEO pack v2
+I.PESOA SEO PACK v3
 
-Sube el contenido de esta carpeta a la raíz del repositorio ipesoa.github.io.
-Mantén el archivo google15a9d63c6d468d15.html para no perder la verificación de Google Search Console.
+Cambios de esta versión:
+- Corrige el fallo de caracteres raros en tildes: CARTELERÍA ya no debe aparecer como CARTELERÃ...
+- El problema estaba en admin.html: leía el JSON desde la API de GitHub con atob() sin decodificar UTF-8.
+- Se corrigió admin.html con TextDecoder/TextEncoder.
+- Se incluye data/products.json corregido.
 
-Después de subirlo:
-1. Comprueba que abre https://ipesoa.github.io/sitemap.xml
-2. En Search Console > Sitemaps envía: sitemap.xml
+SUBIDA RECOMENDADA:
+1. Sube TODO sustituyendo archivos.
+2. Importante: sube especialmente:
+   - admin.html
+   - data/products.json
+   - sitemap.xml
+   - robots.txt
+3. No borres google15a9d63c6d468d15.html.
 
-Notas:
-- admin.html ahora actualiza sitemap.xml automáticamente al añadir, editar o borrar productos.
-- Las pegatinas NEW se guardan en data/products.json como "sticker" y se muestran en la tienda si el producto NO está marcado como vendido.
-- Para que las pegatinas funcionen, deben estar subidos estos archivos actualizados: admin.html, js/shop.js y css/style.css.
+Después abre la web en incógnito o fuerza recarga con Ctrl+F5.

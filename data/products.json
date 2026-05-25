@@ -10,7 +10,7 @@
     },
     {
       "id": "carteles",
-      "name": "CARTELERÃÂA"
+      "name": "CARTELERÍA"
     }
   ],
   "products": [
@@ -34,11 +34,10 @@
         "products/1779730510156_ipesoaeditorial.png"
       ],
       "description": "60x66 cm (aprox)",
-      "price": 50,
+      "price": 15,
       "categories": [
         "carteles"
       ],
-      "sticker": "green",
       "sold": false
     }
   ]
