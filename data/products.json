@@ -15,19 +15,6 @@
   ],
   "products": [
     {
-      "id": "tortuga",
-      "name": "tortuga i.pesoa",
-      "images": [
-        "products/1779730510156_ipesoaeditorial.png"
-      ],
-      "description": "60x66 cm (aprox)",
-      "price": 15,
-      "categories": [
-        "carteles"
-      ],
-      "sold": false
-    },
-    {
       "id": "beta0.1",
       "name": "betaimagen",
       "images": [
@@ -39,6 +26,19 @@
         "libros"
       ],
       "sold": true
+    },
+    {
+      "id": "tortuga",
+      "name": "tortuga i.pesoa",
+      "images": [
+        "products/1779730510156_ipesoaeditorial.png"
+      ],
+      "description": "60x66 cm (aprox)",
+      "price": 15,
+      "categories": [
+        "carteles"
+      ],
+      "sold": false
     }
   ]
 }
