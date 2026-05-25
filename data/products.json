@@ -10,7 +10,7 @@
     },
     {
       "id": "carteles",
-      "name": "CARTELERÃA"
+      "name": "CARTELERÍA"
     }
   ],
   "products": [
@@ -38,7 +38,6 @@
       "categories": [
         "carteles"
       ],
-      "sticker": "green",
       "sold": false
     }
   ]

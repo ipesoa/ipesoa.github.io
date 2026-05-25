@@ -7,6 +7,77 @@ const productDescription = document.getElementById('product-description');
 const orderSection = document.getElementById('order-section');
 const btnCompra = document.getElementById('btn-compra');
 
+function upsertMeta(selector, attrName, attrValue, content) {
+    let tag = document.head.querySelector(selector);
+    if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute(attrName, attrValue);
+        document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', content);
+}
+
+function upsertCanonical(url) {
+    let link = document.head.querySelector('link[rel="canonical"]');
+    if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        document.head.appendChild(link);
+    }
+    link.setAttribute('href', url);
+}
+
+function cleanText(value) {
+    return String(value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+function updateProductSeo(catNames) {
+    const baseUrl = 'https://ipesoa.github.io/';
+    const productUrl = `${baseUrl}product.html?id=${encodeURIComponent(producto.id)}`;
+    const imageUrl = producto.images && producto.images[0] ? new URL(producto.images[0], baseUrl).href : '';
+    const rawDescription = cleanText(producto.description);
+    const seoDescription = cleanText(`${producto.name} de I.PESOA Editorial. ${catNames ? catNames + '. ' : ''}${rawDescription || 'Carteles, libros objeto, poesía visual y ediciones limitadas desde Madrid.'}`).slice(0, 170);
+
+    document.title = `${producto.name} — I.PESOA Editorial`;
+    upsertCanonical(productUrl);
+    upsertMeta('meta[name="description"]', 'name', 'description', seoDescription);
+    upsertMeta('meta[property="og:title"]', 'property', 'og:title', `${producto.name} — I.PESOA Editorial`);
+    upsertMeta('meta[property="og:description"]', 'property', 'og:description', seoDescription);
+    upsertMeta('meta[property="og:url"]', 'property', 'og:url', productUrl);
+    if (imageUrl) upsertMeta('meta[property="og:image"]', 'property', 'og:image', imageUrl);
+    upsertMeta('meta[name="twitter:title"]', 'name', 'twitter:title', `${producto.name} — I.PESOA Editorial`);
+    upsertMeta('meta[name="twitter:description"]', 'name', 'twitter:description', seoDescription);
+    if (imageUrl) upsertMeta('meta[name="twitter:image"]', 'name', 'twitter:image', imageUrl);
+
+    const oldSchema = document.getElementById('product-schema');
+    if (oldSchema) oldSchema.remove();
+
+    const schema = document.createElement('script');
+    schema.type = 'application/ld+json';
+    schema.id = 'product-schema';
+    schema.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: producto.name,
+        description: seoDescription,
+        image: imageUrl ? [imageUrl] : undefined,
+        brand: {
+            '@type': 'Brand',
+            name: 'I.PESOA Editorial'
+        },
+        category: catNames || undefined,
+        offers: {
+            '@type': 'Offer',
+            url: productUrl,
+            priceCurrency: 'EUR',
+            price: producto.price,
+            availability: producto.sold ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock'
+        }
+    });
+    document.head.appendChild(schema);
+}
+
+
 // Obtener ID del producto de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const productoId = urlParams.get('id');
@@ -17,11 +88,11 @@ function generarOrderId() {
 }
 
 // Construir carrusel o imagen única
-function buildGallery(images) {
+function buildGallery(images, catNames) {
     if (images.length === 1) {
         const img = document.createElement('img');
         img.src = images[0];
-        img.alt = producto.name;
+        img.alt = `${producto.name} — ${catNames || 'edición'} de I.PESOA Editorial, Madrid`;
         gallery.appendChild(img);
         return;
     }
@@ -36,7 +107,7 @@ function buildGallery(images) {
     images.forEach(src => {
         const img = document.createElement('img');
         img.src = src;
-        img.alt = producto.name;
+        img.alt = `${producto.name} — ${catNames || 'edición'} de I.PESOA Editorial, Madrid`;
         track.appendChild(img);
     });
 
@@ -103,18 +174,21 @@ fetch('data/products.json')
             return;
         }
 
-        document.title = `${producto.name} - I.PESOA Editorial`;
-
-        // Galería
-        buildGallery(producto.images);
-
-        // Info
+        // Categorías
         const catNames = producto.categories
             .map(cid => {
                 const cat = categories.find(c => c.id === cid);
                 return cat ? cat.name : cid;
             })
             .join(', ');
+
+        // SEO dinámico del producto
+        updateProductSeo(catNames);
+
+        // Galería
+        buildGallery(producto.images, catNames);
+
+        // Info
 
         productInfo.innerHTML = `
             <h3>${producto.name}</h3>

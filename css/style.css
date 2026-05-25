@@ -38,7 +38,7 @@ header h1 {
     font-family: Arial, sans-serif;
     font-size: 3em;
     letter-spacing: 4px;
-    margin-bottom: -10px;
+    margin-bottom: -6px;
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
@@ -519,6 +519,57 @@ nav.main-nav a {
         text-decoration: underline;
     }
 }
+
+
+.site-footer .seo-footnote {
+    max-width: 520px;
+    margin: 14px auto 0;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    line-height: 1.55;
+    letter-spacing: 0.7px;
+    color: #d6d6d6;
+    text-align: center;
+    text-transform: lowercase;
+}
+
+@media (max-width: 768px) {
+    .site-footer .seo-footnote {
+        max-width: 320px;
+        font-size: 8.5px;
+        color: #d9d9d9;
+    }
+}
+
+/* ========================
+   Sticker NEW!
+======================== */
+.product-card {
+    position: relative;
+}
+
+.sticker-new {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    color: #000;
+    z-index: 2;
+    pointer-events: none;
+    line-height: 1;
+    transform: rotate(3deg);
+}
+
+.sticker-new.green  { background: #39ff14; }
+.sticker-new.yellow { background: #ffff00; }
+.sticker-new.red    { background: #ff3131; color: #fff; }
+.sticker-new.blue   { background: #00cfff; }
 
 /* ========================
    Responsive (móvil)

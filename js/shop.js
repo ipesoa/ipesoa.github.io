@@ -19,7 +19,6 @@ fetch('data/products.json')
             const catId = hash.replace('#cat=', '');
             filterBy(catId);
         } else {
-            // Estado inicial: muestra lo más reciente, pero el botón sigue diciendo "Categorías"
             renderProducts('recent');
         }
     })
@@ -53,7 +52,6 @@ function filterBy(filter) {
     currentFilter = filter;
     catMenu.classList.remove('open');
 
-    // Update toggle text
     if (filter === 'recent') {
         catToggle.textContent = 'Lo más reciente';
     } else {
@@ -84,7 +82,6 @@ function renderProducts(filter) {
     let filtered = products;
 
     if (filter === 'recent') {
-        // Show last 12 products (most recently added)
         filtered = products.slice(-12).reverse();
     } else if (filter !== 'all') {
         filtered = products.filter(p => p.categories.includes(filter));
@@ -94,10 +91,28 @@ function renderProducts(filter) {
         const card = document.createElement('div');
         card.className = 'product-card' + (product.sold ? ' sold' : '');
 
+        // Pegatina NEW!
+        if (product.sticker && !product.sold) {
+            const sticker = document.createElement('span');
+            sticker.className = 'sticker-new ' + product.sticker;
+            sticker.textContent = 'NEW!';
+            card.appendChild(sticker);
+        }
+
+        const catNames = (product.categories || [])
+            .map(cid => {
+                const cat = categories.find(c => c.id === cid);
+                return cat ? cat.name : cid;
+            })
+            .filter(Boolean)
+            .join(', ');
+
+        card.setAttribute('aria-label', `${product.name} — ${catNames || 'edición'} de I.PESOA Editorial`);
+
         const img = document.createElement('img');
         img.className = 'product-card-img';
         img.src = product.images[0];
-        img.alt = product.name;
+        img.alt = `${product.name} — ${catNames || 'edición'} de I.PESOA Editorial, Madrid`;
         img.loading = 'lazy';
 
         const name = document.createElement('div');
