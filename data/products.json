@@ -34,10 +34,11 @@
         "products/1779730510156_ipesoaeditorial.png"
       ],
       "description": "60x66 cm (aprox)",
-      "price": 15,
+      "price": 75,
       "categories": [
         "carteles"
       ],
+      "sticker": "green",
       "sold": false
     }
   ]
