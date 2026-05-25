@@ -7,9 +7,24 @@
     {
       "id": "totebags",
       "name": "ToteBags"
+    },
+    {
+      "id": "carteles",
+      "name": "CARTELERÍA"
     }
   ],
   "products": [
+    {
+      "id": "tortuga",
+      "name": "tortuga i.pesoa",
+      "images": [
+        "products/1779730510156_ipesoaeditorial.png"
+      ],
+      "description": "60x66 cm (aprox)",
+      "price": 15,
+      "categories": [],
+      "sold": false
+    },
     {
       "id": "beta0.1",
       "name": "betaimagen",
@@ -22,17 +37,6 @@
         "libros"
       ],
       "sold": true
-    },
-    {
-      "id": "tortuga",
-      "name": "tortuga i.pesoa",
-      "images": [
-        "products/1779730510156_ipesoaeditorial.png"
-      ],
-      "description": "60x66 cm (aprox)",
-      "price": 15,
-      "categories": [],
-      "sold": false
     }
   ]
 }
