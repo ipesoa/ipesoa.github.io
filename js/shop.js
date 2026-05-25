@@ -19,7 +19,8 @@ fetch('data/products.json')
             const catId = hash.replace('#cat=', '');
             filterBy(catId);
         } else {
-            filterBy('recent');
+            // Estado inicial: muestra lo más reciente, pero el botón sigue diciendo "Categorías"
+            renderProducts('recent');
         }
     })
     .catch(err => console.error('Error cargando productos:', err));
