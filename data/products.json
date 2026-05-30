@@ -40,6 +40,21 @@
       ],
       "sticker": "green",
       "sold": false
+    },
+    {
+      "id": "totebagpaseo",
+      "name": "paseo",
+      "images": [
+        "products/1780153504584_paseo2.png",
+        "products/1780153506505_paseo1.png"
+      ],
+      "description": "42x34cm",
+      "price": 40,
+      "categories": [
+        "totebags"
+      ],
+      "sticker": "green",
+      "sold": false
     }
   ]
 }
