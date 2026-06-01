@@ -70,6 +70,20 @@
       ],
       "sticker": "green",
       "sold": false
+    },
+    {
+      "id": "cartelrandom",
+      "name": "paquete sorpresa",
+      "images": [
+        "products/1780308409849_carta.png"
+      ],
+      "description": "recibe un paquete con 2 a 5 carteles al azar (precio península)",
+      "price": 20,
+      "categories": [
+        "carteles"
+      ],
+      "sticker": "green",
+      "sold": false
     }
   ]
 }
