@@ -2,37 +2,43 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ipesoa.github.io/</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://ipesoa.github.io/contacto.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://ipesoa.github.io/product.html?id=beta0.1</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ipesoa.github.io/product.html?id=tortuga</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ipesoa.github.io/product.html?id=totebagpaseo</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ipesoa.github.io/product.html?id=aquivauncalortote</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ipesoa.github.io/product.html?id=cartelrandom</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
