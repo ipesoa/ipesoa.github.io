@@ -1,0 +1,172 @@
+/* Extensión para libros y proyectos financiables. Conserva la estética del sitio. */
+
+.funding-card-status {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.funding-detail .product-detail-info {
+  min-width: 0;
+}
+
+.funding-status {
+  display: inline-block;
+  margin: 6px 0 12px;
+  padding: 4px 8px;
+  border: 1px solid #000;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.product-categories {
+  margin-bottom: 18px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.funding-detail .product-description {
+  white-space: pre-wrap;
+  line-height: 1.55;
+}
+
+.funding-section,
+.newsletter-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #000;
+  text-align: left;
+}
+
+.funding-section h4,
+.newsletter-section h4 {
+  margin-bottom: 12px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.funding-intro {
+  max-width: 540px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.funding-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.funding-button,
+.funding-pending,
+.newsletter-form button {
+  display: inline-block;
+  padding: 11px 16px;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.funding-button.primary,
+.funding-button:hover,
+.newsletter-form button:hover {
+  background: #000;
+  color: #fff;
+}
+
+.funding-pending {
+  cursor: default;
+  color: #666;
+  border-color: #777;
+}
+
+.funding-legal {
+  max-width: 620px;
+  margin-top: 16px;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 430px;
+}
+
+.newsletter-form > label:first-child {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.newsletter-form input[type="email"] {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+.newsletter-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.newsletter-consent input {
+  margin-top: 2px;
+  accent-color: #000;
+}
+
+.newsletter-status {
+  min-height: 14px;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .funding-section,
+  .newsletter-section {
+    text-align: center;
+  }
+
+  .funding-buttons,
+  .newsletter-form {
+    align-items: stretch;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .funding-button,
+  .newsletter-form button {
+    width: 100%;
+  }
+
+  .newsletter-consent {
+    text-align: left;
+  }
+}
