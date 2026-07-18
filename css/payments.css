@@ -27,3 +27,35 @@
 .checkout-trust { width:min(100%,390px); margin:9px 0 14px; color:#555; font-size:9px; line-height:1.45; text-align:center; }
 .checkout-pending,.checkout-unavailable { width:min(100%,390px); min-height:auto; padding:13px 18px; color:#666; font-size:11px; letter-spacing:1px; }
 @media(max-width:768px){ .checkout-section{text-align:center}.express-payment-choices,.checkout-trust,.checkout-pending,.checkout-unavailable{width:100%;max-width:none} }
+
+/* PayPal y estados auxiliares */
+.paypal-button {
+  gap: 12px;
+  justify-content: center;
+  background: #fff;
+}
+.paypal-wordmark {
+  color: #003087;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-transform: none;
+}
+.paypal-action {
+  color: #111;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.checkout-note {
+  width: min(100%,390px);
+  margin: 8px 0 0;
+  color: #666;
+  font-size: 9px;
+  line-height: 1.45;
+}
+.empty-gallery {
+  min-height: 1px;
+}
+@media(max-width:768px){
+  .checkout-note{width:100%;max-width:none;text-align:center}
+}
