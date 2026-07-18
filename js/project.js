@@ -101,8 +101,7 @@ function makePaymentButton(label, url, primary = false) {
   const link = document.createElement('a');
   link.className = `funding-button${primary ? ' primary' : ''}`;
   link.href = safeUrl;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
+  link.rel = 'noopener';
   link.textContent = label;
   return link;
 }
@@ -124,8 +123,8 @@ function renderFunding(project) {
   const buttons = document.createElement('div');
   buttons.className = 'funding-buttons';
 
-  const stripe = makePaymentButton('APOYAR CON STRIPE', project.payment?.stripeUrl || DEFAULT_STRIPE_URL, true);
-  const paypal = makePaymentButton('PayPal', project.payment?.paypalUrl, !stripe);
+  const stripe = makePaymentButton('DONAR', project.payment?.stripeUrl || DEFAULT_STRIPE_URL, true);
+  const paypal = makePaymentButton('DONAR CON PAYPAL', project.payment?.paypalUrl, !stripe);
   if (stripe) buttons.appendChild(stripe);
   if (paypal) buttons.appendChild(paypal);
 
@@ -153,7 +152,9 @@ function renderFunding(project) {
 
   const legal = document.createElement('p');
   legal.className = 'funding-legal';
-  legal.textContent = project.legalText || DEFAULT_LEGAL_TEXT;
+  const storedLegal = String(project.legalText || '').trim();
+  const isCompleteLegalText = /art[ií]culo\s+618/i.test(storedLegal) && /Ley\s+29\/1987/i.test(storedLegal);
+  legal.textContent = isCompleteLegalText ? storedLegal : DEFAULT_LEGAL_TEXT;
   fundingSection.appendChild(legal);
 }
 

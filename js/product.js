@@ -1,18 +1,49 @@
+'use strict';
+
 let product = null;
 
 const gallery = document.getElementById('gallery');
 const productInfo = document.getElementById('product-info');
 const productDescription = document.getElementById('product-description');
 const checkoutSection = document.getElementById('checkout-section');
-const productId = new URLSearchParams(window.location.search).get('id');
+const productId = new URLSearchParams(window.location.search).get('id') || '';
 
-const PRODUCT_PAYMENT_OVERRIDES = {
+const PAYPAL_BUSINESS = '312rimini@gmail.com';
+
+/* Enlaces conocidos. Nunca se reutiliza aquí el enlace de donaciones. */
+const PRODUCT_PAYMENT_DEFAULTS = {
   cartelism: {
     stripeUrl: 'https://buy.stripe.com/00wdRa0jVe547Nbcc5gfu01',
-    price: 15,
-    cleanDonationText: true
+    price: 15
   }
 };
+
+/* Evita que una URL antigua de Cartelism quede completamente vacía si su registro
+   fue borrado accidentalmente de products.json. Para que aparezca en portada debe
+   volver a guardarse desde admin.html con su imagen y descripción. */
+const PRODUCT_RECORD_FALLBACKS = {
+  cartelism: {
+    id: 'cartelism',
+    type: 'product',
+    name: 'Cartelism',
+    price: 15,
+    images: [],
+    description: '',
+    categories: [],
+    sold: false,
+    payment: {
+      stripeUrl: 'https://buy.stripe.com/00wdRa0jVe547Nbcc5gfu01'
+    }
+  }
+};
+
+function normalizeKey(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
+}
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -32,9 +63,33 @@ function safeExternalUrl(value) {
   }
 }
 
+function findKnownConfig(item) {
+  const keys = [normalizeKey(item?.id), normalizeKey(item?.name), normalizeKey(productId)];
+  return keys.map((key) => PRODUCT_PAYMENT_DEFAULTS[key]).find(Boolean) || {};
+}
+
+function buildPayPalUrl(item) {
+  const explicit = safeExternalUrl(item?.payment?.paypalUrl || item?.paypalUrl || '');
+  if (explicit) return explicit;
+
+  const params = new URLSearchParams({
+    cmd: '_xclick',
+    business: PAYPAL_BUSINESS,
+    item_name: item?.name || item?.id || 'I.PESOA',
+    amount: Number(item?.price || 0).toFixed(2),
+    currency_code: 'EUR',
+    no_note: '1'
+  });
+  return `https://www.paypal.com/cgi-bin/webscr?${params.toString()}`;
+}
+
 function buildGallery(images) {
   gallery.innerHTML = '';
-  if (!Array.isArray(images) || images.length === 0) return;
+  if (!Array.isArray(images) || images.length === 0) {
+    gallery.classList.add('empty-gallery');
+    return;
+  }
+  gallery.classList.remove('empty-gallery');
 
   if (images.length === 1) {
     const image = document.createElement('img');
@@ -129,7 +184,7 @@ function buildPaymentChoices(stripeUrl) {
     const apple = paymentLink(
       stripeUrl,
       'wallet-button apple-pay-button',
-      'Pagar con Apple Pay mediante Stripe',
+      'Continuar al pago con Apple Pay mediante Stripe',
       '<span class="apple-mark"></span><span>Pay</span>'
     );
     if (apple) wrapper.appendChild(apple);
@@ -139,8 +194,8 @@ function buildPaymentChoices(stripeUrl) {
     const google = paymentLink(
       stripeUrl,
       'wallet-button google-pay-button',
-      'Pagar con Google Pay mediante Stripe',
-      '<span class="google-g"><i>G</i></span><span>Pay</span>'
+      'Continuar al pago con Google Pay mediante Stripe',
+      '<span class="google-g" aria-hidden="true">G</span><span>Pay</span>'
     );
     if (google) wrapper.appendChild(google);
   }
@@ -148,10 +203,11 @@ function buildPaymentChoices(stripeUrl) {
   const card = paymentLink(
     stripeUrl,
     'card-payment-button',
-    'Pagar con tarjeta mediante Stripe',
+    'Continuar al pago con tarjeta mediante Stripe',
     '<span class="radio-dot" aria-hidden="true"></span><span class="card-symbol" aria-hidden="true"></span><span class="card-label">Tarjeta</span><span class="card-brands" aria-hidden="true"><b>VISA</b><b>MC</b><b>AMEX</b></span>'
   );
   if (card) wrapper.appendChild(card);
+
   return wrapper;
 }
 
@@ -163,9 +219,9 @@ function renderCheckout() {
     return;
   }
 
-  const override = PRODUCT_PAYMENT_OVERRIDES[product.id] || {};
-  const stripeUrl = override.stripeUrl || product.payment?.stripeUrl || product.stripeUrl || '';
-  const paypalUrl = product.payment?.paypalUrl || product.paypalUrl || '';
+  const known = findKnownConfig(product);
+  const stripeUrl = safeExternalUrl(product.payment?.stripeUrl || product.stripeUrl || known.stripeUrl || '');
+  const paypalUrl = buildPayPalUrl(product);
 
   const heading = document.createElement('h4');
   heading.textContent = 'PAGO';
@@ -180,37 +236,40 @@ function renderCheckout() {
     checkoutSection.appendChild(trust);
   }
 
-  if (paypalUrl) {
-    const paypalButton = paymentLink(
-      paypalUrl,
-      'checkout-button paypal-button',
-      'Pagar con PayPal',
-      'PAGAR CON PAYPAL'
-    );
-    if (paypalButton) checkoutSection.appendChild(paypalButton);
-  }
+  const paypalButton = paymentLink(
+    paypalUrl,
+    'checkout-button paypal-button',
+    'Pagar con PayPal',
+    '<span class="paypal-wordmark">PayPal</span><span class="paypal-action">PAGAR CON PAYPAL</span>'
+  );
+  if (paypalButton) checkoutSection.appendChild(paypalButton);
 
-  if (!stripeUrl && !paypalUrl) {
-    const pending = document.createElement('p');
-    pending.className = 'checkout-pending';
-    pending.textContent = 'PAGO ONLINE PENDIENTE DE CONFIGURAR';
-    checkoutSection.appendChild(pending);
+  if (!stripeUrl) {
+    const note = document.createElement('p');
+    note.className = 'checkout-note';
+    note.textContent = 'El pago con tarjeta todavía no está configurado para este producto. PayPal permanece disponible.';
+    checkoutSection.appendChild(note);
   }
 }
 
-fetch('data/products.json', { cache: 'no-store' })
+fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' })
   .then((response) => {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return response.json();
   })
   .then((data) => {
-    product = (data.products || []).find((item) => item.id === productId && item.type !== 'funding');
+    const products = Array.isArray(data.products) ? data.products : [];
+    const normalizedRequested = normalizeKey(productId);
+    product = products.find((item) => item.id === productId && item.type !== 'funding')
+      || products.find((item) => normalizeKey(item.id) === normalizedRequested && item.type !== 'funding')
+      || PRODUCT_RECORD_FALLBACKS[normalizedRequested];
+
     if (!product) throw new Error('Producto no encontrado');
 
-    const override = PRODUCT_PAYMENT_OVERRIDES[product.id] || {};
-    if (Number.isFinite(override.price)) product.price = override.price;
-    if (override.stripeUrl) {
-      product.payment = { ...(product.payment || {}), stripeUrl: override.stripeUrl };
+    const known = findKnownConfig(product);
+    if (Number.isFinite(known.price)) product.price = known.price;
+    if (known.stripeUrl && !product.payment?.stripeUrl) {
+      product.payment = { ...(product.payment || {}), stripeUrl: known.stripeUrl };
     }
 
     document.title = `${product.name} - I.PESOA Editorial`;
@@ -226,12 +285,7 @@ fetch('data/products.json', { cache: 'no-store' })
       ${product.sold ? '<p class="status">VENDIDO</p>' : ''}
       ${categoryNames ? `<p class="categories-label">${escapeHtml(categoryNames)}</p>` : ''}`;
 
-    let description = product.description || '';
-    const override = PRODUCT_PAYMENT_OVERRIDES[product.id] || {};
-    if (override.cleanDonationText && /aportaci[oó]n voluntaria|sin contraprestaci[oó]n|donaci[oó]n/i.test(description)) {
-      description = '';
-    }
-    productDescription.textContent = description;
+    productDescription.textContent = product.description || '';
     renderCheckout();
   })
   .catch((error) => {
