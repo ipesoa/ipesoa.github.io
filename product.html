@@ -1,73 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producto - I.PESOA Editorial</title>
-    <meta name="description" content="I.PESOA Editorial — Carteles, libros objeto, poesía y ediciones limitadas desde Madrid.">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Producto - I.PESOA Editorial">
-    <meta property="og:description" content="Carteles, libros objeto, poesía visual y ediciones limitadas de I.PESOA Editorial desde Madrid.">
-    <meta property="og:type" content="product">
-    <meta property="og:site_name" content="I.PESOA Editorial">
-    <meta property="og:locale" content="es_ES">
-    <meta property="og:url" content="https://ipesoa.github.io/product.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Producto - I.PESOA Editorial">
-    <meta name="twitter:description" content="Carteles, libros objeto, poesía visual y ediciones limitadas de I.PESOA Editorial desde Madrid.">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Producto - I.PESOA Editorial</title>
+  <meta name="description" content="I.PESOA Editorial — Carteles, libros objeto, poesía y ediciones limitadas desde Madrid.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Producto - I.PESOA Editorial">
+  <meta property="og:description" content="Carteles, libros objeto, poesía visual y ediciones limitadas de I.PESOA Editorial desde Madrid.">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="I.PESOA Editorial">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:url" content="https://ipesoa.github.io/product.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Producto - I.PESOA Editorial">
+  <meta name="twitter:description" content="Carteles, libros objeto, poesía visual y ediciones limitadas de I.PESOA Editorial desde Madrid.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/payments.css">
 </head>
 <body>
-
 <header>
-    <h1><a href="index.html">I.PESOA</a></h1>
-    <h2>EDITORIAL</h2>
-    <p class="subtitle">ediciones impublicables</p>
+  <h1><a href="index.html">I.PESOA</a></h1>
+  <h2>EDITORIAL</h2>
+  <p class="subtitle">ediciones impublicables</p>
 </header>
-
 <nav class="main-nav">
-    <a href="index.html">SHOP</a>
-    <a href="contacto.html">CONTACTO</a>
+  <a href="index.html">SHOP</a>
+  <a href="contacto.html">CONTACTO</a>
 </nav>
-
 <main>
-    <div class="product-detail" id="product-detail">
-        <div class="product-detail-top">
-            <div class="product-detail-gallery" id="gallery"></div>
-            <div class="product-detail-info" id="product-info"></div>
-        </div>
-        <div class="product-detail-description" id="product-description"></div>
-        <div class="order-section" id="order-section">
-            <h4>Realizar pedido</h4>
-            <div class="order-form">
-                <div class="campo">
-                    <label for="nombre">Nombre completo</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
-                <div class="campo">
-                    <label for="direccion">Dirección de envío</label>
-                    <textarea id="direccion" name="direccion" rows="3" required></textarea>
-                </div>
-                <div class="campo">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <button type="button" id="btn-compra">Realizar compra</button>
-            </div>
-        </div>
-        <a href="index.html" class="back-link">← Volver</a>
+  <div class="product-detail" id="product-detail">
+    <div class="product-detail-top">
+      <div class="product-detail-gallery" id="gallery"></div>
+      <div class="product-detail-info" id="product-info"></div>
     </div>
+    <div class="product-detail-description" id="product-description"></div>
+    <section class="checkout-section" id="checkout-section" aria-live="polite"></section>
+    <a href="index.html" class="back-link">← Volver</a>
+  </div>
 </main>
-
 <footer class="site-footer">
-    <p class="copyright">© 2026 ipesoa editorial. All rights reserved.</p>
-    <div class="social-links">
-        <a href="https://instagram.com/ipesoaeditorial" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://tiktok.com/@ipesoaeditorial" target="_blank" rel="noopener">Tiktok</a>
-    </div>
-    <p class="seo-footnote">I.PESOA Editorial es una editorial independiente en Madrid dedicada a carteles, libros objeto, poesía visual, fanzines y ediciones experimentales.</p>
+  <p class="copyright">© 2026 ipesoa editorial. All rights reserved.</p>
+  <div class="social-links">
+    <a href="https://instagram.com/ipesoaeditorial" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://tiktok.com/@ipesoaeditorial" target="_blank" rel="noopener">Tiktok</a>
+  </div>
+  <p class="seo-footnote">I.PESOA Editorial es una editorial independiente en Madrid dedicada a carteles, libros objeto, poesía visual, fanzines y ediciones experimentales.</p>
 </footer>
-
 <script src="js/product.js"></script>
 </body>
 </html>
