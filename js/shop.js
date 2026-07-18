@@ -1,145 +1,160 @@
 let products = [];
 let categories = [];
+
 const grid = document.getElementById('product-grid');
 const catToggle = document.getElementById('cat-toggle');
 const catMenu = document.getElementById('cat-menu');
 let currentFilter = 'recent';
 
-// Cargar datos
-fetch('data/products.json')
-    .then(res => res.json())
-    .then(data => {
-        products = data.products;
-        categories = data.categories;
-        buildCategoryDropdown();
+function isFunding(item) {
+  return item && item.type === 'funding';
+}
 
-        // Check URL hash for category filter
-        const hash = window.location.hash;
-        if (hash && hash.startsWith('#cat=')) {
-            const catId = hash.replace('#cat=', '');
-            filterBy(catId);
-        } else {
-            renderProducts('recent');
-        }
-    })
-    .catch(err => console.error('Error cargando productos:', err));
+function slugify(value) {
+  return String(value || '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '') || 'libro';
+}
+
+function normalizeItem(item) {
+  return {
+    ...item,
+    type: item.type === 'funding' ? 'funding' : 'product',
+    categories: Array.isArray(item.categories) ? item.categories : [],
+    images: Array.isArray(item.images) ? item.images : [],
+    price: Number(item.price || 0),
+    suggestedAmount: Number(item.suggestedAmount || 0),
+    sold: Boolean(item.sold)
+  };
+}
+
+fetch('data/products.json')
+  .then((res) => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  })
+  .then((data) => {
+    products = (data.products || []).map(normalizeItem);
+    categories = Array.isArray(data.categories) ? data.categories : [];
+    buildCategoryDropdown();
+
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#cat=')) {
+      filterBy(decodeURIComponent(hash.replace('#cat=', '')));
+    } else {
+      filterBy('recent');
+    }
+  })
+  .catch((err) => {
+    console.error('Error cargando productos:', err);
+    if (grid) grid.innerHTML = '<p style="font-size:12px;">No se pudo cargar el catálogo.</p>';
+  });
 
 function buildCategoryDropdown() {
-    // "Lo más reciente" option
-    const recentLink = document.createElement('a');
-    recentLink.href = '#';
-    recentLink.textContent = 'Lo más reciente';
-    recentLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        filterBy('recent');
-    });
-    catMenu.appendChild(recentLink);
+  if (!catMenu) return;
+  catMenu.innerHTML = '';
 
-    // Category options
-    categories.forEach(cat => {
-        const a = document.createElement('a');
-        a.href = '#';
-        a.textContent = cat.name;
-        a.addEventListener('click', (e) => {
-            e.preventDefault();
-            filterBy(cat.id);
-        });
-        catMenu.appendChild(a);
-    });
+  addFilterLink('Todo', 'all');
+  addFilterLink('Lo más reciente', 'recent');
+  categories.forEach((cat) => addFilterLink(cat.name, cat.id));
+}
+
+function addFilterLink(label, filter) {
+  const link = document.createElement('a');
+  link.href = filter === 'all' ? '#cat=all' : `#cat=${encodeURIComponent(filter)}`;
+  link.textContent = label;
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    history.replaceState(null, '', link.href);
+    filterBy(filter);
+  });
+  catMenu.appendChild(link);
 }
 
 function filterBy(filter) {
-    currentFilter = filter;
-    catMenu.classList.remove('open');
+  currentFilter = filter;
+  if (catMenu) catMenu.classList.remove('open');
 
-    if (filter === 'recent') {
-        catToggle.textContent = 'Lo más reciente';
-    } else {
-        const cat = categories.find(c => c.id === filter);
-        catToggle.textContent = cat ? cat.name : 'Categorías';
+  if (catToggle) {
+    if (filter === 'all') catToggle.textContent = 'Todo';
+    else if (filter === 'recent') catToggle.textContent = 'Lo más reciente';
+    else {
+      const category = categories.find((cat) => cat.id === filter);
+      catToggle.textContent = category ? category.name : 'Todo';
     }
-
-    renderProducts(filter);
+  }
+  renderProducts(filter);
 }
 
-// Toggle dropdown
-catToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
+if (catToggle && catMenu) {
+  catToggle.addEventListener('click', (event) => {
+    event.stopPropagation();
     catMenu.classList.toggle('open');
-});
+  });
+  document.addEventListener('click', () => catMenu.classList.remove('open'));
+  catMenu.addEventListener('click', (event) => event.stopPropagation());
+}
 
-document.addEventListener('click', () => {
-    catMenu.classList.remove('open');
-});
-
-catMenu.addEventListener('click', (e) => {
-    e.stopPropagation();
-});
-
-// Renderizar productos
 function renderProducts(filter) {
-    grid.innerHTML = '';
-    let filtered = products;
+  if (!grid) return;
+  grid.innerHTML = '';
 
-    if (filter === 'recent') {
-        filtered = products.slice(-12).reverse();
-    } else if (filter !== 'all') {
-        filtered = products.filter(p => p.categories.includes(filter));
+  let filtered = [...products];
+  if (filter === 'recent') {
+    filtered = filtered.slice(-12).reverse();
+  } else if (filter !== 'all') {
+    filtered = filtered.filter((item) => item.categories.includes(filter));
+  }
+
+  filtered.forEach((item) => {
+    const card = document.createElement('div');
+    card.className = `product-card${item.sold && !isFunding(item) ? ' sold' : ''}${isFunding(item) ? ' funding-card' : ''}`;
+
+    const image = document.createElement('img');
+    image.className = 'product-card-img';
+    image.src = item.images[0] || '';
+    image.alt = item.name || '';
+    image.loading = 'lazy';
+
+    const name = document.createElement('div');
+    name.className = 'product-card-name';
+    name.textContent = item.name || '';
+
+    card.appendChild(image);
+    card.appendChild(name);
+
+    if (item.sticker) {
+      const sticker = document.createElement('span');
+      sticker.className = `sticker-new ${item.sticker}`;
+      sticker.textContent = 'NEW!';
+      card.appendChild(sticker);
     }
 
-    filtered.forEach(product => {
-        const card = document.createElement('div');
-        card.className = 'product-card' + (product.sold ? ' sold' : '');
+    if (isFunding(item)) {
+      const status = document.createElement('div');
+      status.className = 'product-card-price funding-card-status';
+      status.textContent = item.status || 'EN ESCRITURA';
+      card.appendChild(status);
+      card.addEventListener('click', () => {
+        window.location.href = `libros/${encodeURIComponent(slugify(item.slug || item.name || item.id))}.html`;
+      });
+    } else if (item.sold) {
+      const sold = document.createElement('div');
+      sold.className = 'product-card-sold';
+      sold.textContent = 'Vendido';
+      card.appendChild(sold);
+    } else {
+      const price = document.createElement('div');
+      price.className = 'product-card-price';
+      price.textContent = `${item.price.toFixed(2)} €`;
+      card.appendChild(price);
+      card.addEventListener('click', () => {
+        window.location.href = `product.html?id=${encodeURIComponent(item.id)}`;
+      });
+    }
 
-        // Pegatina NEW!
-        if (product.sticker && !product.sold) {
-            const sticker = document.createElement('span');
-            sticker.className = 'sticker-new ' + product.sticker;
-            sticker.textContent = 'NEW!';
-            card.appendChild(sticker);
-        }
-
-        const catNames = (product.categories || [])
-            .map(cid => {
-                const cat = categories.find(c => c.id === cid);
-                return cat ? cat.name : cid;
-            })
-            .filter(Boolean)
-            .join(', ');
-
-        card.setAttribute('aria-label', `${product.name} — ${catNames || 'edición'} de I.PESOA Editorial`);
-
-        const img = document.createElement('img');
-        img.className = 'product-card-img';
-        img.src = product.images[0];
-        img.alt = `${product.name} — ${catNames || 'edición'} de I.PESOA Editorial, Madrid`;
-        img.loading = 'lazy';
-
-        const name = document.createElement('div');
-        name.className = 'product-card-name';
-        name.textContent = product.name;
-
-        if (product.sold) {
-            const soldLabel = document.createElement('div');
-            soldLabel.className = 'product-card-sold';
-            soldLabel.textContent = 'Vendido';
-            card.appendChild(img);
-            card.appendChild(name);
-            card.appendChild(soldLabel);
-        } else {
-            const price = document.createElement('div');
-            price.className = 'product-card-price';
-            price.textContent = product.price.toFixed(2) + ' €';
-
-            card.addEventListener('click', () => {
-                window.location.href = `product.html?id=${encodeURIComponent(product.id)}`;
-            });
-
-            card.appendChild(img);
-            card.appendChild(name);
-            card.appendChild(price);
-        }
-
-        grid.appendChild(card);
-    });
+    grid.appendChild(card);
+  });
 }
