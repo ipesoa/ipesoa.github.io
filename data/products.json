@@ -16,6 +16,7 @@
   "products": [
     {
       "id": "cartelism",
+      "type": "product",
       "name": "Cartelism (x5)",
       "images": [
         "products/1784392724527_CARTELISM.png"
