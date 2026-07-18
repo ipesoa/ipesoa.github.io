@@ -13,8 +13,7 @@ const PAYPAL_BUSINESS = '312rimini@gmail.com';
 /* Enlaces conocidos. Nunca se reutiliza aquí el enlace de donaciones. */
 const PRODUCT_PAYMENT_DEFAULTS = {
   cartelism: {
-    stripeUrl: 'https://buy.stripe.com/00wdRa0jVe547Nbcc5gfu01',
-    price: 15
+    stripeUrl: 'https://buy.stripe.com/bJe4gA8Qr8KKgjH6RLgfu02'
   }
 };
 
@@ -26,13 +25,13 @@ const PRODUCT_RECORD_FALLBACKS = {
     id: 'cartelism',
     type: 'product',
     name: 'Cartelism',
-    price: 15,
+    price: 25,
     images: [],
     description: '',
     categories: [],
     sold: false,
     payment: {
-      stripeUrl: 'https://buy.stripe.com/00wdRa0jVe547Nbcc5gfu01'
+      stripeUrl: 'https://buy.stripe.com/bJe4gA8Qr8KKgjH6RLgfu02'
     }
   }
 };
@@ -267,7 +266,6 @@ fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' })
     if (!product) throw new Error('Producto no encontrado');
 
     const known = findKnownConfig(product);
-    if (Number.isFinite(known.price)) product.price = known.price;
     if (known.stripeUrl && !product.payment?.stripeUrl) {
       product.payment = { ...(product.payment || {}), stripeUrl: known.stripeUrl };
     }
