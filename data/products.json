@@ -13,5 +13,20 @@
       "name": "CARTELERÍA"
     }
   ],
-  "products": []
+  "products": [
+    {
+      "id": "cartelism",
+      "name": "Cartelism (x5)",
+      "images": [
+        "products/1784392724527_CARTELISM.png"
+      ],
+      "description": "recibe 5 carteles de nuestro fondo de carteles más conocido \" bring me home or leave here\" para apoyar la editorial en las paredes de tu casa ó la de tus amigas/os.",
+      "price": 25,
+      "categories": [
+        "carteles"
+      ],
+      "sticker": "green",
+      "sold": false
+    }
+  ]
 }
