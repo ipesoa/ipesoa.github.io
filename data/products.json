@@ -15,21 +15,6 @@
   ],
   "products": [
     {
-      "id": "totebagpaseo",
-      "name": "paseo",
-      "images": [
-        "products/1780153962011_paseo1.png",
-        "products/1780153964195_paseo2.png"
-      ],
-      "description": "42x34cm",
-      "price": 40,
-      "categories": [
-        "totebags"
-      ],
-      "sticker": "",
-      "sold": true
-    },
-    {
       "id": "aquivauncalortote",
       "name": "aqui va un color",
       "images": [
