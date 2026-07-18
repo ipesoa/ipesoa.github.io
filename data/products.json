@@ -27,7 +27,12 @@
         "carteles"
       ],
       "sticker": "green",
-      "sold": false
+      "sold": false,
+      "pinned": false,
+      "payment": {
+        "stripeUrl": "",
+        "paypalUrl": ""
+      }
     },
     {
       "id": "libro-sin-titulo",
@@ -54,7 +59,8 @@
         "formUrl": "",
         "emailEntry": "",
         "consentText": "Acepto recibir por correo novedades sobre este proyecto."
-      }
+      },
+      "pinned": false
     }
   ]
 }
