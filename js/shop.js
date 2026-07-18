@@ -26,11 +26,12 @@ function normalizeItem(item) {
     images: Array.isArray(item.images) ? item.images : [],
     price: Number(item.price || 0),
     suggestedAmount: Number(item.suggestedAmount || 0),
-    sold: Boolean(item.sold)
+    sold: Boolean(item.sold),
+    pinned: Boolean(item.pinned)
   };
 }
 
-fetch('data/products.json')
+fetch('data/products.json', { cache: 'no-store' })
   .then((res) => {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return res.json();
@@ -97,20 +98,31 @@ if (catToggle && catMenu) {
   catMenu.addEventListener('click', (event) => event.stopPropagation());
 }
 
+function pinnedFirst(items) {
+  return items
+    .map((item, index) => ({ item, index }))
+    .sort((a, b) => Number(b.item.pinned) - Number(a.item.pinned) || a.index - b.index)
+    .map(({ item }) => item);
+}
+
 function renderProducts(filter) {
   if (!grid) return;
   grid.innerHTML = '';
 
   let filtered = [...products];
   if (filter === 'recent') {
-    filtered = filtered.slice(-12).reverse();
+    const pinned = products.filter((item) => item.pinned);
+    const recent = products.filter((item) => !item.pinned).slice(-12).reverse();
+    filtered = [...pinnedFirst(pinned), ...recent];
   } else if (filter !== 'all') {
-    filtered = filtered.filter((item) => item.categories.includes(filter));
+    filtered = pinnedFirst(filtered.filter((item) => item.categories.includes(filter)));
+  } else {
+    filtered = pinnedFirst(filtered);
   }
 
   filtered.forEach((item) => {
     const card = document.createElement('div');
-    card.className = `product-card${item.sold && !isFunding(item) ? ' sold' : ''}${isFunding(item) ? ' funding-card' : ''}`;
+    card.className = `product-card${item.sold && !isFunding(item) ? ' sold' : ''}${isFunding(item) ? ' funding-card' : ''}${item.pinned ? ' pinned-card' : ''}`;
 
     const image = document.createElement('img');
     image.className = 'product-card-img';

@@ -1,4 +1,5 @@
 const DEFAULT_STRIPE_URL = 'https://donate.stripe.com/cNidRa1nZ9OO6J77VPgfu00';
+const DEFAULT_LEGAL_TEXT = 'La aportación es voluntaria y se destina a apoyar la escritura, edición y futura producción de proyectos editoriales de I.PESOA. Se realiza a título gratuito y sin contraprestación: no constituye una compra, preventa o reserva, ni otorga derecho a recibir un ejemplar, devolución, descuento u otra prestación. Se formula conforme al concepto de donación del artículo 618 del Código Civil y al artículo 3.1.b de la Ley 29/1987, del Impuesto sobre Sucesiones y Donaciones.';
 const projectId = document.body.dataset.projectId;
 const gallery = document.getElementById('gallery');
 const projectInfo = document.getElementById('project-info');
@@ -123,10 +124,25 @@ function renderFunding(project) {
   const buttons = document.createElement('div');
   buttons.className = 'funding-buttons';
 
-  const stripe = makePaymentButton('Tarjeta / Apple Pay / Google Pay', project.payment?.stripeUrl || DEFAULT_STRIPE_URL, true);
+  const stripe = makePaymentButton('APOYAR CON STRIPE', project.payment?.stripeUrl || DEFAULT_STRIPE_URL, true);
   const paypal = makePaymentButton('PayPal', project.payment?.paypalUrl, !stripe);
   if (stripe) buttons.appendChild(stripe);
   if (paypal) buttons.appendChild(paypal);
+
+  if (stripe) {
+    const methods = document.createElement('p');
+    methods.className = 'funding-methods';
+    methods.textContent = 'Tarjeta · Apple Pay · Google Pay · Link';
+    fundingSection.appendChild(buttons);
+    fundingSection.appendChild(methods);
+
+    const trust = document.createElement('p');
+    trust.className = 'funding-trust';
+    trust.textContent = 'Pago seguro procesado por Stripe. I.PESOA no recibe ni almacena los datos de tu tarjeta.';
+    fundingSection.appendChild(trust);
+  } else {
+    fundingSection.appendChild(buttons);
+  }
 
   if (!stripe && !paypal) {
     const pending = document.createElement('div');
@@ -134,11 +150,10 @@ function renderFunding(project) {
     pending.textContent = 'APORTACIONES PRÓXIMAMENTE';
     buttons.appendChild(pending);
   }
-  fundingSection.appendChild(buttons);
 
   const legal = document.createElement('p');
   legal.className = 'funding-legal';
-  legal.textContent = project.legalText || 'La aportación es voluntaria y apoya el proceso de escritura, edición y futura producción del libro. No constituye una compra, preventa o reserva, ni concede el derecho a recibir un ejemplar u otra contraprestación.';
+  legal.textContent = project.legalText || DEFAULT_LEGAL_TEXT;
   fundingSection.appendChild(legal);
 }
 
@@ -183,7 +198,7 @@ function renderNewsletter(project) {
   });
 }
 
-fetch('../data/products.json')
+fetch('../data/products.json', { cache: 'no-store' })
   .then((response) => {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return response.json();
