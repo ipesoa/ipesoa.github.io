@@ -1,86 +1,29 @@
-/* Pago directo de productos. Mantiene la estética de I.PESOA. */
-
-.product-detail-description {
-  white-space: pre-wrap;
+/* Métodos de pago visuales. Checkout y datos bancarios permanecen en Stripe. */
+.product-detail-description { white-space: pre-wrap; }
+.checkout-section { margin-top:25px; padding-top:20px; border-top:1px solid #000; text-align:left; }
+.checkout-section h4 { margin:0 0 13px; font:700 11px Arial,sans-serif; letter-spacing:2px; }
+.express-payment-choices { width:min(100%,390px); display:grid; gap:9px; }
+.wallet-button,.card-payment-button,.checkout-button,.checkout-pending,.checkout-unavailable {
+  box-sizing:border-box; width:100%; min-height:54px; border:1px solid #000; text-decoration:none;
+  display:flex; align-items:center; justify-content:center; font-family:Arial,sans-serif;
 }
-
-.checkout-section {
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid #000;
-  text-align: left;
-}
-
-.checkout-section h4 {
-  margin-bottom: 13px;
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.checkout-button,
-.checkout-pending,
-.checkout-unavailable {
-  display: block;
-  width: min(100%, 390px);
-  padding: 13px 18px;
-  border: 1px solid #000;
-  background: #fff;
-  color: #000;
-  font-family: Arial, sans-serif;
-  font-size: 11px;
-  font-weight: bold;
-  line-height: 1.25;
-  letter-spacing: 1.5px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.checkout-button + .checkout-button {
-  margin-top: 8px;
-}
-
-.checkout-button.primary,
-.checkout-button:hover {
-  background: #000;
-  color: #fff;
-}
-
-.checkout-methods {
-  width: min(100%, 390px);
-  margin-top: 8px;
-  font-size: 10px;
-  letter-spacing: .7px;
-  text-align: center;
-}
-
-.checkout-trust {
-  max-width: 390px;
-  margin: 8px 0 14px;
-  color: #555;
-  font-size: 9px;
-  line-height: 1.45;
-  text-align: center;
-}
-
-.checkout-pending,
-.checkout-unavailable {
-  color: #666;
-  font-weight: normal;
-}
-
-@media (max-width: 768px) {
-  .checkout-section {
-    text-align: center;
-  }
-
-  .checkout-button,
-  .checkout-pending,
-  .checkout-unavailable,
-  .checkout-methods,
-  .checkout-trust {
-    width: 100%;
-    max-width: none;
-  }
-}
+.wallet-button { border-radius:7px; font-size:25px; font-weight:600; letter-spacing:-1px; }
+.apple-pay-button { background:#000; color:#fff; }
+.apple-mark { font-size:28px; margin-right:5px; line-height:1; }
+.google-pay-button { background:#fff; color:#202124; }
+.google-g { margin-right:7px; font:700 25px Arial,sans-serif; }
+.google-g i { font-style:normal; }
+.card-payment-button { justify-content:flex-start; gap:13px; min-height:62px; padding:0 16px; background:#fff; color:#111; border-color:#d4d7dc; border-radius:7px; font-size:16px; }
+.radio-dot { width:18px; height:18px; border:1px solid #aab0b8; border-radius:50%; flex:none; }
+.card-symbol { position:relative; width:22px; height:15px; border-radius:2px; background:#080808; flex:none; }
+.card-symbol:after { content:''; position:absolute; left:4px; top:5px; width:6px; height:2px; background:#fff; }
+.card-label { flex:1; }
+.card-brands { display:flex; gap:4px; align-items:center; }
+.card-brands b { display:inline-flex; height:20px; min-width:31px; padding:0 4px; border-radius:2px; align-items:center; justify-content:center; background:#1358c8; color:#fff; font-size:8px; font-style:italic; }
+.card-brands b:nth-child(2) { background:#111; }
+.card-brands b:nth-child(3) { background:#0875b8; }
+.checkout-button { margin-top:9px; min-height:48px; padding:12px 18px; background:#fff; color:#000; font-size:11px; font-weight:700; letter-spacing:1.5px; }
+.checkout-button:hover { background:#000; color:#fff; }
+.checkout-trust { width:min(100%,390px); margin:9px 0 14px; color:#555; font-size:9px; line-height:1.45; text-align:center; }
+.checkout-pending,.checkout-unavailable { width:min(100%,390px); min-height:auto; padding:13px 18px; color:#666; font-size:11px; letter-spacing:1px; }
+@media(max-width:768px){ .checkout-section{text-align:center}.express-payment-choices,.checkout-trust,.checkout-pending,.checkout-unavailable{width:100%;max-width:none} }
