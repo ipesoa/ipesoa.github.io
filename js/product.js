@@ -6,6 +6,14 @@ const productDescription = document.getElementById('product-description');
 const checkoutSection = document.getElementById('checkout-section');
 const productId = new URLSearchParams(window.location.search).get('id');
 
+const PRODUCT_PAYMENT_OVERRIDES = {
+  cartelism: {
+    stripeUrl: 'https://buy.stripe.com/00wdRa0jVe547Nbcc5gfu01',
+    price: 15,
+    cleanDonationText: true
+  }
+};
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -91,16 +99,60 @@ function buildGallery(images) {
   }, { passive: true });
 }
 
-function paymentButton(label, url, primary = false) {
+function paymentLink(url, className, ariaLabel, html) {
   const safeUrl = safeExternalUrl(url);
   if (!safeUrl) return null;
 
   const link = document.createElement('a');
-  link.className = `checkout-button${primary ? ' primary' : ''}`;
+  link.className = className;
   link.href = safeUrl;
-  link.textContent = label;
   link.rel = 'noopener';
+  link.setAttribute('aria-label', ariaLabel);
+  link.innerHTML = html;
   return link;
+}
+
+function getPaymentPlatform() {
+  const ua = navigator.userAgent || '';
+  const isApple = /Macintosh|Mac OS X|iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+  const isChrome = /Chrome|CriOS/i.test(ua) && !/Edg|OPR/i.test(ua);
+  return { isApple, isAndroid, isChrome };
+}
+
+function buildPaymentChoices(stripeUrl) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'express-payment-choices';
+  const { isApple, isAndroid, isChrome } = getPaymentPlatform();
+
+  if (isApple) {
+    const apple = paymentLink(
+      stripeUrl,
+      'wallet-button apple-pay-button',
+      'Pagar con Apple Pay mediante Stripe',
+      '<span class="apple-mark"></span><span>Pay</span>'
+    );
+    if (apple) wrapper.appendChild(apple);
+  }
+
+  if (isAndroid || isChrome) {
+    const google = paymentLink(
+      stripeUrl,
+      'wallet-button google-pay-button',
+      'Pagar con Google Pay mediante Stripe',
+      '<span class="google-g"><i>G</i></span><span>Pay</span>'
+    );
+    if (google) wrapper.appendChild(google);
+  }
+
+  const card = paymentLink(
+    stripeUrl,
+    'card-payment-button',
+    'Pagar con tarjeta mediante Stripe',
+    '<span class="radio-dot" aria-hidden="true"></span><span class="card-symbol" aria-hidden="true"></span><span class="card-label">Tarjeta</span><span class="card-brands" aria-hidden="true"><b>VISA</b><b>MC</b><b>AMEX</b></span>'
+  );
+  if (card) wrapper.appendChild(card);
+  return wrapper;
 }
 
 function renderCheckout() {
@@ -111,21 +163,16 @@ function renderCheckout() {
     return;
   }
 
-  const stripeUrl = product.payment?.stripeUrl || product.stripeUrl || '';
+  const override = PRODUCT_PAYMENT_OVERRIDES[product.id] || {};
+  const stripeUrl = override.stripeUrl || product.payment?.stripeUrl || product.stripeUrl || '';
   const paypalUrl = product.payment?.paypalUrl || product.paypalUrl || '';
-  const stripeButton = paymentButton(`COMPRAR — ${Number(product.price).toFixed(2)} €`, stripeUrl, true);
-  const paypalButton = paymentButton('PAGAR CON PAYPAL', paypalUrl, !stripeButton);
 
   const heading = document.createElement('h4');
-  heading.textContent = 'Pago';
+  heading.textContent = 'PAGO';
   checkoutSection.appendChild(heading);
 
-  if (stripeButton) {
-    checkoutSection.appendChild(stripeButton);
-    const methods = document.createElement('p');
-    methods.className = 'checkout-methods';
-    methods.textContent = 'Tarjeta · Apple Pay · Google Pay · Link';
-    checkoutSection.appendChild(methods);
+  if (stripeUrl) {
+    checkoutSection.appendChild(buildPaymentChoices(stripeUrl));
 
     const trust = document.createElement('p');
     trust.className = 'checkout-trust';
@@ -133,9 +180,17 @@ function renderCheckout() {
     checkoutSection.appendChild(trust);
   }
 
-  if (paypalButton) checkoutSection.appendChild(paypalButton);
+  if (paypalUrl) {
+    const paypalButton = paymentLink(
+      paypalUrl,
+      'checkout-button paypal-button',
+      'Pagar con PayPal',
+      'PAGAR CON PAYPAL'
+    );
+    if (paypalButton) checkoutSection.appendChild(paypalButton);
+  }
 
-  if (!stripeButton && !paypalButton) {
+  if (!stripeUrl && !paypalUrl) {
     const pending = document.createElement('p');
     pending.className = 'checkout-pending';
     pending.textContent = 'PAGO ONLINE PENDIENTE DE CONFIGURAR';
@@ -152,6 +207,12 @@ fetch('data/products.json', { cache: 'no-store' })
     product = (data.products || []).find((item) => item.id === productId && item.type !== 'funding');
     if (!product) throw new Error('Producto no encontrado');
 
+    const override = PRODUCT_PAYMENT_OVERRIDES[product.id] || {};
+    if (Number.isFinite(override.price)) product.price = override.price;
+    if (override.stripeUrl) {
+      product.payment = { ...(product.payment || {}), stripeUrl: override.stripeUrl };
+    }
+
     document.title = `${product.name} - I.PESOA Editorial`;
     buildGallery(product.images || []);
 
@@ -165,7 +226,12 @@ fetch('data/products.json', { cache: 'no-store' })
       ${product.sold ? '<p class="status">VENDIDO</p>' : ''}
       ${categoryNames ? `<p class="categories-label">${escapeHtml(categoryNames)}</p>` : ''}`;
 
-    productDescription.textContent = product.description || '';
+    let description = product.description || '';
+    const override = PRODUCT_PAYMENT_OVERRIDES[product.id] || {};
+    if (override.cleanDonationText && /aportaci[oó]n voluntaria|sin contraprestaci[oó]n|donaci[oó]n/i.test(description)) {
+      description = '';
+    }
+    productDescription.textContent = description;
     renderCheckout();
   })
   .catch((error) => {
