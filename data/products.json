@@ -30,7 +30,7 @@
       "sold": false,
       "pinned": false,
       "payment": {
-        "stripeUrl": "",
+        "stripeUrl": "https://buy.stripe.com/00wdRa0jVe547Nbcc5gfu01",
         "paypalUrl": ""
       }
     },
