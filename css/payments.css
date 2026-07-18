@@ -1,0 +1,86 @@
+/* Pago directo de productos. Mantiene la estética de I.PESOA. */
+
+.product-detail-description {
+  white-space: pre-wrap;
+}
+
+.checkout-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #000;
+  text-align: left;
+}
+
+.checkout-section h4 {
+  margin-bottom: 13px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.checkout-button,
+.checkout-pending,
+.checkout-unavailable {
+  display: block;
+  width: min(100%, 390px);
+  padding: 13px 18px;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1.25;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.checkout-button + .checkout-button {
+  margin-top: 8px;
+}
+
+.checkout-button.primary,
+.checkout-button:hover {
+  background: #000;
+  color: #fff;
+}
+
+.checkout-methods {
+  width: min(100%, 390px);
+  margin-top: 8px;
+  font-size: 10px;
+  letter-spacing: .7px;
+  text-align: center;
+}
+
+.checkout-trust {
+  max-width: 390px;
+  margin: 8px 0 14px;
+  color: #555;
+  font-size: 9px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.checkout-pending,
+.checkout-unavailable {
+  color: #666;
+  font-weight: normal;
+}
+
+@media (max-width: 768px) {
+  .checkout-section {
+    text-align: center;
+  }
+
+  .checkout-button,
+  .checkout-pending,
+  .checkout-unavailable,
+  .checkout-methods,
+  .checkout-trust {
+    width: 100%;
+    max-width: none;
+  }
+}
