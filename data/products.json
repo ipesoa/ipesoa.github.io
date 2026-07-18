@@ -15,20 +15,6 @@
   ],
   "products": [
     {
-      "id": "tortuga",
-      "name": "tortuga i.pesoa",
-      "images": [
-        "products/1779730510156_ipesoaeditorial.png"
-      ],
-      "description": "60x66 cm (aprox)",
-      "price": 75,
-      "categories": [
-        "carteles"
-      ],
-      "sticker": "",
-      "sold": true
-    },
-    {
       "id": "totebagpaseo",
       "name": "paseo",
       "images": [
