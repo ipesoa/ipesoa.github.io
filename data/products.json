@@ -28,6 +28,33 @@
       ],
       "sticker": "green",
       "sold": false
+    },
+    {
+      "id": "libro-sin-titulo",
+      "type": "funding",
+      "name": "sin titulo",
+      "images": [
+        "products/1784395787398_synth2.png"
+      ],
+      "description": "",
+      "price": 0,
+      "categories": [],
+      "sticker": "",
+      "sold": false,
+      "slug": "sin-titulo",
+      "status": "EN ESCRITURA",
+      "suggestedAmount": 10,
+      "payment": {
+        "stripeUrl": "https://donate.stripe.com/cNidRa1nZ9OO6J77VPgfu00",
+        "paypalUrl": ""
+      },
+      "legalText": "La aportación es voluntaria y apoya el proceso de escritura, edición y futura producción del libro. No constituye una compra, preventa o reserva, ni concede el derecho a recibir un ejemplar u otra contraprestación.",
+      "newsletter": {
+        "enabled": true,
+        "formUrl": "",
+        "emailEntry": "",
+        "consentText": "Acepto recibir por correo novedades sobre este proyecto."
+      }
     }
   ]
 }
