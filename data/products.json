@@ -33,6 +33,26 @@
         "stripeUrl": "https://buy.stripe.com/bJe4gA8Qr8KKgjH6RLgfu02",
         "paypalUrl": ""
       }
+    },
+    {
+      "id": "pinta-colorea",
+      "type": "product",
+      "name": "pinta&colorea",
+      "images": [
+        "products/1784891566127_pinta_colorea.png"
+      ],
+      "description": "fanzine dina5, imágenes para pintar,colorear & pasarlo bonito",
+      "price": 10,
+      "categories": [
+        "libros"
+      ],
+      "sticker": "green",
+      "sold": false,
+      "pinned": false,
+      "payment": {
+        "stripeUrl": "",
+        "paypalUrl": ""
+      }
     }
   ]
 }
