@@ -54,6 +54,29 @@
         "stripeUrl": "https://buy.stripe.com/fZufZi2s39OOebz4JDgfu06",
         "paypalUrl": ""
       }
+    },
+    {
+      "id": "posters-completos",
+      "type": "download",
+      "name": "TODOS LOS CARTELES",
+      "images": [
+        "products/posters-completos-1790617334998-1.png",
+        "products/posters-completos-1790617338594-2.png",
+        "products/posters-completos-1790617341056-3.png",
+        "products/posters-completos-1790617343206-4.png",
+        "products/posters-completos-1790617345024-5.png"
+      ],
+      "description": "imprime y difunde (˶ᵔ ᵕ ᵔ˶)\n\narchivo con los carteles para imprimir en dina3/dina4.",
+      "price": 0,
+      "categories": [
+        "carteles"
+      ],
+      "sticker": "blue",
+      "sold": false,
+      "pinned": false,
+      "downloadUrl": "downloads/posters-completos.pdf",
+      "downloadLabel": "DESCARGAR AQUÍ",
+      "downloadNote": "Todos los carteles juntos y también por separado, en un solo ZIP."
     }
   ]
 }
