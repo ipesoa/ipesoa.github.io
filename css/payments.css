@@ -59,3 +59,15 @@
 @media(max-width:768px){
   .checkout-note{width:100%;max-width:none;text-align:center}
 }
+
+
+/* Entradas descargables */
+.download-button {
+  width: min(100%,390px);
+}
+.download-card-status {
+  letter-spacing: 1px;
+}
+@media(max-width:768px){
+  .download-button{width:100%;max-width:none}
+}
