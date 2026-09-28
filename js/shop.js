@@ -10,6 +10,11 @@ function isFunding(item) {
   return item && item.type === 'funding';
 }
 
+
+function isDownload(item) {
+  return item && (item.type === 'download' || Boolean(item.downloadUrl));
+}
+
 function slugify(value) {
   return String(value || '')
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -21,7 +26,7 @@ function slugify(value) {
 function normalizeItem(item) {
   return {
     ...item,
-    type: item.type === 'funding' ? 'funding' : 'product',
+    type: ['funding', 'download'].includes(item.type) ? item.type : 'product',
     categories: Array.isArray(item.categories) ? item.categories : [],
     images: Array.isArray(item.images) ? item.images : [],
     price: Number(item.price || 0),
@@ -122,7 +127,7 @@ function renderProducts(filter) {
 
   filtered.forEach((item) => {
     const card = document.createElement('div');
-    card.className = `product-card${item.sold && !isFunding(item) ? ' sold' : ''}${isFunding(item) ? ' funding-card' : ''}${item.pinned ? ' pinned-card' : ''}`;
+    card.className = `product-card${item.sold && !isFunding(item) && !isDownload(item) ? ' sold' : ''}${isFunding(item) ? ' funding-card' : ''}${isDownload(item) ? ' download-card' : ''}${item.pinned ? ' pinned-card' : ''}`;
 
     const image = document.createElement('img');
     image.className = 'product-card-img';
@@ -151,6 +156,14 @@ function renderProducts(filter) {
       card.appendChild(status);
       card.addEventListener('click', () => {
         window.location.href = `libros/${encodeURIComponent(slugify(item.slug || item.name || item.id))}.html`;
+      });
+    } else if (isDownload(item)) {
+      const download = document.createElement('div');
+      download.className = 'product-card-price download-card-status';
+      download.textContent = item.downloadLabel || 'DESCARGA';
+      card.appendChild(download);
+      card.addEventListener('click', () => {
+        window.location.href = `product.html?id=${encodeURIComponent(item.id)}`;
       });
     } else if (item.sold) {
       const sold = document.createElement('div');
