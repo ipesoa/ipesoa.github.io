@@ -47,13 +47,8 @@
       "categories": [
         "libros"
       ],
-      "sticker": "green",
-      "sold": false,
-      "pinned": false,
-      "payment": {
-        "stripeUrl": "https://buy.stripe.com/fZufZi2s39OOebz4JDgfu06",
-        "paypalUrl": ""
-      }
+      "sticker": "",
+      "sold": false
     },
     {
       "id": "posters-completos",
