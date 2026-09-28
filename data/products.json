@@ -51,63 +51,6 @@
       "sold": false
     },
     {
-      "id": "posters-completos",
-      "type": "download",
-      "name": "TODOS LOS CARTELES",
-      "images": [
-        "products/posters-completos-1790619759028-1.png",
-        "products/posters-completos-1790619761168-2.png",
-        "products/posters-completos-1790619763837-3.png",
-        "products/posters-completos-1790619766237-4.png",
-        "products/posters-completos-1790619768504-5.png"
-      ],
-      "description": "imprime y difunde (˶ᵔ ᵕ ᵔ˶)\n\narchivo con los carteles para imprimir en dina3/dina4.",
-      "price": 0,
-      "categories": [
-        "carteles"
-      ],
-      "sticker": "blue",
-      "sold": false,
-      "pinned": false,
-      "downloadUrl": "downloads/posters-completos-1790619771548-1-posters_unidos.pdf",
-      "downloadLabel": "DESCARGAR AQUÍ",
-      "downloadFiles": [
-        {
-          "url": "downloads/posters-completos-1790619771548-1-posters_unidos.pdf",
-          "label": "DESCARGAR PDF 1"
-        },
-        {
-          "url": "downloads/posters-completos-1790619774620-2-2a3.pdf",
-          "label": "DESCARGAR PDF 2"
-        },
-        {
-          "url": "downloads/posters-completos-1790619776455-3-9a3.pdf",
-          "label": "DESCARGAR PDF 3"
-        },
-        {
-          "url": "downloads/posters-completos-1790619778352-4-8a3.pdf",
-          "label": "DESCARGAR PDF 4"
-        },
-        {
-          "url": "downloads/posters-completos-1790619780273-5-7a3.pdf",
-          "label": "DESCARGAR PDF 5"
-        },
-        {
-          "url": "downloads/posters-completos-1790619782212-6-6a3.pdf",
-          "label": "DESCARGAR PDF 6"
-        },
-        {
-          "url": "downloads/posters-completos-1790619784059-7-4a3.pdf",
-          "label": "DESCARGAR PDF 7"
-        },
-        {
-          "url": "downloads/posters-completos-1790619786214-8-3a3.pdf",
-          "label": "DESCARGAR PDF 8"
-        }
-      ],
-      "downloadNote": "Todos los carteles juntos en ZIP y también los PDFs por separado."
-    },
-    {
       "id": "posters-completos2",
       "type": "download",
       "name": "CARTELES VIVIENDA DIGNA",
