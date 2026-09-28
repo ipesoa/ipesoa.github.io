@@ -62,6 +62,18 @@ function safeExternalUrl(value) {
   }
 }
 
+function safeDownloadUrl(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  if (/^https:\/\//i.test(raw)) return raw;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(raw) || raw.startsWith('//')) return '';
+  return raw;
+}
+
+function isDownloadProduct(item) {
+  return item && (item.type === 'download' || Boolean(item.downloadUrl || item.download?.url));
+}
+
 function findKnownConfig(item) {
   const keys = [normalizeKey(item?.id), normalizeKey(item?.name), normalizeKey(productId)];
   return keys.map((key) => PRODUCT_PAYMENT_DEFAULTS[key]).find(Boolean) || {};
@@ -213,6 +225,33 @@ function buildPaymentChoices(stripeUrl) {
 function renderCheckout() {
   checkoutSection.innerHTML = '';
 
+  if (isDownloadProduct(product)) {
+    const downloadUrl = safeDownloadUrl(product.downloadUrl || product.download?.url || '');
+
+    const heading = document.createElement('h4');
+    heading.textContent = 'DESCARGA';
+    checkoutSection.appendChild(heading);
+
+    if (!downloadUrl) {
+      checkoutSection.innerHTML += '<p class="checkout-unavailable">DESCARGA NO DISPONIBLE</p>';
+      return;
+    }
+
+    const link = document.createElement('a');
+    link.className = 'checkout-button download-button';
+    link.href = downloadUrl;
+    link.textContent = product.downloadLabel || 'DESCARGAR AQUÍ';
+    link.setAttribute('aria-label', `Descargar ${product.name}`);
+    if (!/^https:\/\//i.test(downloadUrl)) link.download = '';
+    checkoutSection.appendChild(link);
+
+    const note = document.createElement('p');
+    note.className = 'checkout-note';
+    note.textContent = product.downloadNote || 'Archivo ZIP con PDFs listo para descargar.';
+    checkoutSection.appendChild(note);
+    return;
+  }
+
   if (product.sold) {
     checkoutSection.innerHTML = '<p class="checkout-unavailable">VENDIDO</p>';
     return;
@@ -279,7 +318,7 @@ fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' })
 
     productInfo.innerHTML = `
       <h3>${escapeHtml(product.name)}</h3>
-      <p class="price">${Number(product.price || 0).toFixed(2)} €</p>
+      <p class="price">${isDownloadProduct(product) ? escapeHtml(product.downloadLabel || 'DESCARGA') : Number(product.price || 0).toFixed(2) + ' €'}</p>
       ${product.sold ? '<p class="status">VENDIDO</p>' : ''}
       ${categoryNames ? `<p class="categories-label">${escapeHtml(categoryNames)}</p>` : ''}`;
 
