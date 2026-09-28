@@ -6,6 +6,7 @@ const gallery = document.getElementById('gallery');
 const productInfo = document.getElementById('product-info');
 const productDescription = document.getElementById('product-description');
 const checkoutSection = document.getElementById('checkout-section');
+const productDetail = document.getElementById('product-detail');
 const productId = new URLSearchParams(window.location.search).get('id') || '';
 
 const PAYPAL_BUSINESS = '312rimini@gmail.com';
@@ -71,7 +72,25 @@ function safeDownloadUrl(value) {
 }
 
 function isDownloadProduct(item) {
-  return item && (item.type === 'download' || Boolean(item.downloadUrl || item.download?.url));
+  return item && (item.type === 'download' || Boolean(item.downloadUrl || item.download?.url) || (Array.isArray(item.downloadFiles) && item.downloadFiles.length > 0));
+}
+
+function getDownloadItems(item) {
+  const files = Array.isArray(item?.downloadFiles) ? item.downloadFiles : [];
+  const normalized = files
+    .map((file, index) => {
+      if (typeof file === 'string') {
+        return { url: safeDownloadUrl(file), label: index === 0 ? (item.downloadLabel || 'DESCARGAR AQUÍ') : 'DESCARGA ' + (index + 1) };
+      }
+      return { url: safeDownloadUrl(file?.url || ''), label: file?.label || '' };
+    })
+    .filter((file) => file.url);
+
+  const legacyUrl = safeDownloadUrl(item?.downloadUrl || item?.download?.url || '');
+  if (legacyUrl && !normalized.some((file) => file.url === legacyUrl)) {
+    normalized.unshift({ url: legacyUrl, label: item.downloadLabel || 'DESCARGAR AQUÍ' });
+  }
+  return normalized;
 }
 
 function findKnownConfig(item) {
@@ -226,24 +245,29 @@ function renderCheckout() {
   checkoutSection.innerHTML = '';
 
   if (isDownloadProduct(product)) {
-    const downloadUrl = safeDownloadUrl(product.downloadUrl || product.download?.url || '');
+    const downloadItems = getDownloadItems(product);
 
     const heading = document.createElement('h4');
     heading.textContent = 'DESCARGA';
     checkoutSection.appendChild(heading);
 
-    if (!downloadUrl) {
+    if (!downloadItems.length) {
       checkoutSection.innerHTML += '<p class="checkout-unavailable">DESCARGA NO DISPONIBLE</p>';
       return;
     }
 
-    const link = document.createElement('a');
-    link.className = 'checkout-button download-button';
-    link.href = downloadUrl;
-    link.textContent = product.downloadLabel || 'DESCARGAR AQUÍ';
-    link.setAttribute('aria-label', `Descargar ${product.name}`);
-    if (!/^https:\/\//i.test(downloadUrl)) link.download = '';
-    checkoutSection.appendChild(link);
+    const list = document.createElement('div');
+    list.className = 'download-link-list';
+    downloadItems.forEach((item, index) => {
+      const link = document.createElement('a');
+      link.className = 'checkout-button download-button';
+      link.href = item.url;
+      link.textContent = item.label || (downloadItems.length === 1 ? (product.downloadLabel || 'DESCARGAR AQUÍ') : 'DESCARGA ' + (index + 1));
+      link.setAttribute('aria-label', 'Descargar ' + (product.name || 'archivo'));
+      if (!/^https:\/\//i.test(item.url)) link.download = '';
+      list.appendChild(link);
+    });
+    checkoutSection.appendChild(list);
 
     const note = document.createElement('p');
     note.className = 'checkout-note';
@@ -310,6 +334,7 @@ fetch(`data/products.json?v=${Date.now()}`, { cache: 'no-store' })
     }
 
     document.title = `${product.name} - I.PESOA Editorial`;
+    if (productDetail) productDetail.classList.toggle('download-detail', isDownloadProduct(product));
     buildGallery(product.images || []);
 
     const categoryNames = (product.categories || [])
