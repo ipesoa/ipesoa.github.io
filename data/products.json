@@ -106,6 +106,64 @@
         }
       ],
       "downloadNote": "Todos los carteles juntos en ZIP y también los PDFs por separado."
+    },
+    {
+      "id": "posters-completos2",
+      "type": "download",
+      "name": "CARTELES VIVIENDA DIGNA",
+      "images": [
+        "products/posters-completos2-1790623132629-1.png",
+        "products/posters-completos2-1790623134936-2.png",
+        "products/posters-completos2-1790623136744-3.png",
+        "products/posters-completos2-1790623139646-4.png",
+        "products/posters-completos2-1790623141370-5.png",
+        "products/posters-completos2-1790623143780-6.png"
+      ],
+      "description": "imprime y difunde (˶ᵔ ᵕ ᵔ˶)\n\narchivo con los carteles para imprimir en dina3/dina4.",
+      "price": 0,
+      "categories": [
+        "carteles"
+      ],
+      "sticker": "green",
+      "sold": false,
+      "pinned": false,
+      "downloadUrl": "downloads/posters-completos2-1790623146650-1-7a3.pdf",
+      "downloadLabel": "DESCARGAR AQUÍ",
+      "downloadFiles": [
+        {
+          "url": "downloads/posters-completos2-1790623146650-1-7a3.pdf",
+          "label": "DESCARGAR PDF 1"
+        },
+        {
+          "url": "downloads/posters-completos2-1790623148281-2-6a3.pdf",
+          "label": "DESCARGAR PDF 2"
+        },
+        {
+          "url": "downloads/posters-completos2-1790623150019-3-4a3.pdf",
+          "label": "DESCARGAR PDF 3"
+        },
+        {
+          "url": "downloads/posters-completos2-1790623151957-4-3a3.pdf",
+          "label": "DESCARGAR PDF 4"
+        },
+        {
+          "url": "downloads/posters-completos2-1790623154922-5-2a3.pdf",
+          "label": "DESCARGAR PDF 5"
+        },
+        {
+          "url": "downloads/posters-completos2-1790623156676-6-9a3.pdf",
+          "label": "DESCARGAR PDF 6"
+        },
+        {
+          "url": "downloads/posters-completos2-1790623158885-7-8a3.pdf",
+          "label": "DESCARGAR PDF 7"
+        },
+        {
+          "url": "downloads/posters-completos2-1790623161211-8-posters.zip",
+          "label": "DESCARGAR TODO (ZIP)"
+        }
+      ],
+      "downloadNote": "Todos los carteles juntos en ZIP y también los PDFs por separado."
     }
   ]
 }
