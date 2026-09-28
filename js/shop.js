@@ -12,7 +12,7 @@ function isFunding(item) {
 
 
 function isDownload(item) {
-  return item && (item.type === 'download' || Boolean(item.downloadUrl));
+  return item && (item.type === 'download' || Boolean(item.downloadUrl) || (Array.isArray(item.downloadFiles) && item.downloadFiles.length > 0));
 }
 
 function slugify(value) {
