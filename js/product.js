@@ -256,18 +256,29 @@ function renderCheckout() {
       return;
     }
 
-    const list = document.createElement('div');
-    list.className = 'download-link-list';
-    downloadItems.forEach((item, index) => {
-      const link = document.createElement('a');
-      link.className = 'checkout-button download-button';
-      link.href = item.url;
-      link.textContent = item.label || (downloadItems.length === 1 ? (product.downloadLabel || 'DESCARGAR AQUÍ') : 'DESCARGA ' + (index + 1));
-      link.setAttribute('aria-label', 'Descargar ' + (product.name || 'archivo'));
-      if (!/^https:\/\//i.test(item.url)) link.download = '';
-      list.appendChild(link);
+    const wrapper = document.createElement('div');
+    wrapper.className = 'download-link-list';
+    const link = document.createElement('a');
+    link.className = 'checkout-button download-button';
+    link.href = downloadItems[0].url;
+    link.textContent = product.downloadLabel || (downloadItems.length > 1 ? 'DESCARGAR TODO' : 'DESCARGAR AQUÍ');
+    link.setAttribute('aria-label', 'Descargar ' + (product.name || 'archivo'));
+    if (!/^https:\/\//i.test(downloadItems[0].url)) link.download = '';
+    link.addEventListener('click', (event) => {
+      if (downloadItems.length < 2) return;
+      event.preventDefault();
+      downloadItems.forEach((item) => {
+        const hiddenLink = document.createElement('a');
+        hiddenLink.href = item.url;
+        if (!/^https:\/\//i.test(item.url)) hiddenLink.download = '';
+        hiddenLink.style.display = 'none';
+        document.body.appendChild(hiddenLink);
+        hiddenLink.click();
+        hiddenLink.remove();
+      });
     });
-    checkoutSection.appendChild(list);
+    wrapper.appendChild(link);
+    checkoutSection.appendChild(wrapper);
 
     const note = document.createElement('p');
     note.className = 'checkout-note';
